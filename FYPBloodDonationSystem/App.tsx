@@ -18,6 +18,7 @@ import {
   Image,
   Button,
   Alert,
+  Dimensions,
 } from 'react-native';
 
 
@@ -33,8 +34,12 @@ type SectionProps = PropsWithChildren<{
   title: string;
 }>;
 
+const win = Dimensions.get('window');
+const ratio = win.width/602;
+
 function Section({children, title}: SectionProps): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
+  
   return (
     <View style={styles.sectionContainer}>
       <Text
@@ -81,19 +86,21 @@ function App(): JSX.Element {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-          <Image 
-          source={require('./assets/StartupPic.png')}
-          style={{width: 380, height: 400}} />
+
+          <Image style={styles.image}
+          resizeMode={'contain'}
+          source={require('./assets/StartupPic.png')} />
+
           <View style={styles.fixToText}>
           <View style={styles.buttonView}>
           <Button
-          title="Left button"
+          title="Signup"
           onPress={() => Alert.alert('Left button pressed')}
         />
         </View>
         <Button 
           
-          title="Right button"
+          title="Login"
           onPress={() => Alert.alert('Right button pressed')}
           
         />
@@ -125,12 +132,18 @@ const styles = StyleSheet.create({
   fixToText: {
     flexDirection: 'row',
     justifyContent: 'center',
-    
+    padding: 50,
   },
   buttonView: {
     // width: '50%',
     paddingRight: 25,
     fontSize: 40,
+  },
+  image:{
+    flex: 1,
+    alignSelf: 'stretch',
+    width: win.width,
+    height: 576 * ratio,
   },
 });
 
