@@ -1,12 +1,14 @@
 import React from 'react';
 import { Button, Pressable, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, useColorScheme, View } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 
-function Login() {
+function Login()  {
     const isDarkMode = useColorScheme() === 'dark';
     const backgroundStyle = {
         backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
     };
+
 
     const [email, onChangeEmail] = React.useState('');
     const [password, onChangePassword] = React.useState('');
@@ -43,7 +45,12 @@ function Login() {
         {/* <View style={styles.button}>
             <Button title="Log In" />
         </View> */}
-        <Text style={styles.footer}>Don't have an account? <TouchableOpacity><Text>Signup</Text></TouchableOpacity></Text>
+        <Text style={styles.footer}>Don't have an account? <TouchableOpacity 
+        // onPress={() =>
+        //   navigation.navigate('Signup')
+        // }
+        >
+          <Text>Signup</Text></TouchableOpacity></Text>
       </SafeAreaView>
     );
 }

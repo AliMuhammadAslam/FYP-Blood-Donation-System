@@ -29,10 +29,35 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Login from './src/screens/login';
+import Signup from './src/screens/signup';
 
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
+
+const Stack = createNativeStackNavigator();
+
+const MyStack = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Signup"
+          component={Signup}
+          //options={{title: 'Welcome'}}
+        />
+        <Stack.Screen name="Login" 
+        component={Login} />
+        <Stack.Screen name="Startup" 
+        component={App} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
 
 const win = Dimensions.get('window');
 const ratio = win.width/602;
@@ -72,6 +97,7 @@ function App(): JSX.Element {
   };
 
   return (
+    <NavigationContainer>
     <SafeAreaView style={backgroundStyle}>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
@@ -96,6 +122,9 @@ function App(): JSX.Element {
           <Button
           title="Signup"
           onPress={() => Alert.alert('Left button pressed')}
+          // onPress={() =>
+          //   navigation.navigate('Signup')
+          // }
         />
         </View>
         <Button 
@@ -109,6 +138,7 @@ function App(): JSX.Element {
         </View>
       </ScrollView>
     </SafeAreaView>
+    </NavigationContainer>
   );
 }
 
