@@ -28,6 +28,7 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from './src/screens/login';
 import Signup from './src/screens/signup';
+import Slideshow from './src/components/slideshow';
 
 const win = Dimensions.get('window');
 const ratio = win.width/602;
@@ -120,8 +121,14 @@ const AuthenticationScreen = () => {
                 {"Continue With Facebook"}
               </Text>
             </TouchableOpacity>
+            <TouchableOpacity
+              style={{marginTop:15}}
+              onPress={() => navigation.navigate('Slideshow')}>
+              <Text style={styles.buttonText2}>
+                {"View an Excellent Slideshow"}
+              </Text>
+            </TouchableOpacity>
           </View>
-
           <View style={styles.plainPaddingBottom}/>
           
         </View>
@@ -153,7 +160,10 @@ const App = () => {
         component={Login} 
         options={{headerShown: false}}
         />
-        
+        <Stack.Screen name="Slideshow" 
+        component={Slideshow} 
+        //options={{headerShown: false}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
