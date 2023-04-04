@@ -4,23 +4,22 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 
 function Login()  {
-    const isDarkMode = useColorScheme() === 'dark';
-    const backgroundStyle = {
-        backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-    };
+    // const isDarkMode = useColorScheme() === 'dark';
+    // const backgroundStyle = {
+    //     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    // };
 
 
     const [email, onChangeEmail] = React.useState('');
     const [password, onChangePassword] = React.useState('');
     return(
-        <SafeAreaView style={[
+        <SafeAreaView style={
             {//styles.container
                 justifyContent: 'center',
             alignItems: 'center',
              flex: 1,
-            }, 
-            backgroundStyle
-            ]}>
+            }        
+            }>
             <Text style={styles.header}>Login</Text>
         <TextInput
           style={styles.input}
@@ -29,6 +28,7 @@ function Login()  {
           placeholder="Email Address"
           inputMode='email'
           keyboardType='email-address'
+          placeholderTextColor= "#808080"
         />
         <TextInput
           style={styles.input}
@@ -36,6 +36,7 @@ function Login()  {
           value={password}
           secureTextEntry={true}
           placeholder="Password"
+          placeholderTextColor= "#808080"
         />
 
         <TouchableOpacity style={styles.button}>
@@ -50,7 +51,7 @@ function Login()  {
         //   navigation.navigate('Signup')
         // }
         >
-          <Text>Signup</Text></TouchableOpacity></Text>
+          <Text style={{color: "#DE0A1E"}}>Signup</Text></TouchableOpacity></Text>
       </SafeAreaView>
     );
 }
@@ -76,9 +77,11 @@ function Login()  {
     header:{
         fontSize: 30,
         marginBottom: 30,
+        color:"black",
     },
     footer: {
         margin: 10,
+        color: "#808080"
     },
     button: {
         width:300,

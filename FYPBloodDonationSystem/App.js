@@ -36,22 +36,24 @@ const AuthenticationScreen = () => {
 
   const navigation = useNavigation();
 
-  const isDarkMode = useColorScheme() === 'dark';
+  // const isDarkMode = useColorScheme() === 'dark';
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+  // const backgroundStyle = {
+  //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  // };
 
   return (
     
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
+    <SafeAreaView //style={backgroundStyle}
+    >
+      {/* <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
-      />
+      /> */}
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
+        //style={backgroundStyle}
+        >
         
         <View
 
@@ -99,7 +101,7 @@ const AuthenticationScreen = () => {
             <View style={styles.buttonView2}>
               <TouchableOpacity
               style={styles.buttonStyle3}
-              onPress={() => Alert.alert('Left button pressed')}>
+              onPress={() => Alert.alert('Google button pressed')}>
               <Image style={styles.imageIcon}
               //resizeMode={'contain'}
               source={require('./assets/google.png')} />
@@ -110,7 +112,7 @@ const AuthenticationScreen = () => {
             </View>
             <TouchableOpacity
               style={styles.buttonStyle3}
-              onPress={() => Alert.alert('Right button pressed')}>
+              onPress={() => Alert.alert('Facebook button pressed')}>
               <Image style={styles.imageIcon}
               resizeMode={'contain'}
               source={require('./assets/facebook.png')} />
@@ -167,13 +169,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 80,
   },
   buttonView: {
-    paddingRight: 100
+    //flex:1,
+    flexDirection: 'row',
+    paddingRight: 20
   },
   buttonView2: {
     paddingBottom: 40
   },
   buttonStyle: {
-    // width: '50%',
+    //width: '100%',
     backgroundColor: '#00CC66',
     //paddingRight: 50,
     borderColor: 'white',
@@ -184,7 +188,7 @@ const styles = StyleSheet.create({
     //width: 105
   },
   buttonStyle2: {
-    // width: '50%',
+    // width: '40%',
     backgroundColor: '#0080FF',
     //paddingRight: 50,
     borderColor: 'white',

@@ -6,10 +6,10 @@ import {Dropdown } from 'react-native-dropdown';
 import SelectDropdown from 'react-native-select-dropdown';
 
 function Signup() {
-    const isDarkMode = useColorScheme() === 'dark';
-    const backgroundStyle = {
-        backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-    };
+    // const isDarkMode = useColorScheme() === 'dark';
+    // const backgroundStyle = {
+    //     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    // };
 
     const [genderOpen, setGenderOpen] = useState(false);
   const [genderValue, setGenderValue] = useState(null);
@@ -46,7 +46,7 @@ function Signup() {
             alignItems: 'center',
              flex: 1,
             }, 
-            backgroundStyle
+            //backgroundStyle
             ]}>
             <Text style={styles.header}>Signup</Text>
 
@@ -55,6 +55,7 @@ function Signup() {
           onChangeText={onChangeName}
           value={name}
           placeholder="Full Name"
+          placeholderTextColor= "#808080"
           //inputMode='email'
           //keyboardType=''
         />
@@ -66,6 +67,7 @@ function Signup() {
           placeholder="Email Address"
           inputMode='email'
           keyboardType='email-address'
+          placeholderTextColor= "#808080"
         />
 
 <View style={styles.dropdown}>
@@ -77,7 +79,7 @@ function Signup() {
       setOpen={setGenderOpen}
       setValue={setGenderValue}
       setItems={setGenderItems}
-      theme="DARK"
+      theme="LIGHT"
     />
 </View>
 
@@ -88,6 +90,7 @@ function Signup() {
           placeholder="Mobile Number"
           inputMode='numeric'
           keyboardType='numeric'
+          placeholderTextColor= "#808080"
         />
       
 <TextInput
@@ -95,6 +98,7 @@ function Signup() {
           onChangeText={onChangeAddress}
           value={address}
           placeholder="Address"
+          placeholderTextColor= "#808080"
           //inputMode='email'
           //keyboardType=''
         />
@@ -108,7 +112,7 @@ function Signup() {
       setOpen={setBloodOpen}
       setValue={setBloodValue}
       setItems={setBloodItems}
-      theme="DARK"
+      theme="LIGHT"
       dropDownDirection='TOP'
       listMode="MODAL"
       searchable={true}
@@ -122,6 +126,7 @@ function Signup() {
           value={password}
           secureTextEntry={true}
           placeholder="Password"
+          placeholderTextColor= "#808080"
         />
 
         <TouchableOpacity style={styles.button}>
@@ -131,7 +136,7 @@ function Signup() {
         {/* <View style={styles.button}>
             <Button title="Log In" />
         </View> */}
-        <Text style={styles.footer}>Already have an account? <TouchableOpacity><Text>Login</Text></TouchableOpacity></Text>
+        <Text style={styles.footer}>Already have an account? <TouchableOpacity ><Text style={{color: "#DE0A1E"}}>Login</Text></TouchableOpacity></Text>
       </SafeAreaView>
     );
 }
@@ -145,6 +150,7 @@ const styles = StyleSheet.create({
       padding: 12,
       //elevation: 20,
       borderRadius: 8,
+      color: "black",
       //backgroundColor: "white",
     },
     container: {
@@ -156,9 +162,11 @@ const styles = StyleSheet.create({
     header:{
         fontSize: 30,
         marginBottom: 30,
+        color: "black",
     },
     footer: {
         margin: 10,
+        color: "#808080"
     },
     button: {
         width:300,
