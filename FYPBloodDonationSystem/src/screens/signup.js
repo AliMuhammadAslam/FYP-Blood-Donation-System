@@ -4,12 +4,15 @@ import { SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, useColorSc
 import DropDownPicker from 'react-native-dropdown-picker';
 import {Dropdown } from 'react-native-dropdown';
 import SelectDropdown from 'react-native-select-dropdown';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 
 function Signup() {
     // const isDarkMode = useColorScheme() === 'dark';
     // const backgroundStyle = {
     //     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
     // };
+
+    const navigation = useNavigation();
 
     const [genderOpen, setGenderOpen] = useState(false);
   const [genderValue, setGenderValue] = useState(null);
@@ -136,7 +139,12 @@ function Signup() {
         {/* <View style={styles.button}>
             <Button title="Log In" />
         </View> */}
-        <Text style={styles.footer}>Already have an account? <TouchableOpacity ><Text style={{color: "#DE0A1E"}}>Login</Text></TouchableOpacity></Text>
+        <Text style={styles.footer}>Already have an account? 
+        <TouchableOpacity
+         onPress={() =>
+          navigation.navigate('Login')
+        } 
+        ><Text style={{color: "#DE0A1E"}}>Login</Text></TouchableOpacity></Text>
       </SafeAreaView>
     );
 }

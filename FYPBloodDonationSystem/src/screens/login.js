@@ -9,6 +9,7 @@ function Login()  {
     //     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
     // };
 
+    const navigation = useNavigation();
 
     const [email, onChangeEmail] = React.useState('');
     const [password, onChangePassword] = React.useState('');
@@ -46,10 +47,11 @@ function Login()  {
         {/* <View style={styles.button}>
             <Button title="Log In" />
         </View> */}
-        <Text style={styles.footer}>Don't have an account? <TouchableOpacity 
-        // onPress={() =>
-        //   navigation.navigate('Signup')
-        // }
+        <Text style={styles.footer}>Don't have an account? 
+        <TouchableOpacity 
+         onPress={() =>
+           navigation.navigate('Signup')
+         }
         >
           <Text style={{color: "#DE0A1E"}}>Signup</Text></TouchableOpacity></Text>
       </SafeAreaView>
