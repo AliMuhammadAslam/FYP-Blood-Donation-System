@@ -39,6 +39,8 @@ function forgotPassword() {
             source={require('../../assets/forgotPassPic.png')} />  
 
       </View>
+
+      <Text style={styles.header}>Forgot Password</Text>
       <TextInput
         style={styles.input}
         onChangeText={onChangeEmail}
