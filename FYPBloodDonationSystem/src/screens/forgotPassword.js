@@ -13,8 +13,7 @@ function forgotPassword() {
   };
 
   const [email, onChangeEmail] = React.useState('');
-  const [password, onChangePassword] = React.useState('');
-
+  
   return (
     <SafeAreaView style={[
       {//styles.container
@@ -40,7 +39,9 @@ function forgotPassword() {
 
       </View>
 
-      <Text style={styles.header}>Forgot Password</Text>
+    
+      <Text style={{marginLeft:40, marginRight:40, marginTop:10, fontSize:20}}>Enter the email address associated with your account.</Text>
+      <Text style={{marginLeft:40, marginRight:25, marginTop:10, fontSize:20}}>We will email you a link to reset your password.</Text>
       <TextInput
         style={styles.input}
         onChangeText={onChangeEmail}
@@ -49,27 +50,21 @@ function forgotPassword() {
         inputMode='email'
         keyboardType='email-address'
       />
-      <TextInput
-        style={styles.input}
-        onChangeText={onChangePassword}
-        value={password}
-        secureTextEntry={true}
-        placeholder="Password"
-      />
+      
 
       <TouchableOpacity style={styles.button}>
-        <Text style={styles.btnText}>Log In</Text>
+        <Text style={styles.btnText}>Send</Text>
       </TouchableOpacity>
 
       {/* <View style={styles.button}>
             <Button title="Log In" />
         </View> */}
-      <Text style={styles.footer}>Don't have an account? <TouchableOpacity
+      <Text style={styles.footer}>Did not receive an email?<TouchableOpacity
       // onPress={() =>
       //   navigation.navigate('Signup')
       // }
       >
-        <Text>Signup</Text></TouchableOpacity></Text>
+        <Text style={{color: "#DE0A1E"}}>Resend</Text></TouchableOpacity></Text>
 
     </SafeAreaView>
   );
@@ -95,7 +90,8 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 30,
-    marginBottom: 30,
+    marginBottom: 15,
+    marginTop: -50,
   },
   footer: {
     margin: 10,
