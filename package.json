@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "react-native-confirmation-code-field": "^7.3.1"
+  }
+}
