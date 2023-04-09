@@ -9,8 +9,11 @@ import Login from './src/screens/login';
 import Signup from './src/screens/signup';
 import forgotPassword from './src/screens/forgotPassword';
 import changePassword from './src/screens/changePassword';
+import organizations_list from './src/screens/organizations_list';
+import Account from './src/screens/account';
 import OTPVerification from './src/screens/OTPVerification';
+import questionnaire from './src/screens/questionnaire';
 
 
 
-AppRegistry.registerComponent(appName, () => OTPVerification);
+AppRegistry.registerComponent(appName, () => App);
