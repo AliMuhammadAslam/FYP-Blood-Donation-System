@@ -57,7 +57,7 @@ function OTPVerification() {
             size={50}
             codeInputStyle={{ borderWidth: 1.5 }}
             // onFulfill={(isValid, code) => this._onFinishCheckingCode1(isValid, code)}
-            onFulfill={(isValid, code) => console.log(isValid, code)}
+            onFulfill={(code, isValid) => console.log(code, isValid)}
             containerStyle={{ marginTop: 30}}
             codeInputStyle={{ fontWeight: '800' }}
             keyboardType='numeric'
