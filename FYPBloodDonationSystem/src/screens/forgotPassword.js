@@ -6,7 +6,7 @@ import { Dropdown } from 'react-native-dropdown';
 import SelectDropdown from 'react-native-select-dropdown';
 
 
-function forgotPassword() {
+function ForgotPassword() {
   const isDarkMode = useColorScheme() === 'dark';
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -114,4 +114,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default forgotPassword;
+export default ForgotPassword;

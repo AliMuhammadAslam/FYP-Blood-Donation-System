@@ -42,7 +42,9 @@ function achievements() {
         <Text style={{marginLeft:40, marginRight:40, marginTop:10, fontSize:20}}>Tip: You must donate 10 times for a gold medal.</Text>
         
         
-        <View style={styles.listContainer}>
+      <View style={{ flexDirection: 'row', margin:15, flex: 1, justifyContent: 'space-between'}}
+        //{styles.listContainer}
+        >
       <FlatList
         // ListHeaderComponent={"Category"}
         data={[
@@ -52,7 +54,8 @@ function achievements() {
           {category: 'Jackson', count: 23},
           {category: 'James', count: 23},
         ]}
-        renderItem={({item}) => <Text style={styles.item}>{item.category}       {item.count}</Text>}
+        renderItem={({item}) => <Text style={{flexDirection: 'row', margin:8, flex: 1, justifyContent: 'space-between'}}
+        ><Text style={styles.item}>{item.category}</Text><Text style={styles.item}>{" "}{item.count}</Text></Text>}
       />
     </View>
     
@@ -108,6 +111,8 @@ function achievements() {
         padding: 10,
         fontSize: 18,
         height: 44,
+        marginRight: 40,
+        //letterSpacing: 5,
       },
 });
 

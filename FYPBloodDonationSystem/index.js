@@ -7,7 +7,7 @@ import App from './App';
 import {name as appName} from './app.json';
 import Login from './src/screens/login';
 import Signup from './src/screens/signup';
-import forgotPassword from './src/screens/forgotPassword';
+import ForgotPassword from './src/screens/forgotPassword';
 import changePassword from './src/screens/changePassword';
 import organizations_list from './src/screens/organizations_list';
 import Account from './src/screens/account';
@@ -19,7 +19,7 @@ import questionnaire from './src/screens/questionnaire';
 
 
 
-AppRegistry.registerComponent(appName, () => tabNavigation);
+AppRegistry.registerComponent(appName, () => achievements);
 
 
 

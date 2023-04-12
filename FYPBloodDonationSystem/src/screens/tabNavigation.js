@@ -10,27 +10,27 @@ import { Icon } from '@rneui/themed';
 import Login from './login';
 import Signup from './signup';
 import forgotPassword from './forgotPassword';
+import Settings from './settings';
+import Home from './home';
+import Chat from './chat';
+
+import 'react-native-gesture-handler';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+const Drawer = createDrawerNavigator();
+
 
 // const navigation = useNavigation();
-
-function HomeScreen() {
+function MyDrawer() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Home!</Text>
-    </View>
+    
+    <Drawer.Navigator>
+      <Drawer.Screen name="Feed" component={Feed} />
+      <Drawer.Screen name="Article" component={Article} />
+    </Drawer.Navigator>
+    
   );
-}
 
-function SettingsScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings screen</Text>
-      <Button
-        title="Startup"
-        // onPress={() => navigation.navigate('Startup')}
-      />
-    </View>
-  );
 }
 
 const Tab = createBottomTabNavigator();
@@ -74,9 +74,9 @@ export default function tabNavigation() {
           tabBarInactiveTintColor: 'gray',
         })}
       >
-        <Tab.Screen name="Settings" component={SettingsScreen} />
-        <Tab.Screen name="Chat" component={Login} />
-        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Settings" component={Settings} />
+        <Tab.Screen name="Chat" component={Chat} />
+        <Tab.Screen name="Home" component={Home} />
         <Tab.Screen name="Account" component={Signup} />
         <Tab.Screen name="Menu" component={forgotPassword} />
 
