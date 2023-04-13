@@ -16,10 +16,11 @@ import achievements from './src/screens/achievements';
 import patientDetails from './src/screens/patientDetails';
 import tabNavigation from './src/screens/tabNavigation';
 import questionnaire from './src/screens/questionnaire';
+import manageAddresses from './src/screens/manage_addresses';
 
 
 
-AppRegistry.registerComponent(appName, () => achievements);
+AppRegistry.registerComponent(appName, () => manageAddresses);
 
 
 
