@@ -14,13 +14,13 @@ import Account from './src/screens/account';
 import OTPVerification from './src/screens/OTPVerification';
 import achievements from './src/screens/achievements';
 import patientDetails from './src/screens/patientDetails';
-import tabNavigation from './src/screens/tabNavigation';
+//import tabNavigation from './src/screens/tabNavigation';
 import questionnaire from './src/screens/questionnaire';
 import manageAddresses from './src/screens/manage_addresses';
 
 
 
-AppRegistry.registerComponent(appName, () => manageAddresses);
+AppRegistry.registerComponent(appName, () => achievements);
 
 
 

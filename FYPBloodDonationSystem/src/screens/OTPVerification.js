@@ -55,11 +55,11 @@ function OTPVerification() {
             ignoreCase={true}
             inputPosition='center'
             size={50}
-            codeInputStyle={{ borderWidth: 1.5 }}
+            codeInputStyle={{ borderWidth: 1.5, fontWeight: '800' }}
             // onFulfill={(isValid, code) => this._onFinishCheckingCode1(isValid, code)}
             onFulfill={(code, isValid) => console.log(code, isValid)}
             containerStyle={{ marginTop: 30}}
-            codeInputStyle={{ fontWeight: '800' }}
+            //codeInputStyle={{ fontWeight: '800' }}
             keyboardType='numeric'
             
         />
