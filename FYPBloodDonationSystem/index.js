@@ -20,7 +20,7 @@ import tabNavigation from './src/screens/tabNavigation';
 
 
 
-AppRegistry.registerComponent(appName, () => tabNavigation);
+AppRegistry.registerComponent(appName, () => App);
 
 
 
