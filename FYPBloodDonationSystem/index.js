@@ -17,10 +17,14 @@ import patientDetails from './src/screens/patientDetails';
 import tabNavigation from './src/screens/tabNavigation';
 import questionnaire from './src/screens/questionnaire';
 import manageAddresses from './src/screens/manage_addresses';
+import ApplicationForm from './src/screens/Forms/ApplicationForm';
+import CreateRequest from './src/screens/Forms/CreateRequest';
+import DonationHistory from './src/screens/DonationHistory';
+import DonationRequestInfoPage from './src/screens/DonationRequestInfoPage';
 
 
 
-AppRegistry.registerComponent(appName, () => manageAddresses);
+AppRegistry.registerComponent(appName, () => DonationRequestInfoPage);
 
 
 
