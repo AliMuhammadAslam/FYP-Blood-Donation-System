@@ -1,8 +1,10 @@
 import React from 'react';
-import { Button, Pressable, SafeAreaView, StyleSheet, Text, TouchableOpacity, useColorScheme, View } from 'react-native';
+import { Button, Pressable, SafeAreaView, StyleSheet, Text, TouchableOpacity, useColorScheme, View, Alert} from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import {TextInput} from 'react-native-paper';
+import auth from '@react-native-firebase/auth'
+
 function Login()  {
     // const isDarkMode = useColorScheme() === 'dark';
     // const backgroundStyle = {
@@ -14,6 +16,41 @@ function Login()  {
     const [email, onChangeEmail] = React.useState('');
     const [password, onChangePassword] = React.useState('');
     const [isVisible, setIsVisible] = React.useState(true);
+    const userLogin = () => {
+
+      if(email.length == 0 || password.length == 0){
+
+        Alert.alert('Please fill in the required fields')
+
+      }
+      else{
+
+        auth()
+          .signInWithEmailAndPassword(email, password)
+          .then(() => {
+            console.log('Signed in!');
+            navigation.navigate('Slideshow')
+          })
+          .catch(error => {
+
+            if (error.code === 'auth/user-not-found') {
+              console.log('User not found!');
+            }
+
+            if(error.code === 'auth/wrong-password'){
+              console.log('That password is invalid!');
+            }
+
+            Alert.alert('Invalid Credentials');
+
+            console.error(error);
+        });
+        
+      }  
+
+    }
+
+
     return(
         <SafeAreaView style={
             {//styles.container
@@ -50,8 +87,9 @@ function Login()  {
           placeholderTextColor= "#808080"
         />
 
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={userLogin}>
                 <Text style={styles.btnText}>Log In</Text>
+                
             </TouchableOpacity>
 
         {/* <View style={styles.button}>
