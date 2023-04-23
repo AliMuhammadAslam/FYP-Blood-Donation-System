@@ -25,8 +25,7 @@ import tabNavigation from './src/screens/tabNavigation';
 import organizationRequests from './src/screens/organizationRequests';
 
 
-
-AppRegistry.registerComponent(appName, () => organizationRequests);
+AppRegistry.registerComponent(appName, () => App);
 
 
 

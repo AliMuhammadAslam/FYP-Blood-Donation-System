@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, useColorScheme, View } from 'react-native';
+import { Alert, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, useColorScheme, View } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {Dropdown } from 'react-native-dropdown';
 import SelectDropdown from 'react-native-select-dropdown';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
 function Signup() {
     // const isDarkMode = useColorScheme() === 'dark';
@@ -41,6 +43,42 @@ function Signup() {
     const [mobileNumber, onChangeMobNum] = React.useState('');
     const [address, onChangeAddress] = React.useState('');
     const [name, onChangeName] = React.useState('');
+
+    const userSignUp = async () => {
+
+      if(email.length == 0 || password.length == 0 || name.length == 0 || mobileNumber.length == 0 || address.length == 0 || genderValue == null || bloodValue == null){
+        Alert.alert("Please provide the required information");
+      }
+      else{
+
+        try {
+          const userCredential = await auth().createUserWithEmailAndPassword(email, password);
+          const { uid } = userCredential.user;
+      
+          const userRef = firestore().collection('users').doc(uid);
+          userRef.set({
+            name,
+            address,
+            mobileNumber,
+            genderValue,
+            bloodValue,
+            email,
+            password
+          });
+
+          navigation.navigate('Slideshow');
+          
+        } catch (error) {
+          console.log(error.code);
+          Alert.alert(error.code);
+          
+        }
+
+      }
+     
+    };
+
+
     return(
 
         <SafeAreaView style={[
@@ -132,9 +170,9 @@ function Signup() {
           placeholderTextColor= "#808080"
         />
 
-        <TouchableOpacity style={styles.button}>
-                <Text style={styles.btnText}>Sign Up</Text>
-            </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={userSignUp}>
+          <Text style={styles.btnText}>Sign Up</Text>
+        </TouchableOpacity>
 
         {/* <View style={styles.button}>
             <Button title="Log In" />
