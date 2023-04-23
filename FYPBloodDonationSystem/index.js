@@ -17,10 +17,11 @@ import patientDetails from './src/screens/patientDetails';
 import questionnaire from './src/screens/questionnaire';
 import manageAddresses from './src/screens/manage_addresses';
 import tabNavigation from './src/screens/tabNavigation';
+import organizationRequests from './src/screens/organizationRequests';
 
 
 
-AppRegistry.registerComponent(appName, () => App);
+AppRegistry.registerComponent(appName, () => organizationRequests);
 
 
 
