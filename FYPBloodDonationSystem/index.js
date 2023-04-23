@@ -22,10 +22,11 @@ import CreateRequest from './src/screens/Forms/CreateRequest';
 import DonationHistory from './src/screens/DonationHistory';
 import DonationRequestInfoPage from './src/screens/DonationRequestInfoPage';
 import tabNavigation from './src/screens/tabNavigation';
+import organizationRequests from './src/screens/organizationRequests';
 
 
 
-AppRegistry.registerComponent(appName, () => App);
+AppRegistry.registerComponent(appName, () => organizationRequests);
 
 
 
