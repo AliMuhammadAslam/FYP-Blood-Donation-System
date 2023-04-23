@@ -49,13 +49,13 @@ function achievements() {
         // ListHeaderComponent={"Category"}
         data={[
           {category: 'Devin', count: 23},
-          {category: 'Dan', count: 23},
-          {category: 'Dominic', count: 23},
-          {category: 'Jackson', count: 23},
+          {category: 'Dan  ', count: 23},
+          {category: 'Domin', count: 23},
+          {category: 'Jack ', count: 23},
           {category: 'James', count: 23},
         ]}
         renderItem={({item}) => <Text style={{flexDirection: 'row', margin:8, flex: 1, justifyContent: 'space-between'}}
-        ><Text style={styles.item}>{item.category}</Text><Text style={styles.item}>{" "}{item.count}</Text></Text>}
+        ><Text style={styles.item}>{item.category}</Text><Text style={styles.item}>{"          "}{item.count}</Text></Text>}
       />
     </View>
     
