@@ -34,14 +34,14 @@ const styles = StyleSheet.create({
 });
 
 
-const ReceiversList = () => {
+const ReceiversRequestList = () => {
 
   const [data, setData] = useState([
-    { key: '1', name: 'Indus Hospital', address: 'Darussalam Society Sector 39\nKorangi, Karachi', bloodGroup: 'AB+'},
-    { key: '2', name: 'Agha Khan Hospital', address: 'Darussalam Society Sector 39\nKorangi, Karachi', bloodGroup: 'A-' },
-    { key: '3', name: 'National Hospital', address: 'Darussalam Society Sector 39\nKorangi, Karachi', bloodGroup: 'B+' },
-    { key: '4', name: 'Blood Bank PIC', address: 'Darussalam Society Sector 39\nKorangi, Karachi', bloodGroup: 'O-' },
-    { key: '5', name: 'Jinnah Hospital', address: 'Darussalam Society Sector 39\nKorangi, Karachi', bloodGroup: 'AB-' }
+    { key: '1', name: 'Li Yuo', address: 'Darussalam Society Sector 39\nKorangi, Karachi', bloodGroup: 'AB+'},
+    { key: '2', name: 'Sabir', address: 'Darussalam Society Sector 39\nKorangi, Karachi', bloodGroup: 'A-' },
+    { key: '3', name: 'Sam Arsha', address: 'Darussalam Society Sector 39\nKorangi, Karachi', bloodGroup: 'B+' },
+    { key: '4', name: 'Shehbaz', address: 'Darussalam Society Sector 39\nKorangi, Karachi', bloodGroup: 'O-' },
+    { key: '5', name: 'Akhtar Raja', address: 'Darussalam Society Sector 39\nKorangi, Karachi', bloodGroup: 'AB-' }
   ]);
 
   const [filteredData, setFilteredData] = useState([]);
@@ -131,4 +131,4 @@ const ReceiversList = () => {
 
 };
 
-export default ReceiversList;
+export default ReceiversRequestList;

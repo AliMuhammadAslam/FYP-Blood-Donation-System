@@ -34,14 +34,14 @@ const styles = StyleSheet.create({
 });
 
 
-const DonorsList = () => {
+const RegReceiversList = () => {
 
   const [data, setData] = useState([
-    { key: '1', name: 'Indus Hospital', address: 'Darussalam Society Sector 39\nKorangi, Karachi', bloodGroup: 'AB+'},
-    { key: '2', name: 'Agha Khan Hospital', address: 'Darussalam Society Sector 39\nKorangi, Karachi', bloodGroup: 'A-' },
-    { key: '3', name: 'National Hospital', address: 'Darussalam Society Sector 39\nKorangi, Karachi', bloodGroup: 'B+' },
-    { key: '4', name: 'Blood Bank PIC', address: 'Darussalam Society Sector 39\nKorangi, Karachi', bloodGroup: 'O-' },
-    { key: '5', name: 'Jinnah Hospital', address: 'Darussalam Society Sector 39\nKorangi, Karachi', bloodGroup: 'AB-' }
+    { key: '1', name: 'Haris', address: 'Darussalam Society Sector 39\nKorangi, Karachi', bloodGroup: 'AB+'},
+    { key: '2', name: 'Yunus', address: 'Darussalam Society Sector 39\nKorangi, Karachi', bloodGroup: 'A-' },
+    { key: '3', name: 'Javed', address: 'Darussalam Society Sector 39\nKorangi, Karachi', bloodGroup: 'B+' },
+    { key: '4', name: 'Samad', address: 'Darussalam Society Sector 39\nKorangi, Karachi', bloodGroup: 'O-' },
+    { key: '5', name: 'Jing Xiao', address: 'Darussalam Society Sector 39\nKorangi, Karachi', bloodGroup: 'AB-' }
   ]);
 
   const [filteredData, setFilteredData] = useState([]);
@@ -76,7 +76,6 @@ const DonorsList = () => {
       <Text style={{color: 'white', position:'absolute', right: 14, marginTop: 14, fontWeight: 'bold'}}>{item.bloodGroup}</Text>
       </View>
       </View>
-      <View style={{margin:2, marginTop:4, flex: 1, height: 1, backgroundColor: '#8C8C8C'}} />
       <View style={{
         flex: 1,
         flexDirection: 'row',
@@ -84,13 +83,6 @@ const DonorsList = () => {
         justifyContent: 'center',
       }}>
         
-        <TouchableOpacity style={{ alignItems: 'center', backgroundColor: '#00000000', borderRadius: 10, paddingVertical: 8, paddingHorizontal: 50 }}>
-          <Text style={{ fontSize: 17, color: '#8C8C8C', }}>{'Decline'}</Text>
-        </TouchableOpacity>
-        <View style={{ marginTop:10, height: '100%', width: 1, backgroundColor: '#8C8C8C'}} />
-        <TouchableOpacity style={{ alignItems: 'center', backgroundColor: '#00000000', borderRadius: 3, paddingVertical: 8, paddingHorizontal: 50 }}>
-          <Text style={{ fontSize: 17, color: '#DE0A1E' }}>{'Accept'}</Text>
-        </TouchableOpacity>
       </View>
       {/* <View style={{margin:2, marginTop:4, flex: 1, height: 1, backgroundColor: '#8C8C8C'}} /> */}
     </View>
@@ -131,4 +123,4 @@ const DonorsList = () => {
 
 };
 
-export default DonorsList;
+export default RegReceiversList;

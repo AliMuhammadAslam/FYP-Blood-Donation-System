@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import DonorsRequestList from './orgDonorsRequestList';
-import ReceiversRequestList from './orgReceiversRequestList';
+import RegDonorsList from './orgRegDonors';
+import RegReceiversList from './orgRegReceivers';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import Icon from 'react-native-vector-icons/FontAwesome';  
 import { faArrowLeft, faBold, faDroplet } from '@fortawesome/free-solid-svg-icons';
@@ -24,12 +24,12 @@ function MyTabs() {
     >
       <Tab.Screen
         name="Donors"
-        component={DonorsRequestList}
+        component={RegDonorsList}
         options={{ tabBarLabel: 'Donors' }}
       />
       <Tab.Screen
         name="Receivers"
-        component={ReceiversRequestList}
+        component={RegReceiversList}
         options={{ tabBarLabel: 'Receivers' }}
       />
       {/* <Tab.Screen
@@ -40,14 +40,14 @@ function MyTabs() {
     </Tab.Navigator>
   );
 }
-export default function organizationRequests() {
+export default function organizationRegPatients() {
   return (
     <NavigationContainer>
         <View style={styles.container}>
             <TouchableOpacity style={styles.backButton}>
                 <FontAwesomeIcon icon={faArrowLeft} size={20} color="white" />
             </TouchableOpacity>
-            <Text style={styles.title}>{"Requests"}</Text>
+            <Text style={styles.title}>{"Registered Patients"}</Text>
             <View style={{ width: 30 }} />
         </View>
       <MyTabs />
