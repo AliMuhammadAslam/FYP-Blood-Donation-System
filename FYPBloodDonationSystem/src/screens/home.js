@@ -3,7 +3,6 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { FlatList, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, useColorScheme, View, Image } from 'react-native';
 
 
-
 function Home() {
     const isDarkMode = useColorScheme() === 'dark';
     const backgroundStyle = {

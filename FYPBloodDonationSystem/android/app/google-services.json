@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "623870810273",
+    "project_id": "fyp-blooddonationsystem",
+    "storage_bucket": "fyp-blooddonationsystem.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:623870810273:android:000029912700277d35f8e0",
+        "android_client_info": {
+          "package_name": "com.fypblooddonationsystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "623870810273-pe1am8cpgqfdqevams35hg5o2j379cll.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fypblooddonationsystem",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "623870810273-hotii1vlccr80sdiq4vt2g11aesphkhs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWBH3qVR3g3ufbw7AzBwBgmltNpejqhVM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "623870810273-hotii1vlccr80sdiq4vt2g11aesphkhs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
