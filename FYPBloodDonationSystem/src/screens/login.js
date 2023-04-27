@@ -29,7 +29,7 @@ function Login()  {
           .signInWithEmailAndPassword(email, password)
           .then(() => {
             console.log('Signed in!');
-            navigation.navigate('Slideshow')
+            navigation.navigate('Create Request')
           })
           .catch(error => {
 

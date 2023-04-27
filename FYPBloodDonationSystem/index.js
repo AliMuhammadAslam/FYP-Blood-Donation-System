@@ -16,19 +16,17 @@ import achievements from './src/screens/achievements';
 import patientDetails from './src/screens/patientDetails';
 import questionnaire from './src/screens/questionnaire';
 import manageAddresses from './src/screens/manage_addresses';
-
 import ApplicationForm from './src/screens/Forms/ApplicationForm';
-import CreateRequest from './src/screens/Forms/CreateRequest';
 import DonationHistory from './src/screens/DonationHistory';
 import DonationRequestInfoPage from './src/screens/DonationRequestInfoPage';
 import tabNavigation from './src/screens/tabNavigation';
 import organizationRequests from './src/screens/organizationRequests';
 import checkLocation from './src/components/Location';
 import organizationRegPatients from './src/screens/organizationRegPatients';
-import Slideshow from './src/components/slideshow';
-import OrganisationInfoPage from './src/screens/OrganisationInfoPage';
+import PrivateReceiversRequestList from './src/screens/privateRequests';
 
-AppRegistry.registerComponent(appName, () => OrganisationInfoPage);
+
+AppRegistry.registerComponent(appName, () => App);
 
 
 

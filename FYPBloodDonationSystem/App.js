@@ -29,6 +29,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from './src/screens/login';
 import Signup from './src/screens/signup';
 import Slideshow from './src/components/slideshow';
+import CreateRequest from './src/screens/Forms/CreateRequest';
 
 const win = Dimensions.get('window');
 const ratio = win.width/602;
@@ -158,6 +159,10 @@ const App = () => {
         />
         <Stack.Screen name="Login" 
         component={Login} 
+        options={{headerShown: false}}
+        />
+        <Stack.Screen name="Create Request" 
+        component={CreateRequest} 
         options={{headerShown: false}}
         />
         <Stack.Screen name="Slideshow" 

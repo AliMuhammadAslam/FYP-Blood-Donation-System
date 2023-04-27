@@ -56,7 +56,7 @@ function Signup() {
           const { uid } = userCredential.user;
       
           const userRef = firestore().collection('users').doc(uid);
-          userRef.set({
+          await userRef.set({
             name,
             address,
             mobileNumber,
