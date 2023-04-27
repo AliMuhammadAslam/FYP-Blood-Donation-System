@@ -25,8 +25,10 @@ import tabNavigation from './src/screens/tabNavigation';
 import organizationRequests from './src/screens/organizationRequests';
 import checkLocation from './src/components/Location';
 import organizationRegPatients from './src/screens/organizationRegPatients';
+import Slideshow from './src/components/slideshow';
+import OrganisationInfoPage from './src/screens/OrganisationInfoPage';
 
-AppRegistry.registerComponent(appName, () => organizationRegPatients);
+AppRegistry.registerComponent(appName, () => OrganisationInfoPage);
 
 
 
