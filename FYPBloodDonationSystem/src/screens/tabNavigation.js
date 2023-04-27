@@ -11,49 +11,81 @@ import Settings from './settings';
 import Home from './home';
 import Chat from './chat';
 import Account from './account';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faArrowLeft, faBars, faBold, faDroplet, faGear, faHome, faMessage, faPerson, faUser } from '@fortawesome/free-solid-svg-icons';
+
+//import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Menu } from 'react-native-paper';
+
 const Tab = createBottomTabNavigator();
 
 export default function tabNavigation() {
+  
   return (
-    
     <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
-
-            if (route.name === 'Settings') {
-              iconName = focused
-                ? 'ios-information-circle'
-                : 'ios-information-circle-outline';
-            } else if (route.name === 'Chat') {
-              iconName = focused ? 'ios-list' : 'ios-list-outline';
-            }
-            else if (route.name === 'Home') {
-                iconName = focused ? 'ios-list' : 'ios-list-outline';
-              }
-            else if (route.name === 'Account') {  
-                iconName = focused ? 'ios-list' : 'ios-list-outline';
-                }
-            else if (route.name === 'Menu') {  
-                iconName = focused ? 'ios-list' : 'ios-list-outline';
-                }
-
-
-            // You can return any component that you like here!
-            return <Icon name= "13mp" size={size} color={color} />;
-          },
-          tabBarActiveTintColor: 'tomato',
-          tabBarInactiveTintColor: 'gray',
-        })}
-      >
-        <Tab.Screen name="Settings" component={Settings} />
-        <Tab.Screen name="Chat" component={Chat} />
-        <Tab.Screen name="Home" component={Home} />
-        <Tab.Screen name="Account" component={Account} />
-        <Tab.Screen name="Menu" component={forgotPassword} />
-
-      </Tab.Navigator>
+    <Tab.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        tabBarActiveTintColor: '#e91e63',
+      }}
+    >
+      <Tab.Screen
+        name="Settings"
+        component={Settings}
+        options={{
+          tabBarLabel: 'Settings',
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesomeIcon icon={faGear} size={20} color={color} />
+          ),
+          //tabBarBadge: 3,
+        }}
+      />
+      <Tab.Screen
+        name="Chat"
+        component={Chat}
+        options={{
+          tabBarLabel: 'Chat',
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesomeIcon icon={faMessage} size={20} color={color} />
+          ),
+          //tabBarBadge: 3,
+        }}
+      />
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{
+          tabBarLabel: 'Home',
+          tabBarIcon: ({ color, size }) => (
+            // <MaterialCommunityIcons name="home" color={color} size={size} />
+            <FontAwesomeIcon icon={faHome} size={20} color={color} />
+          ),
+        }}
+      />
+      
+      <Tab.Screen
+        name="Account"
+        component={Account}
+        options={{
+          tabBarLabel: 'Account',
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesomeIcon icon={faUser} size={20} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Menu"
+        component={Menu}
+        options={{
+          tabBarLabel: 'Menu',
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesomeIcon icon={faBars} size={20} color={color} />
+          ),
+          //tabBarBadge: 3,
+        }}
+      />
+    </Tab.Navigator>
     </NavigationContainer>
   );
 }
