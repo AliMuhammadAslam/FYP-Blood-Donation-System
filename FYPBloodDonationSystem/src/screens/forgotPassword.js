@@ -4,6 +4,8 @@ import { SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, useColorSc
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Dropdown } from 'react-native-dropdown';
 import SelectDropdown from 'react-native-select-dropdown';
+import Header from "../components/Header";
+
 
 
 function ForgotPassword() {
@@ -26,7 +28,7 @@ function ForgotPassword() {
 
       
 
-      <Text style={styles.header}>Forgot Password</Text>
+      <Header title="Forgot Password" isRed={true} />
       <View
 
         style={{

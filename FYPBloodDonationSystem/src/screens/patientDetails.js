@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { FlatList, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, useColorScheme, View, Image } from 'react-native';
-
+import Header from "../components/Header";
 
 
 
@@ -25,7 +25,7 @@ function patientDetails() {
     
         
     
-        <Text style={styles.header}>Patient Details</Text>
+        <Header title="Patient Details" isRed={true} />
         <View
     
             style={{

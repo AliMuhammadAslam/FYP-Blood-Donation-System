@@ -5,6 +5,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { Dropdown } from 'react-native-dropdown';
 import SelectDropdown from 'react-native-select-dropdown';
 import ConfirmationCodeInput from 'react-native-confirmation-code-input';
+import Header from "../components/Header";
 
   
 
@@ -29,7 +30,7 @@ function OTPVerification() {
 
       
 
-      <Text style={styles.header}>OTP Verification</Text>
+      <Header title="OTP Verification" isRed={true} />
       <View
 
         style={{

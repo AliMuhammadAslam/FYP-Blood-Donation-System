@@ -29,6 +29,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from './src/screens/login';
 import Signup from './src/screens/signup';
 import Slideshow from './src/components/slideshow';
+import forgotPassword from './src/screens/forgotPassword';
+import ChatScreen from './src/screens/ChatScreen';
 import CreateRequest from './src/screens/Forms/CreateRequest';
 
 const win = Dimensions.get('window');
@@ -144,6 +146,7 @@ const App = () => {
 
   const Stack = createNativeStackNavigator();
   
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -169,7 +172,19 @@ const App = () => {
         component={Slideshow} 
         //options={{headerShown: false}}
         />
-      </Stack.Navigator>
+        <Stack.Screen name="forgotPassword" 
+        component={forgotPassword} 
+        options={{headerShown: false}}
+        />
+        {/* <Stack.Screen
+        name="Chat"
+        component={ChatScreen}
+        options={({route}) => ({
+        title: route.params.userName,
+        headerBackTitleVisible: false,
+        })}
+      /> */}
+    </Stack.Navigator>
     </NavigationContainer>
   );
 }

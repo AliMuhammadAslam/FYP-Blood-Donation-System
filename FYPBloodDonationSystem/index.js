@@ -21,10 +21,13 @@ import DonationHistory from './src/screens/DonationHistory';
 import DonationRequestInfoPage from './src/screens/DonationRequestInfoPage';
 import tabNavigation from './src/screens/tabNavigation';
 import organizationRequests from './src/screens/organizationRequests';
+import MessagesScreen from './src/screens/MessagesScreen';
+import ChatScreen from './src/screens/ChatScreen';
 import checkLocation from './src/components/Location';
 import organizationRegPatients from './src/screens/organizationRegPatients';
 import PrivateReceiversRequestList from './src/screens/privateRequests';
-
+import MessagesScreen from './src/screens/MessagesScreen';
+import ChatScreen from './src/screens/ChatScreen';
 
 AppRegistry.registerComponent(appName, () => App);
 

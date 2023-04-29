@@ -3,6 +3,7 @@ import { Button, Pressable, SafeAreaView, StyleSheet, Text, TouchableOpacity, us
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import {TextInput} from 'react-native-paper';
+import Header from "../components/Header";
 // import {eye, eyeOff} from 'react-native-vector-icons/Feather';
 function changePassword()  {
     // const isDarkMode = useColorScheme() === 'dark';
@@ -27,7 +28,7 @@ function changePassword()  {
              flex: 1,
             }        
             }>
-        <Text style={styles.header}>Change Password</Text>
+        <Header title="Change Password" isRed={true} />
         <Text style={{marginLeft:-130, marginTop:10, fontSize:20}}>Current Password:</Text>
         <TextInput
           //label="Password"

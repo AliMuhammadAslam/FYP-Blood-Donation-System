@@ -101,7 +101,15 @@ function Login()  {
            navigation.navigate('Signup')
          }
         >
-          <Text style={{color: "#DE0A1E"}}>Signup</Text></TouchableOpacity></Text>
+        <Text style={{color: "#DE0A1E"}}>Signup</Text></TouchableOpacity></Text>
+
+        <Text style={styles.footer}>Forgot Your Password? 
+        <TouchableOpacity 
+         onPress={() =>
+           navigation.navigate('forgotPassword')
+         }
+        >
+        <Text style={{color: "#DE0A1E"}}>Forgot Password</Text></TouchableOpacity></Text>
       </SafeAreaView>
     );
 }
