@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {Alert, View, StyleSheet, Text } from "react-native";
+import {Alert, View, StyleSheet, Text} from "react-native";
 import Header from "../../components/Header";
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Button, TextInput } from 'react-native-paper';
@@ -8,6 +8,7 @@ import SelectDropdown from 'react-native-select-dropdown'
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import { useNavigation } from '@react-navigation/native';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 
 const CreateRequest = () => {
@@ -15,10 +16,23 @@ const CreateRequest = () => {
     const navigation = useNavigation();
 
     const [name, setName] = useState("");
-    const [openPicker, setOpenPicker] = useState(false);
     const [bloodType, setBloodType] = useState(null);
     const [bloodItems, setBloodItems] = useState(["A+", "B+", "O+", "O-", "AB+"]);
     const [notes, setNotes] = useState("");
+
+    const currentDate = new Date();
+
+    const [expiryDate, setExpiryDate] = useState(currentDate);
+    const [showDatePicker, setShowDatePicker] = useState(false);
+
+    const onExpiryDateChange = (event, selectedDate) => {
+        setShowDatePicker(false);
+        setExpiryDate(selectedDate || expiryDate);
+    };
+
+    const renderPicker = () => {
+        setShowDatePicker(true);
+    };
 
     const postRequest = async () => {
 
@@ -57,7 +71,8 @@ const CreateRequest = () => {
                 hospitalName: name,
                 bloodType,
                 notes,
-                postedAt: firestore.FieldValue.serverTimestamp()
+                postedAt: currentDate,
+                expiryDate: expiryDate
               });
     
               //navigation.navigate('Slideshow');
@@ -102,6 +117,26 @@ const CreateRequest = () => {
                         buttonStyle={styles.picker}
                         buttonTextStyle={{fontSize: 16, color: 'grey', textAlign: 'left'}}
                     />
+                    <Text style={{fontSize: 16, color:'black'}}>Current Date: {currentDate.toLocaleDateString()}</Text>
+
+                    <View style={{flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}>
+
+                    <Text style={{fontSize: 16, color:'black'}}>Expiry Date: {expiryDate.toLocaleDateString()}</Text>
+                    <Button mode="contained" onPress={renderPicker} buttonColor="#DE0A1E" labelStyle={{ fontSize: 18 }} style={{ height: 45, borderRadius: 10, justifyContent: 'center'}}>
+                        Select Date
+                    </Button>
+
+                    </View>
+                    
+                    {showDatePicker && (
+                        <DateTimePicker
+                        value={expiryDate}
+                        mode="date"
+                        minimumDate={currentDate}
+                        onChange={onExpiryDateChange}
+                        />
+                    )}
+
                     <TextInput
                         style={styles.multiline_input}
                         underlineColorAndroid="transparent"
