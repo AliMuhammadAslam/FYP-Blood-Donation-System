@@ -25,9 +25,10 @@ import checkLocation from './src/components/Location';
 import organizationRegPatients from './src/screens/organizationRegPatients';
 import PrivateReceiversRequestList from './src/screens/privateRequests';
 import OrganisationInfo from './src/screens/Organisation/OrganisationInfo';
+import PatientDetails from './src/screens/PatientDetails/PatientDetails';
 
 
-AppRegistry.registerComponent(appName, () => OrganisationInfo);
+AppRegistry.registerComponent(appName, () => PatientDetails);
 
 
 

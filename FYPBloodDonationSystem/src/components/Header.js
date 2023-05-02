@@ -30,11 +30,11 @@ const stylesWhite = StyleSheet.create({
       marginLeft: 10,
     },
     title: {
-      fontSize: 18,
+      fontSize: 22,
       flex: 1,
       textAlign: 'center',
       color: '#DE0A1E',
-      fontWeight: 'bold',
+      fontWeight: '600',
     },
 });
 const stylesRed = StyleSheet.create({
