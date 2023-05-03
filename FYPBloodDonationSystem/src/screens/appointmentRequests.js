@@ -5,7 +5,6 @@ import { faArrowLeft, faBold, faDroplet } from '@fortawesome/free-solid-svg-icon
 import { SafeAreaView } from 'react-native-safe-area-context';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import { useNavigation } from '@react-navigation/native';
 
 const styles = StyleSheet.create({
   container: {
@@ -37,45 +36,69 @@ const styles = StyleSheet.create({
 });
 
 
-const PrivateReceiversRequestList = () => {
-
-  const navigation = useNavigation();
+const AppointmentRequestsList = () => {
 
   //const [requests, setRequests] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
 
   const [filteredData, setFilteredData] = useState([]);
 
-  const currentDate = new Date();
+  const[refresh, setRefresh] = useState(true);
 
   useEffect(() => {
-    const requestsRef = firestore().collection('requests');
-    requestsRef.onSnapshot((querySnapshot) => {
-      const data = [];
-      querySnapshot.forEach((doc) => {
-        const userId = doc.data().uid;
-        if(auth().currentUser.uid != userId){
-            if(doc.data().expiryDate.toDate() > currentDate){
-              data.push({
-              id: doc.id,
-              name: doc.data().userName,
-              address: doc.data().hospitalName,
-              bloodGroup: doc.data().bloodType
-              });
+    if(refresh){
+        const appointmentsRef = firestore().collection('appointments');
+        appointmentsRef.onSnapshot((querySnapshot) => {
+        const data = [];
+        querySnapshot.forEach((doc) => {
+            const receiverId = doc.data().receiverId;
+            if(auth().currentUser.uid == receiverId){
+                if(doc.data().status == 'requested'){
+                    data.push({
+                    id: doc.id,
+                    donorName: doc.data().donorName,
+                    address: doc.data().hospital,
+                    bloodGroup: doc.data().bloodType,
+                    appointmentDate: doc.data().appointmentDate
+                    });
+                }
             }
-        }
-      });
-      setFilteredData(data);
-    });
-  }, []);
+        });
+        setFilteredData(data);
+        setRefresh(false);
+        });
+    }
+  }, [refresh]);
 
   /*useEffect(() => {
     setFilteredData(data);
   }, [data]);*/
 
+    const handleAccept = async (docId) => {
+        try {
+            const requestRef = firestore().collection('appointments').doc(docId);
+            await requestRef.update({status: 'confirmed'});
+            console.log('Request updated successfully!');
+        } catch (error) {
+            console.error(error);
+        }
+        setRefresh(true);
+    };
+
+    const handleReject = async (docId) => {
+        try {
+            const requestRef = firestore().collection('appointments').doc(docId);
+            await requestRef.update({status: 'declined'});
+            console.log('Request updated successfully!');
+        } catch (error) {
+            console.error(error);
+        }
+        setRefresh(true);
+    };
+
   const renderItem = ({ item }) => {
 
-    if (searchQuery && !item.name.includes(searchQuery) && !item.address.includes(searchQuery)) {
+    if (searchQuery && !item.donorName.includes(searchQuery) && !item.address.includes(searchQuery)) {
         return null;
     }
 
@@ -90,8 +113,9 @@ const PrivateReceiversRequestList = () => {
         
         }}>
           <View>
-      <Text style={{ fontWeight: 'bold', fontSize: 25, color: 'black' }}>{item.name}</Text>
+      <Text style={{ fontWeight: 'bold', fontSize: 25, color: 'black' }}>{item.donorName}</Text>
       <Text style={{ paddingVertical: 5, color: 'black' }}>{item.address}</Text>
+      <Text style={{ paddingVertical: 5, color: 'black' }}>Appointment Date: {item.appointmentDate.toDate().toLocaleDateString()}</Text>
       </View>
       <View style={{position: 'absolute', right: 0}}>
       <FontAwesomeIcon icon={faDroplet} size={55} color="#DE0A1E" />
@@ -106,12 +130,12 @@ const PrivateReceiversRequestList = () => {
         justifyContent: 'center',
       }}>
         
-        <TouchableOpacity style={{ alignItems: 'center', backgroundColor: '#00000000', borderRadius: 10, paddingVertical: 8, paddingHorizontal: 50 }}>
+        <TouchableOpacity onPress={ () => handleReject(item.id) } style={{ alignItems: 'center', backgroundColor: '#00000000', borderRadius: 10, paddingVertical: 8, paddingHorizontal: 50 }}>
           <Text style={{ fontSize: 17, color: '#8C8C8C', }}>{'Decline'}</Text>
         </TouchableOpacity>
         <View style={{ marginTop:10, height: '100%', width: 1, backgroundColor: '#8C8C8C'}} />
-        <TouchableOpacity onPress={ () => navigation.navigate('Request Info', {docId: item.id})} style={{ alignItems: 'center', backgroundColor: '#00000000', borderRadius: 3, paddingVertical: 8, paddingHorizontal: 50 }}>
-          <Text style={{ fontSize: 17, color: '#DE0A1E' }}>{'Donate Now'}</Text>
+        <TouchableOpacity onPress={ () => handleAccept(item.id) } style={{ alignItems: 'center', backgroundColor: '#00000000', borderRadius: 3, paddingVertical: 8, paddingHorizontal: 50 }}>
+          <Text style={{ fontSize: 17, color: '#DE0A1E' }}>{'Accept'}</Text>
         </TouchableOpacity>
       </View>
       {/* <View style={{margin:2, marginTop:4, flex: 1, height: 1, backgroundColor: '#8C8C8C'}} /> */}
@@ -157,4 +181,4 @@ const PrivateReceiversRequestList = () => {
 
 };
 
-export default PrivateReceiversRequestList;
+export default AppointmentRequestsList;

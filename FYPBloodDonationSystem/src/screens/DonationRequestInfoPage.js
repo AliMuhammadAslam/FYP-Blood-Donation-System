@@ -4,16 +4,52 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import MapView from "react-native-maps";
 import checkLocation from "../components/Location";
 import { MoreOrLess } from "@rntext/more-or-less";
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+import { useNavigation } from '@react-navigation/native';
 
 
-const DonationRequestInfoPage = () => {
+const DonationRequestInfoPage = ({route}) => {
+
+    const { docId } = route.params;
+
+    const navigation = useNavigation();
+
     const sample_image = require('../../assets/sample_image.jpg');
     const star = require('../../assets/star_icon.png');
     const blood_drop = require('../../assets/blood_drop.jpg');
     const [collapsed, setCollapsed] = useState(true);
-    useEffect(() => {
+
+    const [request, setRequest] = useState();
+    const [userDetails, setDetails] = useState();
+    const[reqID, setReqId] = useState();
+
+    useEffect( () => {
+
         // checkLocation();
-    }, []);
+
+        const requestRef = firestore().collection('requests').doc(docId);
+
+        requestRef.get().then((doc) => {
+        if (doc.exists) {
+            setReqId(doc.id);
+            const userRef = firestore().collection('users').doc(doc.data().uid);
+            userRef.get().then((userDoc) => {
+                if(userDoc.exists){
+                    setDetails(userDoc.data());
+                }
+            });
+            setRequest(doc.data());
+        } else {
+            console.log('Document doesnot exist.');
+        }
+        }).catch((error) => {
+            console.log('Error getting document:', error);
+        });
+
+    }, [docId]);
+
+
     return (
         <SafeAreaView style={styles.container}>
             {/* <View style={styles.backArrow}>
@@ -28,28 +64,29 @@ const DonationRequestInfoPage = () => {
                 }}
             />
             <View style={styles.infoContainer}>
-                <ScrollView>
+                {request && userDetails ? (
+
+                    <ScrollView>
                     <View style={{ flexDirection: 'row', gap: 20, alignItems: 'center' }}>
                         <Image style={{ width: 80, height: 80, borderRadius: 40 }} source={sample_image} />
                         <View>
-                            <Text style={{ color: 'black', fontSize: 20 }}>Zulfiqar Khan</Text>
-                            <Text style={styles.text}>PECHS Block , Karachi</Text>
+                            <Text style={{ color: 'black', fontSize: 20 }}>{request.userName}</Text>
+                            <Text style={styles.text}>{userDetails.address}</Text>
                             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
                                 <Image style={{ width: 15, height: 15 }} source={star} />
                                 <Text style={styles.text}>4.5/5 Ratings</Text>
                             </View>
                         </View>
                         <ImageBackground style={{ width: 50, height: 70, alignItems: 'center', justifyContent: 'center' }} source={blood_drop}>
-                            <Text style={{ color: 'white', fontSize: 28, paddingTop: 15 }}>O-</Text>
+                            <Text style={{ color: 'white', fontSize: 28, paddingTop: 15 }}>{request.bloodType}</Text>
                         </ImageBackground>
                     </View>
                     <View style={{ marginTop: 10 }}>
                         <Text style={{ color: 'black', fontSize: 18 }}>Donation Details</Text>
-                        <Text style={styles.text}>Liaqat National Hospital</Text>
-                        <Text style={styles.text}>Agha Khan Road, Karachi</Text>
+                        <Text style={styles.text}>{request.hospitalName}</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={styles.text}>Time: </Text>
-                            <Text style={styles.text}>04:00 pm 12 Jan 2023</Text>
+                            <Text style={styles.text}>Request Expiry Date: </Text>
+                            <Text style={styles.text}>{request.expiryDate.toDate().toLocaleDateString()}</Text>
                         </View>
                         <MoreOrLess
                             numberOfLines={3}
@@ -63,13 +100,20 @@ const DonationRequestInfoPage = () => {
                             five centuries, but also the leap into electronic typesetting, remaining essentially
                             unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
                             Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
-                            PageMaker including versions of Lorem.
+                            PageMaker including versions of Lorem.{request.notes}
                         </MoreOrLess>
                     </View>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={{fontSize: 22, color: 'white'}}>Donate Now</Text>
+                    <TouchableOpacity style={styles.button} onPress={ () => navigation.navigate('Create Appointment', {reqId: reqID, receiverName: request.userName, receiverId: request.uid , hospital: request.hospitalName, bloodType: request.bloodType, maxDateLimit: request.expiryDate.toDate().toISOString()})}>
+                        <Text style={{fontSize: 22, color: 'white'}}>Create An Appointment</Text>
                     </TouchableOpacity>
-                </ScrollView>
+                    </ScrollView>
+                    
+                ) : (
+
+                    <Text>Loading...</Text>
+                    
+                )}
+
             </View>
         </SafeAreaView>
     );

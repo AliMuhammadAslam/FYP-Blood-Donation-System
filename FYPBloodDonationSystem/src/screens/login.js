@@ -29,7 +29,8 @@ function Login()  {
           .signInWithEmailAndPassword(email, password)
           .then(() => {
             console.log('Signed in!');
-            navigation.navigate('Create Request')
+            //navigation.navigate('Create Request')
+            navigation.navigate('Donation Requests')
           })
           .catch(error => {
 
@@ -41,7 +42,7 @@ function Login()  {
               console.log('That password is invalid!');
             }
 
-            Alert.alert('Invalid Credentials');
+            Alert.alert(error.code);
 
             console.error(error);
         });

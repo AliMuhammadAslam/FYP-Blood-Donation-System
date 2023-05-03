@@ -32,6 +32,10 @@ import Slideshow from './src/components/slideshow';
 import forgotPassword from './src/screens/forgotPassword';
 import ChatScreen from './src/screens/ChatScreen';
 import CreateRequest from './src/screens/Forms/CreateRequest';
+import DonationRequestInfoPage from './src/screens/DonationRequestInfoPage';
+import PrivateReceiversRequestList from './src/screens/privateRequests';
+import CreateAppointment from './src/screens/createAppointment';
+//import MyAppointments from './src/screens/Appointments';
 import MessagesScreen from './src/screens/MessagesScreen';
 const win = Dimensions.get('window');
 const ratio = win.width/602;
@@ -166,6 +170,18 @@ const App = () => {
         />
         <Stack.Screen name="Create Request" 
         component={CreateRequest} 
+        options={{headerShown: false}}
+        />
+        <Stack.Screen name="Donation Requests" 
+        component={PrivateReceiversRequestList}
+        options={{headerShown: false}}
+        />
+        <Stack.Screen name="Request Info" 
+        component={DonationRequestInfoPage}
+        options={{headerShown: false}}
+        />
+        <Stack.Screen name="Create Appointment"
+        component={CreateAppointment}
         options={{headerShown: false}}
         />
         <Stack.Screen name="Slideshow" 
