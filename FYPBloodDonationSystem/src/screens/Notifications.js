@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { FlatList, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, useColorScheme, View, Image } from 'react-native';
-import ChatHeader from "../components/ChatHeader";
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import Header from "../components/Header";
 
-function Home() {
 
-    const navigation = useNavigation();
+function Notifications() {
     const isDarkMode = useColorScheme() === 'dark';
     const backgroundStyle = {
         backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -16,7 +14,7 @@ function Home() {
     
     return (
         <View>
-            <ChatHeader title="Home" isRed={true} />
+            <Header title="Notifications" isRed={true} />
         </View>
         // <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         // </View>
@@ -27,4 +25,4 @@ function Home() {
     
 });
 
-export default Home;
+export default Notifications;

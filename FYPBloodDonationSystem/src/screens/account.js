@@ -3,6 +3,7 @@ import { faStar, faCalendarCheck, faLocation, faArrowRight, faClockRotateLeft, f
 import React, {useState} from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, Switch } from 'react-native';
 
+
 const OverlapView = () => {
     return <View style={styles.overlay}>
         <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
@@ -34,6 +35,9 @@ const Account = () => {
   };
 
   return (
+    
+    
+    
     <View style={styles.container}>
      <View style={styles.profileContainer}>
       <View style={styles.avatarContainer}>

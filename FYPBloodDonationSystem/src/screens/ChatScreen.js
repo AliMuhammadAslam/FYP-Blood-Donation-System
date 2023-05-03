@@ -4,6 +4,9 @@ import {Bubble, GiftedChat, Send} from 'react-native-gifted-chat';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Header from "../components/Header";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faArrowLeft, faBars, faBold, faCalendar, faDroplet, faGear, faHome, faMessage, faPaperPlane, faPerson, faPlusSquare, faUser } from '@fortawesome/free-solid-svg-icons';
+
 const ChatScreen = () => {
   const [messages, setMessages] = useState([]);
 
@@ -41,13 +44,14 @@ const ChatScreen = () => {
   const renderSend = (props) => {
     return (
       <Send {...props}>
-        <View>
-          <MaterialCommunityIcons
+        <View style={{marginBottom: 15, marginRight: 20}} size={32}>
+          {/* <MaterialCommunityIcons
             name="send"
             style={{marginBottom: 5, marginRight: 5}}
             size={32}
             color="#2e64e5"
-          />
+          /> */}
+          <FontAwesomeIcon icon={faPaperPlane} size={20} color={'#DE0A1E'} marginBottom={30} marginRight={30} />
         </View>
       </Send>
     );
@@ -101,4 +105,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  
 });

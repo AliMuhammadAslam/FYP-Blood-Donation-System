@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { FlatList, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, useColorScheme, View, Image } from 'react-native';
-
+import Header from "../components/Header";
 
 
 function Chat() {
@@ -13,9 +13,12 @@ function Chat() {
     
     
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Chat!</Text>
-      </View>
+        <View>
+            <Header title="Chat" isRed={true} />
+        </View>
+        // <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            
+        // </View>
     );
     }
 

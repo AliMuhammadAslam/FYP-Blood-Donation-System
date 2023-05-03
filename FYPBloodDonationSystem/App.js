@@ -32,7 +32,7 @@ import Slideshow from './src/components/slideshow';
 import forgotPassword from './src/screens/forgotPassword';
 import ChatScreen from './src/screens/ChatScreen';
 import CreateRequest from './src/screens/Forms/CreateRequest';
-
+import MessagesScreen from './src/screens/MessagesScreen';
 const win = Dimensions.get('window');
 const ratio = win.width/602;
 
@@ -176,7 +176,16 @@ const App = () => {
         component={forgotPassword} 
         options={{headerShown: false}}
         />
-        {/* <Stack.Screen
+        {/* <Stack.Screen name="MessagesScreen"
+        component={MessagesScreen}
+        options={{headerShown: false}}
+        /> */}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+{/* <Stack.Screen
         name="Chat"
         component={ChatScreen}
         options={({route}) => ({
@@ -184,10 +193,6 @@ const App = () => {
         headerBackTitleVisible: false,
         })}
       /> */}
-    </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
 
 const styles = StyleSheet.create({
   
