@@ -12,6 +12,7 @@ import { BackgroundImage } from "@rneui/themed/dist/config";
 
 
 const OrganisationInfo = () => {
+    //const hospital_image = require('../../../assets/IndusHospital.jpg');
     const hospital_image = require('../../../assets/IndusHospital.jpg');
     const star = require('../../../assets/star_icon.png');
     const data = {

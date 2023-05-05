@@ -24,7 +24,7 @@ import organizationRequests from './src/screens/organizationRequests';
 import checkLocation from './src/components/Location';
 import organizationRegPatients from './src/screens/organizationRegPatients';
 import PrivateReceiversRequestList from './src/screens/privateRequests';
-import OrganisationInfo from './src/screens/Organisation/OrganisationInfo';
+import OrganisationInfo from './src/screens/OrganisationInfo/OrganisationInfo';
 import PatientDetails from './src/screens/PatientDetails/PatientDetails';
 
 
