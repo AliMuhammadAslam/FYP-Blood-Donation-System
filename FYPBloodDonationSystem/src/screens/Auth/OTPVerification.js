@@ -5,11 +5,11 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { Dropdown } from 'react-native-dropdown';
 import SelectDropdown from 'react-native-select-dropdown';
 import ConfirmationCodeInput from 'react-native-confirmation-code-input';
-import Header from "../components/Header";
+import Header from "../../components/Header";
 
   
 
-function OTPVerification() {
+const OTPVerification = () => {
   const isDarkMode = useColorScheme() === 'dark';
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -39,7 +39,7 @@ function OTPVerification() {
 
         <Image style={styles.image}
             resizeMode={'contain'}
-            source={require('../../assets/OTP-Verification.png')} />  
+            source={require('../../../assets/OTP-Verification.png')} />  
 
       </View>
 

@@ -8,11 +8,10 @@ import {
 } from "react-native-chart-kit";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faPhone, faLocationDot, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
-import { BackgroundImage } from "@rneui/themed/dist/config";
 
 
 const OrganisationInfo = () => {
-    const hospital_image = require('../../../assets/IndusHospital.jpg');
+    const hospital_image = require('../../../assets/sample_image.jpg');
     const star = require('../../../assets/star_icon.png');
     const data = {
         labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June'],

@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity, View, Text, ScrollView } from 'react-nati
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faArrowLeft, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Header from '../components/Header';
+import Header from '../../components/Header';
 
 const styles = StyleSheet.create({ 
     container: {
@@ -26,11 +26,11 @@ const styles = StyleSheet.create({
 });
 
 
-const manageAddresses = () => {
+const ManageAddresses = ({navigation}) => {
 
     return (
     <SafeAreaView style={{justifyContent: 'center', alignContent: 'center', backgroundColor: "white", flex: 1}}>
-      <Header title="Manage Address" isRed={true} />
+      <Header title="Manage Address" isRed={true} navigation={navigation} />
       <ScrollView>
         <View style={{ flexDirection: 'column', margin:25}}>
             <Text style={{fontWeight: 'bold', paddingBottom: 20, color: 'black', fontSize: 16}}>
@@ -89,4 +89,4 @@ const manageAddresses = () => {
     );
   };
   
-export default manageAddresses;
+export default ManageAddresses;

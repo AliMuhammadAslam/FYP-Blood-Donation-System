@@ -31,8 +31,8 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Login from './src/screens/login';
-import Signup from './src/screens/signup';
+import Login from './src/screens/Auth/Login';
+import Signup from './src/screens/Auth/Signup';
 
 type SectionProps = PropsWithChildren<{
   title: string;

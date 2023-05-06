@@ -5,9 +5,10 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import AppointmentRequestsList from './appointmentRequests';
 import AppointmentsList from './appointmentsList';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import Icon from 'react-native-vector-icons/FontAwesome';  
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { faArrowLeft, faBold, faDroplet } from '@fortawesome/free-solid-svg-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Header from '../components/Header';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -41,38 +42,40 @@ function MyTabs() {
     </Tab.Navigator>
   );
 }
-export default function MyAppointments() {
+export default function MyAppointments({navigation}) {
   return (
-    <NavigationContainer>
-        <View style={styles.container}>
-            <TouchableOpacity style={styles.backButton}>
-                <FontAwesomeIcon icon={faArrowLeft} size={20} color="white" />
-            </TouchableOpacity>
-            <Text style={styles.title}>{"My Appointments"}</Text>
-            <View style={{ width: 30 }} />
-        </View>
-        <MyTabs />
-    </NavigationContainer>
+    <View style={{flex: 1}}>
+      <Header title="My Appointments" isRed={true} navigation={navigation} />
+      <MyTabs />
+    </View>
+    // <View style={styles.container}>
+    //   <TouchableOpacity style={styles.backButton}>
+    //     <FontAwesomeIcon icon={faArrowLeft} size={20} color="white" />
+    //   </TouchableOpacity>
+    //   <Text style={styles.title}>{"My Appointments"}</Text>
+    //   <View style={{ width: 30 }} />
+    // </View>
+
   );
 }
 
 
 const styles = StyleSheet.create({
-    container: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      backgroundColor: '#DE0A1E',
-      height: 60,
-      paddingHorizontal: 10,
-    },
-    backButton: {
-      marginLeft: 10,
-    },
-    title: {
-      fontSize: 18,
-      flex: 1,
-      textAlign: 'center',
-      color: '#FFF',
-      fontWeight: 'bold',
-    }
-  });
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#DE0A1E',
+    height: 60,
+    paddingHorizontal: 10,
+  },
+  backButton: {
+    marginLeft: 10,
+  },
+  title: {
+    fontSize: 18,
+    flex: 1,
+    textAlign: 'center',
+    color: '#FFF',
+    fontWeight: 'bold',
+  }
+});

@@ -8,7 +8,7 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 
-function Signup() {
+const Signup = () => {
     // const isDarkMode = useColorScheme() === 'dark';
     // const backgroundStyle = {
     //     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,

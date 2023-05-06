@@ -3,9 +3,9 @@ import { Button, Pressable, SafeAreaView, StyleSheet, Text, TouchableOpacity, us
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import {TextInput} from 'react-native-paper';
-import Header from "../components/Header";
+import Header from "../../components/Header";
 // import {eye, eyeOff} from 'react-native-vector-icons/Feather';
-function changePassword()  {
+const ChangePassword = () =>  {
     // const isDarkMode = useColorScheme() === 'dark';
     // const backgroundStyle = {
     //     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -40,7 +40,7 @@ function changePassword()  {
           // iconPosition="right"
           right={
             <TextInput.Icon
-              icon={isVisible ? require('../../assets/eye-off.png') : require('../../assets/eye.png')}
+              icon={isVisible ? require('../../../assets/eye-off.png') : require('../../../assets/eye.png')}
             
               onPress={() =>
                 setIsVisible(!isVisible)
@@ -145,4 +145,4 @@ function changePassword()  {
     },
   });
 
-export default changePassword;
+export default ChangePassword;

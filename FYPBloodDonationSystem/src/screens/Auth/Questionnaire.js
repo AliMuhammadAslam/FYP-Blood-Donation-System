@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const questionnaire = () => {
+const Questionnaire = () => {
 
     return (
     <SafeAreaView style={{justifyContent: 'center', alignContent: 'center'}}>
@@ -101,5 +101,5 @@ const questionnaire = () => {
     );
   };
   
-export default questionnaire;
+export default Questionnaire;
 

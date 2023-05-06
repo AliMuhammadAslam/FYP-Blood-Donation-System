@@ -6,10 +6,12 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 const Header = (props) => {
 
-    const {title, isRed} = props;
+    const {title, isRed, navigation} = props;
   return (
     <View style={isRed ? stylesRed.container : stylesWhite.container}>
-      <TouchableOpacity style={stylesRed.backButton}>
+      <TouchableOpacity style={stylesRed.backButton} onPress={() => {
+        navigation.goBack();
+      }}>
         <FontAwesomeIcon icon={faArrowLeft} size={20} color={isRed ? "white" : "#DE0A1E"} />
 
       </TouchableOpacity>
