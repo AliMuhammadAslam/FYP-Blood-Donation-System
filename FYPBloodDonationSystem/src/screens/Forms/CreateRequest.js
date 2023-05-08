@@ -11,9 +11,8 @@ import { useNavigation } from '@react-navigation/native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 
-const CreateRequest = () => {
+const CreateRequest = ({navigation}) => {
 
-    const navigation = useNavigation();
 
     const [name, setName] = useState("");
     const [bloodType, setBloodType] = useState(null);
@@ -91,7 +90,7 @@ const CreateRequest = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Header title="Create a Request" isRed={true} />
+            <Header title="Create a Request" isRed={true} navigation={navigation} />
             <View style={styles.innerContainer}>
                 <View style={styles.inputContainer}>
                     <TextInput
