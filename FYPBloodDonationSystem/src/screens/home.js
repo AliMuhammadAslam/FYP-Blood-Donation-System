@@ -16,7 +16,10 @@ function Home() {
     
     return (
         <View>
-            <ChatHeader title="Home" isRed={true} />
+            <ChatHeader 
+            //title="Home" 
+            isRed={true} />
+            <Text style={{color:'black'}}>This is user home -- home.js </Text>
         </View>
         // <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         // </View>

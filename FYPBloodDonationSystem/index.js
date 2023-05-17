@@ -28,6 +28,7 @@ import PatientDetails from './src/screens/PatientDetails/PatientDetails';
 // import ChatScreen from './src/screens/ChatScreen';
 // import MessagesScreen from './src/screens/MessagesScreen';
 import Notifications from './src/screens/Notifications';
+import Slideshow from './src/components/slideshow';
 
 
 AppRegistry.registerComponent(appName, () => App);

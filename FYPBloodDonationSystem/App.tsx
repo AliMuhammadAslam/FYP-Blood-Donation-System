@@ -32,7 +32,7 @@ import {
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from './src/screens/login';
-import Signup from './src/screens/signup';
+import Signup from './src/screens/signup_first';
 
 type SectionProps = PropsWithChildren<{
   title: string;

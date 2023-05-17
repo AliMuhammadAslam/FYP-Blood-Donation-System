@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Icon } from '@rneui/themed';
 import Login from './login';
-import Signup from './signup';
+import Signup from './signup_first';
 import forgotPassword from './forgotPassword';
 import Settings from './settings';
 import Home from './home';
@@ -45,7 +45,7 @@ export default function tabNavigation() {
         }}
       />
       <Tab.Screen
-        name="Settings"
+        name="Appointments"
         component={Settings}
         options={{
           tabBarLabel: 'Appointments',
@@ -57,7 +57,7 @@ export default function tabNavigation() {
         }}
       />
       <Tab.Screen
-        name="Chat"
+        name="Requests"
         component={Chat}
         options={{
           tabBarLabel: 'Requests',

@@ -27,7 +27,8 @@ import {
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from './src/screens/login';
-import Signup from './src/screens/signup';
+import Signup_first from './src/screens/signup_first';
+import Signup_second from './src/screens/signup_second';
 import Slideshow from './src/components/slideshow';
 import forgotPassword from './src/screens/forgotPassword';
 import ChatScreen from './src/screens/ChatScreen';
@@ -37,6 +38,7 @@ import PrivateReceiversRequestList from './src/screens/privateRequests';
 import CreateAppointment from './src/screens/createAppointment';
 //import MyAppointments from './src/screens/Appointments';
 import MessagesScreen from './src/screens/MessagesScreen';
+import Home from './src/screens/home';
 const win = Dimensions.get('window');
 const ratio = win.width/602;
 
@@ -104,7 +106,7 @@ const AuthenticationScreen = () => {
             <View style={styles.buttonView}>
               <TouchableOpacity
               style={styles.buttonStyle}
-              onPress={() => navigation.navigate('Signup')}>
+              onPress={() => navigation.navigate('Signup_first')}>
               <Text style={styles.buttonText}>
                 {"Signup"}
               </Text>
@@ -178,17 +180,27 @@ const App = () => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Signup"
-          component={Signup}
-          options={{ headerShown: false }}
+          name="Signup_first"
+          component={Signup_first}
+          options={{headerShown: false}}
+        />
+         <Stack.Screen
+          name="Signup_second"
+          component={Signup_second}
+          options={{headerShown: false}}
         />
         <Stack.Screen name="Login"
           component={Login}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="Create Request"
-          component={CreateRequest}
-          options={{ headerShown: false }}
+        <Stack.Screen
+          name="home"
+          component={Home}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen name="Create Request" 
+        component={CreateRequest} 
+        options={{headerShown: false}}
         />
         <Stack.Screen name="Donation Requests"
           component={PrivateReceiversRequestList}
