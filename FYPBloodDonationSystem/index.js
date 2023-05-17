@@ -28,7 +28,7 @@ import OrganisationInfo from './src/screens/OrganisationInfo/OrganisationInfo';
 import PatientDetails from './src/screens/PatientDetails/PatientDetails';
 
 
-AppRegistry.registerComponent(appName, () => PatientDetails);
+AppRegistry.registerComponent(appName, () => App);
 
 
 
