@@ -26,6 +26,7 @@ import organizationRegPatients from './src/screens/organizationRegPatients';
 import PrivateReceiversRequestList from './src/screens/privateRequests';
 import OrganisationInfo from './src/screens/OrganisationInfo/OrganisationInfo';
 import PatientDetails from './src/screens/PatientDetails/PatientDetails';
+import Slideshow from './src/components/slideshow';
 
 
 AppRegistry.registerComponent(appName, () => App);

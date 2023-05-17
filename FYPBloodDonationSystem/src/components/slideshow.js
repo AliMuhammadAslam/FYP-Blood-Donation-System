@@ -14,6 +14,29 @@ const win = Dimensions.get('window');
 const ratio = win.width / 602;
 
 function Slideshow() {
+  React.useEffect(() => {
+    const backAction = () => {
+        navigation.goBack();
+    //   Alert.alert('Hold on!', 'Are you sure you want to exit the app?', [
+    //     {
+    //       text: 'Cancel',
+    //       onPress: () => null,
+    //       style: 'cancel',
+    //     },
+    //     {text: 'YES', onPress: () => BackHandler.exitApp()},
+    //   ]);
+    //   return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      //backAction,
+      () => true,
+    );
+
+    return () => backHandler.remove();
+  }, []);
+
   const navigation = useNavigation();
     return (
       <Swiper style={styles.wrapper} showsButtons={true} autoplay={true}>
