@@ -10,7 +10,7 @@ const Header = (props) => {
   return (
     <View style={isRed ? stylesRed.container : stylesWhite.container}>
       <TouchableOpacity style={stylesRed.backButton}>
-        <FontAwesomeIcon icon={faArrowLeft} size={20} color={isRed ? "white" : "#DE0A1E"} />
+        {/* <FontAwesomeIcon icon={faArrowLeft} size={20} color={isRed ? "white" : "#DE0A1E"} /> */}
 
       </TouchableOpacity>
       <Text style={isRed ? stylesRed.title : stylesWhite.title}>{title}</Text>

@@ -45,7 +45,7 @@ export default function tabNavigation() {
         }}
       />
       <Tab.Screen
-        name="Settings"
+        name="Appointments"
         component={Settings}
         options={{
           tabBarLabel: 'Appointments',
@@ -57,7 +57,7 @@ export default function tabNavigation() {
         }}
       />
       <Tab.Screen
-        name="Chat"
+        name="Requests"
         component={Chat}
         options={{
           tabBarLabel: 'Requests',
