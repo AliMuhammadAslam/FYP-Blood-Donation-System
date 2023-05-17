@@ -5,9 +5,13 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Header from "../components/Header";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faArrowLeft, faBars, faBold, faCalendar, faDroplet, faGear, faHome, faMessage, faPaperPlane, faPerson, faPlusSquare, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faArrowDown, faArrowLeft, faBars, faBold, faCalendar, faDroplet, faGear, faHome, faMessage, faPaperPlane, faPerson, faPlusSquare, faUser } from '@fortawesome/free-solid-svg-icons';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-const ChatScreen = () => {
+const ChatScreen = (props) => {
+
+  const {userName} = props.route.params;
+  console.log(userName);
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -77,23 +81,43 @@ const ChatScreen = () => {
 
   const scrollToBottomComponent = () => {
     return(
-      <FontAwesome name='angle-double-down' size={22} color='#333' />
+      <FontAwesomeIcon icon={faArrowDown} size={22} color={'#333'} />
     );
   }
 
   return (
-    <GiftedChat
-      messages={messages}
-      onSend={(messages) => onSend(messages)}
-      user={{
-        _id: 1,
-      }}
-      renderBubble={renderBubble}
-      alwaysShowSend
-      renderSend={renderSend}
-      scrollToBottom
-      scrollToBottomComponent={scrollToBottomComponent}
-    />
+    // <SafeAreaView style={[
+    //   {//styles.container
+    //     justifyContent: 'center',
+    //     alignItems: 'center',
+    //     flex: 1,
+    //   },
+      
+    // ]}>
+    //   <Header title={userName} isRed={true} />
+
+
+    //   {/* <Text style={{ fontWeight: '400', color: 'black' }}>
+    //     {userName}
+    //   </Text> */}
+    //   <View>
+        
+    //     <View style={{ marginBottom: 100 }}>
+          <GiftedChat
+            messages={messages}
+            onSend={(messages) => onSend(messages)}
+            user={{
+              _id: 1,
+            }}
+            renderBubble={renderBubble}
+            alwaysShowSend
+            renderSend={renderSend}
+            scrollToBottom
+            scrollToBottomComponent={scrollToBottomComponent}
+          />
+    //     </View>
+    //   </View>
+    // </SafeAreaView>
   );
 };
 

@@ -40,6 +40,22 @@ import MessagesScreen from './src/screens/MessagesScreen';
 const win = Dimensions.get('window');
 const ratio = win.width/602;
 
+
+  // const Stack = createStackNavigator();
+  // const MessageStack = ({ navigation }) => (
+  //   <Stack.Navigator>
+  //     <Stack.Screen name="Messages" component={MessagesScreen} />
+  //     <Stack.Screen
+  //       name="Chat"
+  //       component={ChatScreen}
+  //       options={({ route }) => ({
+  //         title: route.params.userName,
+  //         headerBackTitleVisible: false,
+  //       })}
+  //     />
+  //   </Stack.Navigator>
+  // );
+
 const AuthenticationScreen = () => {
 
   const navigation = useNavigation();
@@ -149,6 +165,8 @@ const AuthenticationScreen = () => {
 const App = () => {
 
   const Stack = createNativeStackNavigator();
+
+
   
 
   return (
@@ -157,58 +175,56 @@ const App = () => {
         <Stack.Screen
           name="Authentication"
           component={AuthenticationScreen}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Signup"
           component={Signup}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
-        <Stack.Screen name="Login" 
-        component={Login} 
-        options={{headerShown: false}}
+        <Stack.Screen name="Login"
+          component={Login}
+          options={{ headerShown: false }}
         />
-        <Stack.Screen name="Create Request" 
-        component={CreateRequest} 
-        options={{headerShown: false}}
+        <Stack.Screen name="Create Request"
+          component={CreateRequest}
+          options={{ headerShown: false }}
         />
-        <Stack.Screen name="Donation Requests" 
-        component={PrivateReceiversRequestList}
-        options={{headerShown: false}}
+        <Stack.Screen name="Donation Requests"
+          component={PrivateReceiversRequestList}
+          options={{ headerShown: false }}
         />
-        <Stack.Screen name="Request Info" 
-        component={DonationRequestInfoPage}
-        options={{headerShown: false}}
+        <Stack.Screen name="Request Info"
+          component={DonationRequestInfoPage}
+          options={{ headerShown: false }}
         />
         <Stack.Screen name="Create Appointment"
-        component={CreateAppointment}
-        options={{headerShown: false}}
+          component={CreateAppointment}
+          options={{ headerShown: false }}
         />
-        <Stack.Screen name="Slideshow" 
-        component={Slideshow} 
+        <Stack.Screen name="Slideshow"
+          component={Slideshow}
         //options={{headerShown: false}}
         />
-        <Stack.Screen name="forgotPassword" 
-        component={forgotPassword} 
-        options={{headerShown: false}}
+        <Stack.Screen name="forgotPassword"
+          component={forgotPassword}
+          options={{ headerShown: false }}
         />
-        {/* <Stack.Screen name="MessagesScreen"
-        component={MessagesScreen}
-        options={{headerShown: false}}
-        /> */}
+        <Stack.Screen name="MessagesScreen"
+          component={MessagesScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen name="ChatScreen"
+          component={ChatScreen}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
+
+
 }
 
-{/* <Stack.Screen
-        name="Chat"
-        component={ChatScreen}
-        options={({route}) => ({
-        title: route.params.userName,
-        headerBackTitleVisible: false,
-        })}
-      /> */}
 
 const styles = StyleSheet.create({
   
