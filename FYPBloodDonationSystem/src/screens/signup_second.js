@@ -104,7 +104,8 @@ function Signup_second({route}) {
             genderValue,
             bloodValue,
             email,
-            password
+            password,
+            isOrg: false
           });
 
           navigation.navigate('Slideshow');

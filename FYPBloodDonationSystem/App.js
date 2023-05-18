@@ -39,6 +39,10 @@ import CreateAppointment from './src/screens/createAppointment';
 //import MyAppointments from './src/screens/Appointments';
 import MessagesScreen from './src/screens/MessagesScreen';
 import Home from './src/screens/home';
+import OrganizationsList from './src/screens/organizations_list';
+import OrganisationInfo from './src/screens/OrganisationInfo/OrganisationInfo';
+import ApplicationForm from './src/screens/Forms/ApplicationForm';
+
 const win = Dimensions.get('window');
 const ratio = win.width/602;
 
@@ -229,6 +233,18 @@ const App = () => {
         <Stack.Screen name="ChatScreen"
           component={ChatScreen}
           options={{ headerShown: false }}
+        />
+        <Stack.Screen name="Organizations List" 
+        component={OrganizationsList} 
+        options={{headerShown: false}}
+        />
+        <Stack.Screen name="Organization Info" 
+        component={OrganisationInfo} 
+        options={{headerShown: false}}
+        />
+        <Stack.Screen name="Application Form" 
+        component={ApplicationForm} 
+        options={{headerShown: false}}
         />
       </Stack.Navigator>
     </NavigationContainer>

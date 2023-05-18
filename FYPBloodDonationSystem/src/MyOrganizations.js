@@ -36,68 +36,46 @@ const styles = StyleSheet.create({
 });
 
 
-const ReceiversRequestsList = () => {
+const MyOrganizations = () => {
 
   //const [requests, setRequests] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
 
   const [filteredData, setFilteredData] = useState([]);
 
-  const[refresh, setRefresh] = useState(true);
-
   useEffect(() => {
-    if(refresh){
-        const associationRef = firestore().collection('OrganizationAssociations');
-        associationRef.onSnapshot((querySnapshot) => {
+    
+        const associationsRef = firestore().collection('OrganizationAssociations');
+        associationsRef.onSnapshot((querySnapshot) => {
         const data = [];
         querySnapshot.forEach((doc) => {
-            const orgId = doc.data().orgId;
-            if(auth().currentUser.uid == orgId && doc.data().regType == 'Receiver'){
-                if(doc.data().status == 'requested'){
+
+            if(auth().currentUser.uid == doc.data().userId){
+                if(doc.data().status == 'confirmed' || doc.data().status == 'requested'){
                     data.push({
                     id: doc.id,
-                    userName: doc.data().userName,
-                    address: doc.data().address,
+                    name: doc.data().orgName,
+                    address: doc.data().orgAddress,
                     bloodGroup: doc.data().bloodType,
+                    status: doc.data().status,
+                    type: doc.data().regType
                     });
                 }
             }
+
         });
         setFilteredData(data);
-        setRefresh(false);
         });
-    }
-  }, [refresh]);
+        
+  }, []);
 
   /*useEffect(() => {
     setFilteredData(data);
   }, [data]);*/
 
-    const handleAccept = async (docId) => {
-        try {
-            const associationRef = firestore().collection('OrganizationAssociations').doc(docId);
-            await associationRef.update({status: 'confirmed'});
-            console.log('Request updated successfully!');
-        } catch (error) {
-            console.error(error);
-        }
-        setRefresh(true);
-    };
-
-    const handleReject = async (docId) => {
-        try {
-            const associationRef = firestore().collection('OrganizationAssociations').doc(docId);
-            await associationRef.update({status: 'declined'});
-            console.log('Request updated successfully!');
-        } catch (error) {
-            console.error(error);
-        }
-        setRefresh(true);
-    };
-
   const renderItem = ({ item }) => {
 
-    if (searchQuery && !item.userName.includes(searchQuery) && !item.address.includes(searchQuery)) {
+    if (searchQuery && !item.name.includes(searchQuery) && !item.address.includes(searchQuery)) {
         return null;
     }
 
@@ -112,8 +90,10 @@ const ReceiversRequestsList = () => {
         
         }}>
           <View>
-      <Text style={{ fontWeight: 'bold', fontSize: 25, color: 'black' }}>{item.userName}</Text>
-      <Text style={{ paddingVertical: 5, color: 'black' }}>{item.address}</Text>
+      <Text style={{ fontWeight: 'bold', fontSize: 25, color: 'black' }}>{item.name}</Text>
+      <Text style={{ paddingVertical: 5, color: 'black', width: '70%' }}>{item.address}</Text>
+      <Text style={{ paddingVertical: 5, color: 'black' }}>Registeration Type: {item.type}</Text>
+      <Text style={{ paddingVertical: 5, color: 'black' }}>Status: {item.status}</Text>
       </View>
       <View style={{position: 'absolute', right: 0}}>
       <FontAwesomeIcon icon={faDroplet} size={55} color="#DE0A1E" />
@@ -127,13 +107,9 @@ const ReceiversRequestsList = () => {
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-        
-        <TouchableOpacity onPress={ () => handleReject(item.id) } style={{ alignItems: 'center', backgroundColor: '#00000000', borderRadius: 10, paddingVertical: 8, paddingHorizontal: 50 }}>
-          <Text style={{ fontSize: 17, color: '#8C8C8C', }}>{'Decline'}</Text>
-        </TouchableOpacity>
-        <View style={{ marginTop:10, height: '100%', width: 1, backgroundColor: '#8C8C8C'}} />
-        <TouchableOpacity onPress={ () => handleAccept(item.id) } style={{ alignItems: 'center', backgroundColor: '#00000000', borderRadius: 3, paddingVertical: 8, paddingHorizontal: 50 }}>
-          <Text style={{ fontSize: 17, color: '#DE0A1E' }}>{'Accept'}</Text>
+
+        <TouchableOpacity style={{ alignItems: 'center', backgroundColor: '#00000000', borderRadius: 3, paddingVertical: 8, paddingHorizontal: 50 }}>
+          <Text style={{ fontSize: 17, color: '#DE0A1E' }}>{'View Details'}</Text>
         </TouchableOpacity>
       </View>
       {/* <View style={{margin:2, marginTop:4, flex: 1, height: 1, backgroundColor: '#8C8C8C'}} /> */}
@@ -179,4 +155,4 @@ const ReceiversRequestsList = () => {
 
 };
 
-export default ReceiversRequestsList;
+export default MyOrganizations;
