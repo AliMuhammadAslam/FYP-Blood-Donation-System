@@ -12,7 +12,7 @@ const DrawerNavigation = () => {
         initialRouteName="Tab"
         screenOptions={
             {
-                // headerShown: false,
+                headerShown: false,
                 animationEnabled: true
             }
         }>
