@@ -4,7 +4,7 @@ import { FlatList, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, 
 import Header from "../components/Header";
 
 
-function Notifications() {
+function Notifications({navigation}) {
     const isDarkMode = useColorScheme() === 'dark';
     const backgroundStyle = {
         backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -14,7 +14,7 @@ function Notifications() {
     
     return (
         <View>
-            <Header title="Notifications" isRed={true} />
+            <Header title="Notifications" isRed={true} navigation={navigation} />
         </View>
         // <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         // </View>

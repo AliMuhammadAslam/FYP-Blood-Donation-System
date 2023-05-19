@@ -11,16 +11,14 @@ const HomeHeader = (props) => {
         <View style={styles.container}>
             <Text style={styles.title}>{title}</Text>
             <TouchableOpacity style={styles.bellIcon} onPress={() => {
-
+                navigation.navigate('Notifications');
             }}>
-                {/* <View > */}
-                    <FontAwesomeIcon icon={faBell} size={26} color='black' />
-                    <View style={{
-                        width: 18, height: 18, backgroundColor: '#DE0A1E', borderRadius: 10, left: -12, top: -3
-                    }}>
-                        <Text style={{fontWeight: 'bold', fontSize: 14, alignSelf: 'center', justifyContent: 'center', alignItems: 'center', color: 'white'}}>3</Text>
-                    </View>
-                {/* </View> */}
+                <FontAwesomeIcon icon={faBell} size={26} color='black' />
+                <View style={{
+                    width: 18, height: 18, backgroundColor: '#DE0A1E', borderRadius: 10, left: -12, top: -3
+                }}>
+                    <Text style={{ fontWeight: 'bold', fontSize: 14, alignSelf: 'center', justifyContent: 'center', alignItems: 'center', color: 'white' }}>3</Text>
+                </View>
 
             </TouchableOpacity>
         </View>

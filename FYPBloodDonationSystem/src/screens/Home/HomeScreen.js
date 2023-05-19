@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import HomeHeader from '../../components/HomeHeader';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faLocationDot, faDroplet } from '@fortawesome/free-solid-svg-icons';
+import Slideshow from '../../components/slideshow';
 
 
 const HomeScreen = ({ navigation }) => {
@@ -101,10 +102,11 @@ const HomeScreen = ({ navigation }) => {
     return (
         <SafeAreaView style={styles.container}>
             <HomeHeader title="Hello! Rafay" navigation={navigation} />
-            <View style={{ marginTop: 6, alignItems: 'center', width: '100%', paddingHorizontal: 12, flex: 1 }}>
-                <View style={styles.header}>
-                    <Text style={styles.headingText}>Are You Looking for Blood?</Text>
+            <View style={styles.header}>
+                    {/* <Text style={styles.headingText}>Are You Looking for Blood?</Text> */}
+                    <Slideshow />
                 </View>
+            <View style={{ alignItems: 'center', width: '100%', paddingHorizontal: 12, flex: 1 }}>
                 <View style={styles.boxRow}>
                     {HomeBoxData.map((data) => <HomeBox icon={data.icon} title={data.title} route={data.route} />)}
                 </View>
@@ -148,13 +150,12 @@ const styles = StyleSheet.create({
         fontSize: 18
     },
     header: {
-        flexDirection: 'row',
+        marginTop: 6,
         width: '100%',
-        height: 180,
-        backgroundColor: 'lightblue'
+        height: 200,
     },
     boxRow: {
-        marginTop: 15,
+        marginTop: 10,
         flexDirection: 'row',
         width: '100%',
         gap: 10

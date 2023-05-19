@@ -49,7 +49,7 @@ const TabNavigation = ({ route }) => {
           paddingLeft: 5
         },
         tabBarLabelStyle: {
-          color: 'black',
+          color: '#353535',
           top: -4,
           fontSize: 11
         },

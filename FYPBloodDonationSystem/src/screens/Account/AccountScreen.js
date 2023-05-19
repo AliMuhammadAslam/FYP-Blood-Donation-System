@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faStar, faCalendarCheck, faLocation, faArrowRight, faClockRotateLeft, faClock, faDroplet, faStarOfLife, faHandHoldingHeart, faArrowRotateLeft } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faCalendarCheck, faLocation, faArrowRight, faDroplet, faStarOfLife, faHandHoldingHeart, faArrowRotateLeft, faRightFromBracket, faHospital, faHospitalAlt, faHospitalUser, faHospitalWide } from '@fortawesome/free-solid-svg-icons';
 // import { fa } from '@fortawesome/free-regular-svg-icons'
 import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, Switch } from 'react-native';
@@ -36,9 +36,6 @@ const AccountScreen = ({ navigation }) => {
   };
 
   return (
-
-
-
     <View style={styles.container}>
       <View style={styles.profileContainer}>
         <View style={styles.avatarContainer}>
@@ -116,6 +113,32 @@ const AccountScreen = ({ navigation }) => {
             <FontAwesomeIcon icon={faArrowRight} size={20} color="black" />
           </View>
         </TouchableOpacity>
+        <TouchableOpacity onPress={() => {
+          navigation.navigate('DonationHistory')
+        }}>
+          <View style={styles.rowContainer}>
+            <View style={{ flexDirection: 'row' }}>
+              <View style={styles.iconContainer}>
+                <FontAwesomeIcon icon={faHospital} size={20} color="#DE0A1E" />
+              </View>
+              <Text style={styles.rowText}>My Organisations</Text>
+            </View>
+            <FontAwesomeIcon icon={faArrowRight} size={20} color="black" />
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => {
+          navigation.navigate('DonationHistory')
+        }}>
+          <View style={styles.rowContainer}>
+            <View style={{ flexDirection: 'row' }}>
+              <View style={styles.iconContainer}>
+                <FontAwesomeIcon icon={faRightFromBracket} size={20} color="#DE0A1E" />
+              </View>
+              <Text style={styles.rowText}>Log Out</Text>
+            </View>
+            <FontAwesomeIcon icon={faArrowRight} size={20} color="black" />
+          </View>
+        </TouchableOpacity>
       </View>
 
 
@@ -173,7 +196,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginVertical: 5,
     paddingHorizontal: 20,
-    paddingVertical: 20
+    paddingVertical: 15
   },
   iconContainer: {
     marginRight: 10,
