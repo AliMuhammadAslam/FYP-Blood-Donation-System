@@ -3,15 +3,11 @@ import {View, ScrollView, Text, Button, StyleSheet} from 'react-native';
 import {Bubble, GiftedChat, Send} from 'react-native-gifted-chat';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Header from "../components/Header";
+import Header from "../../components/Header";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faArrowDown, faArrowLeft, faBars, faBold, faCalendar, faDroplet, faGear, faHome, faMessage, faPaperPlane, faPerson, faPlusSquare, faUser } from '@fortawesome/free-solid-svg-icons';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { faArrowLeft, faBars, faBold, faCalendar, faDroplet, faGear, faHome, faMessage, faPaperPlane, faPerson, faPlusSquare, faUser } from '@fortawesome/free-solid-svg-icons';
 
-const ChatScreen = (props) => {
-
-  const {userName} = props.route.params;
-  console.log(userName);
+const ChatScreen = ({navigation}) => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -81,43 +77,23 @@ const ChatScreen = (props) => {
 
   const scrollToBottomComponent = () => {
     return(
-      <FontAwesomeIcon icon={faArrowDown} size={22} color={'#333'} />
+      <FontAwesome name='angle-double-down' size={22} color='#333' />
     );
   }
 
   return (
-    // <SafeAreaView style={[
-    //   {//styles.container
-    //     justifyContent: 'center',
-    //     alignItems: 'center',
-    //     flex: 1,
-    //   },
-      
-    // ]}>
-    //   <Header title={userName} isRed={true} />
-
-
-    //   {/* <Text style={{ fontWeight: '400', color: 'black' }}>
-    //     {userName}
-    //   </Text> */}
-    //   <View>
-        
-    //     <View style={{ marginBottom: 100 }}>
-          <GiftedChat
-            messages={messages}
-            onSend={(messages) => onSend(messages)}
-            user={{
-              _id: 1,
-            }}
-            renderBubble={renderBubble}
-            alwaysShowSend
-            renderSend={renderSend}
-            scrollToBottom
-            scrollToBottomComponent={scrollToBottomComponent}
-          />
-    //     </View>
-    //   </View>
-    // </SafeAreaView>
+    <GiftedChat
+      messages={messages}
+      onSend={(messages) => onSend(messages)}
+      user={{
+        _id: 1,
+      }}
+      renderBubble={renderBubble}
+      alwaysShowSend
+      renderSend={renderSend}
+      scrollToBottom
+      scrollToBottomComponent={scrollToBottomComponent}
+    />
   );
 };
 

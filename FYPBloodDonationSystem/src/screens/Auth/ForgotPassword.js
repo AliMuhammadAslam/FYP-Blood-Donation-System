@@ -4,11 +4,11 @@ import { SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, useColorSc
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Dropdown } from 'react-native-dropdown';
 import SelectDropdown from 'react-native-select-dropdown';
-import Header from "../components/Header";
+import Header from "../../components/Header";
 
 
 
-function ForgotPassword() {
+const ForgotPassword = () => {
   const isDarkMode = useColorScheme() === 'dark';
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -37,7 +37,7 @@ function ForgotPassword() {
 
         <Image style={styles.image}
             resizeMode={'contain'}
-            source={require('../../assets/forgotPassPic.png')} />  
+            source={require('../../../assets/forgotPassPic.png')} />  
 
       </View>
 

@@ -5,7 +5,7 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import {TextInput} from 'react-native-paper';
 import auth from '@react-native-firebase/auth'
 
-function Login()  {
+const Login = () => {
     // const isDarkMode = useColorScheme() === 'dark';
     // const backgroundStyle = {
     //     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -78,7 +78,7 @@ function Login()  {
           secureTextEntry={isVisible}
           right={
             <TextInput.Icon
-              icon={isVisible ? require('../../assets/eye-off.png') : require('../../assets/eye.png')}
+              icon={isVisible ? require('../../../assets/eye-off.png') : require('../../../assets/eye.png')}
             
               onPress={() =>
                 setIsVisible(!isVisible)

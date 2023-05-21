@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
 });
 
 
-const AppointmentRequestsList = () => {
+const AppointmentRequestsList = ({navigation}) => {
 
   //const [requests, setRequests] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');

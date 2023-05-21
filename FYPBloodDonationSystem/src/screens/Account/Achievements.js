@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { FlatList, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, useColorScheme, View, Image } from 'react-native';
-import Header from "../components/Header";
+import Header from "../../components/Header";
 
 
 

@@ -11,11 +11,15 @@ import { useNavigation } from '@react-navigation/native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 
-const CreateAppointment = ({route}) => {
+const CreateAppointment = ({route, navigation}) => {
 
-    const {reqId, receiverName, receiverId, hospital, bloodType, maxDateLimit} = route.params;
-
-    const navigation = useNavigation();
+    // const {reqId, receiverName, receiverId, hospital, bloodType, maxDateLimit} = route.params;
+    const reqId = 1;
+    const receiverName = "Ali Muhammad";
+    const receiverId = 2;
+    const hospital = "Agha Khan";
+    const bloodType = "O-";
+    const maxDateLimit = new Date();
 
     const [notes, setNotes] = useState("");
 
@@ -92,7 +96,7 @@ const CreateAppointment = ({route}) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Header title="Create an Appointment" isRed={true} />
+            <Header title="Create an Appointment" isRed={true} navigation={navigation} />
             <View style={styles.innerContainer}>
 
                 {donorId && donorDetails ? (

@@ -1,11 +1,11 @@
 import React from "react";
 import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Header from "../components/Header";
+import Header from "../../components/Header";
 
 
-const DonationHistory = () => {
-    const star = require('../../assets/star_icon.png');
+const DonationHistory = ({navigation}) => {
+    const star = require('../../../assets/star_icon.png');
 
     const data = [
         {
@@ -113,7 +113,7 @@ const DonationHistory = () => {
     }
     return (
         <SafeAreaView style={styles.container}>
-            <Header title="Donation History" isRed={true} />
+            <Header title="Donation History" isRed={true} navigation={navigation} />
             <View style={styles.innerContainer}>
                 <View style={{ width: '85%', marginBottom: 100 }}>
                     <FlatList
