@@ -30,7 +30,8 @@ function Login()  {
           .then(() => {
             console.log('Signed in!');
             //navigation.navigate('Create Request')
-            navigation.navigate('MessagesScreen')
+            navigation.navigate('Organizations List')
+            //Alert.alert("Signed in");
           })
           .catch(error => {
 

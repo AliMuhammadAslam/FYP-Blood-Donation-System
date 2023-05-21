@@ -3,6 +3,8 @@ import { StyleSheet, TouchableOpacity, View, Text, ScrollView, FlatList, TextInp
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faArrowLeft, faBold, faDroplet } from '@fortawesome/free-solid-svg-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
 const styles = StyleSheet.create({
   container: {
@@ -36,28 +38,48 @@ const styles = StyleSheet.create({
 
 const RegDonorsList = () => {
 
-  const [data, setData] = useState([
-    { key: '1', name: 'Haris', address: 'Darussalam Society Sector 39\nKorangi, Karachi', bloodGroup: 'AB+'},
-    { key: '2', name: 'Yunus', address: 'Darussalam Society Sector 39\nKorangi, Karachi', bloodGroup: 'A-' },
-    { key: '3', name: 'Javed', address: 'Darussalam Society Sector 39\nKorangi, Karachi', bloodGroup: 'B+' },
-    { key: '4', name: 'Samad', address: 'Darussalam Society Sector 39\nKorangi, Karachi', bloodGroup: 'O-' },
-    { key: '5', name: 'Jing Xiao', address: 'Darussalam Society Sector 39\nKorangi, Karachi', bloodGroup: 'AB-' }
-  ]);
+  //const [requests, setRequests] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const [filteredData, setFilteredData] = useState([]);
 
+  const[refresh, setRefresh] = useState(true);
+
   useEffect(() => {
+    if(refresh){
+        const associationRef = firestore().collection('OrganizationAssociations');
+        associationRef.onSnapshot((querySnapshot) => {
+        const data = [];
+        querySnapshot.forEach((doc) => {
+            const orgId = doc.data().orgId;
+            if(auth().currentUser.uid == orgId && doc.data().regType == 'Donor'){
+                if(doc.data().status == 'confirmed'){
+                    data.push({
+                    id: doc.id,
+                    userName: doc.data().userName,
+                    address: doc.data().address,
+                    bloodGroup: doc.data().bloodType,
+                    });
+                }
+            }
+        });
+        setFilteredData(data);
+        setRefresh(false);
+        });
+    }
+  }, [refresh]);
+
+  /*useEffect(() => {
     setFilteredData(data);
-  }, [data]);
+  }, [data]);*/
 
-  const handleSearch = (text) => {
-    const filtered = data.filter((item) => {
-      return item.name.toLowerCase().includes(text.toLowerCase());
-    });
-    setFilteredData(filtered);
-  };
+  const renderItem = ({ item }) => {
 
-  const renderItem = ({ item }) => (
+    if (searchQuery && !item.userName.includes(searchQuery) && !item.address.includes(searchQuery)) {
+        return null;
+    }
+
+    return (
     <View style={{ flexDirection: 'column', borderRadius: 10, borderColor: '#808080', borderWidth: 1, padding: 10, marginBottom: 10, justifyContent: 'flex-end', }}>
       <View style={{
         flex: 1,
@@ -68,7 +90,7 @@ const RegDonorsList = () => {
         
         }}>
           <View>
-      <Text style={{ fontWeight: 'bold', fontSize: 25, color: 'black' }}>{item.name}</Text>
+      <Text style={{ fontWeight: 'bold', fontSize: 25, color: 'black' }}>{item.userName}</Text>
       <Text style={{ paddingVertical: 5, color: 'black' }}>{item.address}</Text>
       </View>
       <View style={{position: 'absolute', right: 0}}>
@@ -76,17 +98,12 @@ const RegDonorsList = () => {
       <Text style={{color: 'white', position:'absolute', right: 14, marginTop: 14, fontWeight: 'bold'}}>{item.bloodGroup}</Text>
       </View>
       </View>
-      <View style={{
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}>
-        
-      </View>
+      <View style={{margin:2, marginTop:4, flex: 1, height: 1, backgroundColor: '#8C8C8C'}} />
       {/* <View style={{margin:2, marginTop:4, flex: 1, height: 1, backgroundColor: '#8C8C8C'}} /> */}
     </View>
-  );
+    );
+
+  };
 
 
 
@@ -105,15 +122,17 @@ const RegDonorsList = () => {
         <TextInput
           placeholder="Search"
           placeholderTextColor="gray"
-          onChangeText={(text) => handleSearch(text)}
+          onChangeText={setSearchQuery}
+          value={searchQuery}
           style={{ borderRadius: 10, borderColor: '#808080', borderWidth: 1, padding: 5, marginBottom: 10, color: 'black' }}
         />
 
         <FlatList
           data={filteredData}
           renderItem={renderItem}
-          keyExtractor={(item) => item.key}
+          keyExtractor={(item) => item.id}
           scrollEnabled={true}
+          extraData={searchQuery}
         />
 
       </View>

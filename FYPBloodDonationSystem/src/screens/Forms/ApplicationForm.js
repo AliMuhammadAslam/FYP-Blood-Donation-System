@@ -1,65 +1,135 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useState, useEffect } from "react";
+import {Alert, View, Text, StyleSheet } from "react-native";
 import { Button, TextInput } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from "../../components/Header";
 import DropDownPicker from 'react-native-dropdown-picker';
+import SelectDropdown from 'react-native-select-dropdown';
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
 
-const ApplicationForm = () => {
+const ApplicationForm = ({route}) => {
 
-    const [openPicker, setOpenPicker] = useState(false);
-    const [reqBloodType, setReqBloodType] = useState("AB+");
-    const [bloodItems, setBloodItems] = useState([
-        { label: 'A+', value: 'a+' },
-        { label: 'O+', value: 'o+' },
-        { label: 'B+', value: 'b+' },
-        { label: 'AB+', value: 'ab+' },
-        { label: 'A-', value: 'a-' },
-        { label: 'O-', value: 'o-' },
-        { label: 'B-', value: 'b-' },
-        { label: 'AB-', value: 'ab-' },
-    ]);
+    const { orgId, orgName, orgAddress } = route.params;
+
+    const [regType, setregType] = useState(null);
+    const [regItems, setregItems] = useState(["Donor", "Receiver"]);
+
+    const [bloodType, setBloodType] = useState(null);
+    const [bloodItems, setBloodItems] = useState(["A+", "B+", "O+", "O-", "AB+"]);
     const [notes, setNotes] = useState("");
 
-    const handleRegister = () => {
-        console.log('Pressed')
-    }
+    const [userId, setUserId] = useState(null);
+    const[userDetails, setUserDetails] = useState(null);
+
+    useEffect(() => {
+
+        const userRef = firestore().collection('users').doc(auth().currentUser.uid);
+
+        userRef.get().then((doc) => {
+        if (doc.exists) {
+            setUserId(doc.id);
+            setUserDetails(doc.data());
+        } else {
+            console.log('Document doesnot exist.');
+        }
+        }).catch((error) => {
+            console.log('Error getting document:', error);
+        });
+
+    }, []);
+
+    const handleRegister = async () => {
+
+        if(notes.length == 0 || bloodType == null || regType == null){
+            Alert.alert("Please provide the required information");
+        }
+        else{
+    
+            try {
+
+              const AssociationRequestsRef = firestore().collection('OrganizationAssociations').doc();
+              await AssociationRequestsRef.set({
+                orgId,
+                orgName,
+                orgAddress,
+                userId,
+                userName: userDetails.name,
+                address: userDetails.address,
+                bloodType,
+                notes,
+                status: 'requested',
+                regType
+              });
+    
+              //navigation.navigate('Slideshow');
+              Alert.alert("Association Request successfully posted");
+              
+            } catch (error) {
+              console.log(error);
+              Alert.alert(error.code);
+              
+            }
+    
+        }
+  
+    };
 
     return (
-        <SafeAreaView style={styles.container}>
+
+        <>
+
+        {
+            
+            userDetails ? <SafeAreaView style={styles.container}>
             <Header title="Application Form" isRed={false} />
             <View style={styles.innerContainer}>
-                <Text style={styles.heading}>Kindly fill this form to get associated with Indus Hospital </Text>
+                <Text style={styles.heading}>Kindly fill this form to get associated with {orgName}</Text>
                 <View style={styles.inputContainer}>
+
                     <TextInput
                         style={styles.input}
-                        value={"Zulfiqar Khan"}
+                        value={userDetails.name}
                         disabled={true}
                         underlineColorAndroid="transparent"
                     />
-                    <DropDownPicker
-                        style={styles.picker}
-                        open={false}
-                        value={""}
-                        placeholder={<Text style={{color: 'grey'}}>AB+</Text>}
-                        items={bloodItems}
-                        // setOpen={}
-                        // setValue={setValue}
-                        // setItems={setBloodItems}
-                        disabled={true}
-                    />
+                    
+                
                     <View style={{ flexDirection: 'column', gap: 8 }}>
-                        <Text style={{ color: 'black' }}>Which Blood Group are you in need off?</Text>
-                        <DropDownPicker
-                            style={styles.picker}
-                            open={openPicker}
-                            value={reqBloodType}
-                            placeholder=""
-                            items={bloodItems}
-                            setOpen={setOpenPicker}
-                            setValue={setReqBloodType}
-                            setItems={setBloodItems}
+                        <Text style={{ color: 'black' }}>Who do you want to register as?</Text>
+                        <SelectDropdown
+                            data={regItems}
+                            onSelect={(selectedItem, index) => {
+                                console.log(selectedItem, index)
+                                setregType(selectedItem);
+                            }}
+                            buttonTextAfterSelection={(selectedItem, index) => {
+                                return selectedItem
+                            }}
+                            rowTextForSelection={(item, index) => {
+                                return item
+                            }}
+                            defaultButtonText={'Select Registration Type'}
+                            buttonStyle={styles.picker2}
+                            buttonTextStyle={{fontSize: 16, color: 'grey', textAlign: 'left'}}
+                        />
+                        <Text style={{ color: 'black' }}>Which Blood Group are you in need off or want to donate?</Text>
+                        <SelectDropdown
+                            data={bloodItems}
+                            onSelect={(selectedItem, index) => {
+                                console.log(selectedItem, index)
+                                setBloodType(selectedItem);
+                            }}
+                            buttonTextAfterSelection={(selectedItem, index) => {
+                                return selectedItem
+                            }}
+                            rowTextForSelection={(item, index) => {
+                                return item
+                            }}
+                            defaultButtonText={'Select Blood Group'}
+                            buttonStyle={styles.picker2}
+                            buttonTextStyle={{fontSize: 16, color: 'grey', textAlign: 'left'}}
                         />
                     </View>
                     <View style={{ flexDirection: 'column', gap: 8 }}>
@@ -81,6 +151,20 @@ const ApplicationForm = () => {
                 </View>
             </View>
         </SafeAreaView>
+
+        :
+
+        <SafeAreaView style={styles.container}>
+            <Header title="Application Form" isRed={false} />
+            <Text>Loading...</Text>
+        </SafeAreaView>
+
+        
+        }
+
+        </>
+        
+        
     );
 }
 
@@ -129,6 +213,14 @@ const styles = StyleSheet.create({
         borderColor: 'grey',
         // backgroundColor: "white",
     },
+    picker2:{
+        width: '100%',
+        height: 40,
+        borderWidth: 1,
+        borderRadius: 10,
+        borderColor: 'grey',
+        backgroundColor: "white",
+    }
 })
 
 export default ApplicationForm;
