@@ -5,6 +5,8 @@ import { faArrowLeft, faBold, faDroplet } from '@fortawesome/free-solid-svg-icon
 import { SafeAreaView } from 'react-native-safe-area-context';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+import Header from '../components/Header';
+import { useNavigation } from '@react-navigation/native';
 
 const styles = StyleSheet.create({
   container: {
@@ -42,6 +44,8 @@ const MyOrganizations = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const [filteredData, setFilteredData] = useState([]);
+
+  const navigation = useNavigation();
 
   useEffect(() => {
     
@@ -129,7 +133,7 @@ const MyOrganizations = () => {
             <Text style={styles.title}>{"Blood Banks and Hospitals"}</Text>
             <View style={{ width: 30 }} />
         </View> */}
-
+      <Header title="My Organizations" isRed={true} navigation={navigation} />
       <View style={{ flexDirection: 'column', margin: 15, flex: 1, color: 'black' }}>
 
         <TextInput

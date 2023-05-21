@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import { useNavigation } from '@react-navigation/native';
+import Header from '../components/Header';
 
 const styles = StyleSheet.create({
   container: {
@@ -46,6 +47,8 @@ const OrganizationsList = () => {
 
   const [filteredData, setFilteredData] = useState([]);
 
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     const requestsRef = firestore().collection('users');
     requestsRef.onSnapshot((querySnapshot) => {
@@ -73,7 +76,7 @@ const OrganizationsList = () => {
 
             if(flag == false){
               //console.log(flag);
-              //console.log(doc.data().name);
+              console.log(doc.data().name);
               data.push({
                 id: doc.id,
                 name: doc.data().name,
@@ -90,6 +93,7 @@ const OrganizationsList = () => {
         }
       });
       setFilteredData(data);
+      setIsLoading(false);
     });
   }, []);
 
@@ -119,7 +123,7 @@ const OrganizationsList = () => {
       </View>
       </View>
         
-      <TouchableOpacity onPress={ () => navigation.navigate('Organization Info', {docId: item.id})} style={{alignItems: 'center',backgroundColor: '#DE0A1E', borderRadius: 10, paddingVertical: 8}}>
+      <TouchableOpacity onPress={ () => navigation.navigate('OrganizationInfo', {docId: item.id})} style={{alignItems: 'center',backgroundColor: '#DE0A1E', borderRadius: 10, paddingVertical: 8}}>
         <Text style={{fontSize: 15, color: 'white'}}>{'Register'}</Text>
       </TouchableOpacity>
       
@@ -140,7 +144,7 @@ const OrganizationsList = () => {
             <Text style={styles.title}>{"Blood Banks and Hospitals"}</Text>
             <View style={{ width: 30 }} />
         </View> */}
-
+      <Header title="Health Organizations" isRed={true} navigation={navigation} />
       <View style={{ flexDirection: 'column', margin: 15, flex: 1, color: 'black' }}>
 
         <TextInput
@@ -151,13 +155,25 @@ const OrganizationsList = () => {
           style={{ borderRadius: 10, borderColor: '#808080', borderWidth: 1, padding: 5, marginBottom: 10, color: 'black' }}
         />
 
-        <FlatList
+        <>
+
+        {isLoading ? 
+
+          <Text>Loading...</Text>
+
+          :
+
+          <FlatList
           data={filteredData}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
           scrollEnabled={true}
           extraData={searchQuery}
         />
+
+        }
+
+        </>
 
       </View>
 

@@ -15,7 +15,7 @@ const HomeScreen = ({ navigation }) => {
 
     const HomeBoxData = [
         { icon: <Image style={{ width: 65, height: 55, marginTop: 10 }} source={post_request} />, title: 'Post Blood Request', route: 'CreateRequest' },
-        { icon: <Image style={{ width: 70, height: 90, }} source={blood_bank_icon} />, title: 'Blood Bank', route: 'Account' },
+        { icon: <Image style={{ width: 70, height: 90, }} source={blood_bank_icon} />, title: 'Blood Bank', route: 'My Organizations' },
         { icon: <Image style={{ width: 55, height: 60, marginTop: 10 }} source={emergency_donor} />, title: 'Emergency Donors', route: 'Account' }
     ]
     const BloodDonationStats = [

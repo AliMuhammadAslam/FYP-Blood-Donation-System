@@ -12,6 +12,7 @@ import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import { BackgroundImage } from "@rneui/themed/dist/config";
 import { useNavigation } from '@react-navigation/native';
+import Header from "../../components/Header";
 
 
 const OrganisationInfo = ({ route }) => {
@@ -101,7 +102,7 @@ const OrganisationInfo = ({ route }) => {
 
             {
                 info ? <SafeAreaView style={styles.container}>
-
+                    <Header title="Orgaization Info" isRed={true} navigation={navigation} />
                     <ImageBackground style={{ height: 270, width: '100%', backgroundColor: 'green' }} resizeMode="cover" source={hospital_image}>
                         <TouchableOpacity onPress={() => { }}>
                             <FontAwesomeIcon icon={faArrowLeft} size={20} color='black' style={{ marginTop: 20, marginLeft: 10 }} />
@@ -207,7 +208,7 @@ const OrganisationInfo = ({ route }) => {
 
                     </ScrollView>
 
-                    <TouchableOpacity onPress={ () => navigation.navigate('Application Form', {orgId: docId, orgName: info.name, orgAddress: info.address})} style={styles.button}>
+                    <TouchableOpacity onPress={ () => navigation.navigate('ApplicationForm', {orgId: docId, orgName: info.name, orgAddress: info.address})} style={styles.button}>
                         <Text style={{ fontSize: 22, color: 'white' }}>Register</Text>
                     </TouchableOpacity>
 
@@ -216,6 +217,7 @@ const OrganisationInfo = ({ route }) => {
                     :
 
                     <SafeAreaView style={styles.container}>
+                        <Header title="Orgaization Info" isRed={true} navigation={navigation} />
                         <Text>Loading...</Text>
                     </SafeAreaView>
 

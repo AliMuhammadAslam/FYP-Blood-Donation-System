@@ -7,9 +7,12 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import SelectDropdown from 'react-native-select-dropdown';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+import { useNavigation } from "@react-navigation/native";
 
 
 const ApplicationForm = ({route}) => {
+
+    const navigation = useNavigation();
 
     const { orgId, orgName, orgAddress } = route.params;
 
@@ -65,6 +68,7 @@ const ApplicationForm = ({route}) => {
     
               //navigation.navigate('Slideshow');
               Alert.alert("Association Request successfully posted");
+              navigation.navigate('Home');
               
             } catch (error) {
               console.log(error);
@@ -83,7 +87,7 @@ const ApplicationForm = ({route}) => {
         {
             
             userDetails ? <SafeAreaView style={styles.container}>
-            <Header title="Application Form" isRed={false} />
+            <Header title="Application Form" isRed={false} navigation={navigation} />
             <View style={styles.innerContainer}>
                 <Text style={styles.heading}>Kindly fill this form to get associated with {orgName}</Text>
                 <View style={styles.inputContainer}>
@@ -155,7 +159,7 @@ const ApplicationForm = ({route}) => {
         :
 
         <SafeAreaView style={styles.container}>
-            <Header title="Application Form" isRed={false} />
+            <Header title="Application Form" isRed={false} navigation={navigation} />
             <Text>Loading...</Text>
         </SafeAreaView>
 

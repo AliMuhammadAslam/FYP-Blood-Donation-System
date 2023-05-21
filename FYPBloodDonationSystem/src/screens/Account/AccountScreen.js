@@ -114,20 +114,20 @@ const AccountScreen = ({ navigation }) => {
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => {
-          navigation.navigate('DonationHistory')
+          navigation.navigate('OrganizationsList')
         }}>
           <View style={styles.rowContainer}>
             <View style={{ flexDirection: 'row' }}>
               <View style={styles.iconContainer}>
                 <FontAwesomeIcon icon={faHospital} size={20} color="#DE0A1E" />
               </View>
-              <Text style={styles.rowText}>My Organisations</Text>
+              <Text style={styles.rowText}>Register With An Organisation</Text>
             </View>
             <FontAwesomeIcon icon={faArrowRight} size={20} color="black" />
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => {
-          navigation.navigate('DonationHistory')
+          //Log out code
         }}>
           <View style={styles.rowContainer}>
             <View style={{ flexDirection: 'row' }}>
