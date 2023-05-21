@@ -10,6 +10,8 @@ const App = () => {
       <TabNavigation />
     </NavigationContainer>
   );
+
+
 }
 
 export default App;

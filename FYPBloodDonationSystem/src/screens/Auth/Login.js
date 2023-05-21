@@ -30,7 +30,8 @@ const Login = () => {
           .then(() => {
             console.log('Signed in!');
             //navigation.navigate('Create Request')
-            navigation.navigate('Donation Requests')
+            navigation.navigate('Organizations List')
+            //Alert.alert("Signed in");
           })
           .catch(error => {
 
@@ -99,7 +100,7 @@ const Login = () => {
         <Text style={styles.footer}>Don't have an account? 
         <TouchableOpacity 
          onPress={() =>
-           navigation.navigate('Signup')
+           navigation.navigate('Signup_first')
          }
         >
         <Text style={{color: "#DE0A1E"}}>Signup</Text></TouchableOpacity></Text>
@@ -124,8 +125,12 @@ const Login = () => {
       borderWidth: 1,
       padding: 12,
       //elevation: 20,
-      borderRadius: 5,
-      //backgroundColor: "white",
+      //borderRadius: 5,
+      backgroundColor: "white",
+      borderTopEndRadius: 15,
+      borderBottomEndRadius: 15,
+      borderBottomStartRadius: 15, 
+      borderTopStartRadius: 15
     },
     container: {
         justifyContent: 'center',

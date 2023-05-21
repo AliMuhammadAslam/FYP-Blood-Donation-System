@@ -1,6 +1,13 @@
 import React from 'react';
 import { StyleSheet, Image } from 'react-native';
 import Swiper from 'react-native-swiper';
+import TimedSlideshow from 'react-native-timed-slideshow';
+import App from '../../App';
+import Chat from '../screens/chat';
+import Login from '../screens/login';
+import tabNavigation from '../screens/tabNavigation';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faArrowLeft, faCancel, faCross, faX } from '@fortawesome/free-solid-svg-icons';
 
 const Slideshow = () => {
   const slide1 = require('../../assets/slide1.jpg');
@@ -39,6 +46,6 @@ const styles = StyleSheet.create({
     height: '100%',    
     
   }
-});
+})
 
 export default Slideshow;
