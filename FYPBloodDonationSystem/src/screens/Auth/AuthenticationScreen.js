@@ -53,7 +53,7 @@ const AuthenticationScreen = () => {
                         <View style={styles.buttonView}>
                             <TouchableOpacity
                                 style={styles.buttonStyle}
-                                onPress={() => navigation.navigate('Signup')}>
+                                onPress={() => navigation.navigate('SignupFirst')}>
                                 <Text style={styles.buttonText}>
                                     {"Signup"}
                                 </Text>

@@ -108,7 +108,7 @@ function Signup_second({route}) {
             isOrg: false
           });
 
-          navigation.navigate('Slideshow');
+          navigation.navigate('TabNavigation');
           
         } catch (error) {
           console.log(error.code);

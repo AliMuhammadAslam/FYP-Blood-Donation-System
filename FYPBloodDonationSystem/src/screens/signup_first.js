@@ -193,7 +193,7 @@ function Signup_first() {
         /> */}
 
         <TouchableOpacity style={styles.button} onPress={() =>
-          navigation.navigate('Signup_second', {
+          navigation.navigate('SignupSecond', {
             name: name,
             address: address,
             mobileNumber: mobileNumber,

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Image, ImageBackground, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import MapView from "react-native-maps";
+import Header from "../components/Header";
 import checkLocation from "../components/Location";
 import { MoreOrLess } from "@rntext/more-or-less";
 import auth from '@react-native-firebase/auth';
@@ -52,9 +53,10 @@ const DonationRequestInfoPage = ({route}) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            {/* <View style={styles.backArrow}>
+            {/*<View style={styles.backArrow}>
                 <Text style={styles.text}>back</Text>
-            </View> */}
+            </View>*/}
+            <Header title="Request Info" isRed={true} navigation={navigation} />
             <MapView style={styles.map}
                 initialRegion={{
                     latitude: 37.78825,
@@ -126,12 +128,12 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         alignItems: "center",
     },
-    // backArrow: {
-    //     ...StyleSheet.absoluteFillObject,
-    //     width: 50,
-    //     height: 50,
-    //     backgroundColor: 'black'
-    // },
+    //backArrow: {
+        //...StyleSheet.absoluteFillObject,
+        //width: 50,
+        //height: 50,
+        //backgroundColor: 'black'
+    //},
     text: {
         color: 'black',
     },
@@ -140,9 +142,9 @@ const styles = StyleSheet.create({
         height: '100%',
     },
     map: {
-        ...StyleSheet.absoluteFillObject,
+        //...StyleSheet.absoluteFillObject,
         width: '100%',
-        height: '100%',
+        height: '47.5%',
     },
     infoContainer: {
         backgroundColor: 'white',

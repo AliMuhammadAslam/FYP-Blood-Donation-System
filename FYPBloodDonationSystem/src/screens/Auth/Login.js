@@ -3,7 +3,7 @@ import { Button, Pressable, SafeAreaView, StyleSheet, Text, TouchableOpacity, us
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import {TextInput} from 'react-native-paper';
-import auth from '@react-native-firebase/auth'
+import auth from '@react-native-firebase/auth';
 
 const Login = () => {
     // const isDarkMode = useColorScheme() === 'dark';
@@ -30,8 +30,10 @@ const Login = () => {
           .then(() => {
             console.log('Signed in!');
             //navigation.navigate('Create Request')
-            navigation.navigate('Organizations List')
+            //navigation.navigate('Organizations List')
             //Alert.alert("Signed in");
+            navigation.navigate('TabNavigation');
+            
           })
           .catch(error => {
 
@@ -100,7 +102,7 @@ const Login = () => {
         <Text style={styles.footer}>Don't have an account? 
         <TouchableOpacity 
          onPress={() =>
-           navigation.navigate('Signup_first')
+           navigation.navigate('SignupFirst')
          }
         >
         <Text style={{color: "#DE0A1E"}}>Signup</Text></TouchableOpacity></Text>
@@ -108,7 +110,7 @@ const Login = () => {
         <Text style={styles.footer}>Forgot Your Password? 
         <TouchableOpacity 
          onPress={() =>
-           navigation.navigate('forgotPassword')
+           navigation.navigate('ForgotPassword')
          }
         >
         <Text style={{color: "#DE0A1E"}}>Forgot Password</Text></TouchableOpacity></Text>

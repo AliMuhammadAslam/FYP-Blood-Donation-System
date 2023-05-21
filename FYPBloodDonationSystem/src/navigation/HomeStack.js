@@ -2,6 +2,9 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from '../screens/Home/HomeScreen';
 import Notifications from '../screens/Notifications';
+import PrivateReceiversRequestList from '../screens/privateRequests';
+import DonationRequestInfoPage from '../screens/DonationRequestInfoPage';
+import CreateAppointment from '../screens/createAppointment';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,6 +18,9 @@ const HomeStack = () => {
             }}>
                 <Stack.Screen name='Home' component={HomeScreen} />
                 <Stack.Screen name='Notifications' component={Notifications} />
+                <Stack.Screen name='ReceiversList' component={PrivateReceiversRequestList} />
+                <Stack.Screen name='Request Info' component={DonationRequestInfoPage} />
+                <Stack.Screen name='Create Appointment' component={CreateAppointment} />
         </Stack.Navigator>
     );
 }

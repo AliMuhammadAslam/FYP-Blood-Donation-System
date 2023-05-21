@@ -13,13 +13,13 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 const CreateAppointment = ({route, navigation}) => {
 
-    // const {reqId, receiverName, receiverId, hospital, bloodType, maxDateLimit} = route.params;
-    const reqId = 1;
+    const {reqId, receiverName, receiverId, hospital, bloodType, maxDateLimit} = route.params;
+    /*const reqId = 1;
     const receiverName = "Ali Muhammad";
     const receiverId = 2;
     const hospital = "Agha Khan";
     const bloodType = "O-";
-    const maxDateLimit = new Date();
+    const maxDateLimit = new Date();*/
 
     const [notes, setNotes] = useState("");
 
@@ -82,6 +82,7 @@ const CreateAppointment = ({route, navigation}) => {
     
               //navigation.navigate('Slideshow');
               Alert.alert("Appointment request successfully posted");
+              navigation.navigate('Home');
               
             } catch (error) {
               console.log(error);

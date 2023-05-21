@@ -76,6 +76,7 @@ const CreateRequest = ({navigation}) => {
     
               //navigation.navigate('Slideshow');
               Alert.alert("Request successfully posted");
+              navigation.navigate('Home');
               
             } catch (error) {
               console.log(error);

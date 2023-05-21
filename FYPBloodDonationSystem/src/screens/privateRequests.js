@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import { useNavigation } from '@react-navigation/native';
+import Header from '../components/Header';
 
 const styles = StyleSheet.create({
   container: {
@@ -131,7 +132,7 @@ const PrivateReceiversRequestList = () => {
             <Text style={styles.title}>{"Blood Banks and Hospitals"}</Text>
             <View style={{ width: 30 }} />
         </View> */}
-
+      <Header title="Requests" isRed={true} navigation={navigation} />
       <View style={{ flexDirection: 'column', margin: 15, flex: 1, color: 'black' }}>
 
         <TextInput

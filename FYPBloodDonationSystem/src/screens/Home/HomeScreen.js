@@ -126,7 +126,7 @@ const HomeScreen = ({ navigation }) => {
                     <View style={styles.donationReqsContainer}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', paddingHorizontal: 5, alignItems: 'center', marginBottom: 10 }}>
                             <Text style={{ color: '#353535', fontSize: 18 }}>Donation Requests</Text>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={() => navigation.navigate('ReceiversList')}>
                                 <Text style={{ color: '#969696', fontSize: 12 }}>See all</Text>
                             </TouchableOpacity>
                         </View>

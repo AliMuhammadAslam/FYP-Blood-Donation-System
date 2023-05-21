@@ -5,6 +5,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { Dropdown } from 'react-native-dropdown';
 import SelectDropdown from 'react-native-select-dropdown';
 import Header from "../../components/Header";
+import { useNavigation } from '@react-navigation/native';
 
 
 
@@ -13,6 +14,8 @@ const ForgotPassword = () => {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+
+  const navigation = useNavigation();
 
   const [email, onChangeEmail] = React.useState('');
   
@@ -28,7 +31,7 @@ const ForgotPassword = () => {
 
       
 
-      <Header title="Forgot Password" isRed={true} />
+      <Header title="Forgot Password" isRed={true} navigation={navigation}/>
       <View
 
         style={{
