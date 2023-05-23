@@ -10,6 +10,7 @@ import OTPVerification from '../screens/Auth/OTPVerification';
 import Questionnaire from '../screens/Auth/Questionnaire';
 import ChangePassword from '../screens/Auth/ChangePassword';
 import TabNavigation from './TabNavigation';
+import TabNavigationOrganizations from './TabNavigationOrganizations';
 
 
 const Stack = createNativeStackNavigator();
@@ -33,6 +34,7 @@ const AuthStack = () => {
             <Stack.Screen name="OTPVerification" component={OTPVerification} />
             <Stack.Screen name="Questionnaire" component={Questionnaire} />
             <Stack.Screen name="TabNavigation" component={TabNavigation} />
+            <Stack.Screen name="TabNavigationOrganizations" component={TabNavigationOrganizations} />
         </Stack.Navigator>
     );
 }

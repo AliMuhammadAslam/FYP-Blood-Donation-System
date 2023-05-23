@@ -68,7 +68,7 @@ const ApplicationForm = ({route}) => {
     
               //navigation.navigate('Slideshow');
               Alert.alert("Association Request successfully posted");
-              navigation.navigate('Home');
+              navigation.navigate('Account');
               
             } catch (error) {
               console.log(error);

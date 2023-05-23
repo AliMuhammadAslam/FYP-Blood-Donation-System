@@ -7,6 +7,7 @@ import ReceiversRequestList from './orgReceiversRequestList';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import Icon from 'react-native-vector-icons/FontAwesome';  
 import { faArrowLeft, faBold, faDroplet } from '@fortawesome/free-solid-svg-icons';
+import Header from '../components/Header';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -40,9 +41,9 @@ function MyTabs() {
     </Tab.Navigator>
   );
 }
-export default function organizationRequests() {
+export default function OrganizationRequests({navigation}) {
   return (
-    <NavigationContainer>
+    /*<NavigationContainer>
         <View style={styles.container}>
             <TouchableOpacity style={styles.backButton}>
                 <FontAwesomeIcon icon={faArrowLeft} size={20} color="white" />
@@ -51,7 +52,11 @@ export default function organizationRequests() {
             <View style={{ width: 30 }} />
         </View>
       <MyTabs />
-    </NavigationContainer>
+    </NavigationContainer>*/
+    <View style={{flex: 1}}>
+      <Header title="Requests" isRed={true} navigation={navigation} />
+      <MyTabs />
+    </View>
   );
 }
 

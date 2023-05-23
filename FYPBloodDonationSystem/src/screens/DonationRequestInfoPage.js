@@ -59,8 +59,8 @@ const DonationRequestInfoPage = ({route}) => {
             <Header title="Request Info" isRed={true} navigation={navigation} />
             <MapView style={styles.map}
                 initialRegion={{
-                    latitude: 37.78825,
-                    longitude: -122.4324,
+                    latitude: 24.891975,
+                    longitude: 67.072861,
                     latitudeDelta: 0.0922,
                     longitudeDelta: 0.0421,
                 }}

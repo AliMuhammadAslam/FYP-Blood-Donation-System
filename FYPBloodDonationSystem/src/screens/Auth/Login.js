@@ -4,6 +4,7 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import {TextInput} from 'react-native-paper';
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
 const Login = () => {
     // const isDarkMode = useColorScheme() === 'dark';
@@ -32,7 +33,25 @@ const Login = () => {
             //navigation.navigate('Create Request')
             //navigation.navigate('Organizations List')
             //Alert.alert("Signed in");
-            navigation.navigate('TabNavigation');
+            
+            const usersRef = firestore().collection('users').doc(auth().currentUser.uid);
+
+            usersRef.get().then((doc) => {
+                if (doc.exists) {
+                    if(doc.data().isOrg){
+                      navigation.navigate('TabNavigationOrganizations');
+                    }
+                    else{
+                      navigation.navigate('TabNavigation');
+                    }
+                } else {
+                    console.log('Document doesnot exist.');
+                }
+            }).catch((error) => {
+                console.log('Error getting document:', error);
+            });
+
+            
             
           })
           .catch(error => {

@@ -5,6 +5,7 @@ import { faArrowLeft, faBold, faDroplet } from '@fortawesome/free-solid-svg-icon
 import { SafeAreaView } from 'react-native-safe-area-context';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+import { useNavigation } from '@react-navigation/native';
 
 const styles = StyleSheet.create({
   container: {
@@ -45,6 +46,8 @@ const RegDonorsList = () => {
 
   const[refresh, setRefresh] = useState(true);
 
+  const navigation = useNavigation();
+
   useEffect(() => {
     if(refresh){
         const associationRef = firestore().collection('OrganizationAssociations');
@@ -81,6 +84,7 @@ const RegDonorsList = () => {
 
     return (
     <View style={{ flexDirection: 'column', borderRadius: 10, borderColor: '#808080', borderWidth: 1, padding: 10, marginBottom: 10, justifyContent: 'flex-end', }}>
+      <TouchableOpacity onPress={() => navigation.navigate('Patient Details', {docId: item.id})}>
       <View style={{
         flex: 1,
         flexDirection: 'row',
@@ -98,6 +102,7 @@ const RegDonorsList = () => {
       <Text style={{color: 'white', position:'absolute', right: 14, marginTop: 14, fontWeight: 'bold'}}>{item.bloodGroup}</Text>
       </View>
       </View>
+      </TouchableOpacity>
       <View style={{margin:2, marginTop:4, flex: 1, height: 1, backgroundColor: '#8C8C8C'}} />
       {/* <View style={{margin:2, marginTop:4, flex: 1, height: 1, backgroundColor: '#8C8C8C'}} /> */}
     </View>

@@ -107,7 +107,7 @@ const MyOrganizations = () => {
       <Text style={{color: 'white', position:'absolute', right: 14, marginTop: 14, fontWeight: 'bold'}}>{item.bloodGroup}</Text>
       </View>
       </View>
-      <View style={{margin:2, marginTop:4, flex: 1, height: 1, backgroundColor: '#8C8C8C'}} />
+      {/*<View style={{margin:2, marginTop:4, flex: 1, height: 1, backgroundColor: '#8C8C8C'}} />
       <View style={{
         flex: 1,
         flexDirection: 'row',
@@ -118,7 +118,7 @@ const MyOrganizations = () => {
         <TouchableOpacity style={{ alignItems: 'center', backgroundColor: '#00000000', borderRadius: 3, paddingVertical: 8, paddingHorizontal: 50 }}>
           <Text style={{ fontSize: 17, color: '#DE0A1E' }}>{'View Details'}</Text>
         </TouchableOpacity>
-      </View>
+      </View>*/}
       {/* <View style={{margin:2, marginTop:4, flex: 1, height: 1, backgroundColor: '#8C8C8C'}} /> */}
     </View>
     );
