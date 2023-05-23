@@ -49,6 +49,8 @@ const PrivateReceiversRequestList = () => {
 
   const currentDate = new Date();
 
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     const requestsRef = firestore().collection('requests');
     requestsRef.onSnapshot((querySnapshot) => {
@@ -67,6 +69,7 @@ const PrivateReceiversRequestList = () => {
         }
       });
       setFilteredData(data);
+      setIsLoading(false);
     });
   }, []);
 
@@ -143,13 +146,21 @@ const PrivateReceiversRequestList = () => {
           style={{ borderRadius: 10, borderColor: '#808080', borderWidth: 1, padding: 5, marginBottom: 10, color: 'black' }}
         />
 
+        {isLoading ? 
+        
+        <Text>Loading...</Text>
+
+        :
+
         <FlatList
-          data={filteredData}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-          scrollEnabled={true}
-          extraData={searchQuery}
+        data={filteredData}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        scrollEnabled={true}
+        extraData={searchQuery}
         />
+      
+        }
 
       </View>
 

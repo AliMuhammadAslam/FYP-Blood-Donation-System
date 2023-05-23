@@ -43,6 +43,8 @@ const AppointmentsList = () => {
 
   const [filteredData, setFilteredData] = useState([]);
 
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     
         const appointmentsRef = firestore().collection('appointments');
@@ -79,6 +81,7 @@ const AppointmentsList = () => {
             }
         });
         setFilteredData(data);
+        setIsLoading(false);
         });
         
   }, []);
@@ -155,13 +158,24 @@ const AppointmentsList = () => {
           style={{ borderRadius: 10, borderColor: '#808080', borderWidth: 1, padding: 5, marginBottom: 10, color: 'black' }}
         />
 
-        <FlatList
+        {isLoading ?
+        
+          <Text>Loading...</Text>
+
+          :
+
+          <FlatList
           data={filteredData}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
           scrollEnabled={true}
           extraData={searchQuery}
         />
+
+      
+        }
+
+        
 
       </View>
 

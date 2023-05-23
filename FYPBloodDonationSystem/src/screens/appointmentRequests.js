@@ -57,6 +57,9 @@ const AppointmentRequestsList = ({navigation}) => {
                     data.push({
                     id: doc.id,
                     donorName: doc.data().donorName,
+                    donorId: doc.data().donorId,
+                    receiverId: doc.data().receiverId,
+                    receiverName: doc.data().receiverName,
                     address: doc.data().hospital,
                     bloodGroup: doc.data().bloodType,
                     appointmentDate: doc.data().appointmentDate
@@ -74,22 +77,51 @@ const AppointmentRequestsList = ({navigation}) => {
     setFilteredData(data);
   }, [data]);*/
 
-    const handleAccept = async (docId) => {
+    const handleAccept = async (docId, doc) => {
         try {
             const requestRef = firestore().collection('appointments').doc(docId);
             await requestRef.update({status: 'confirmed'});
             console.log('Request updated successfully!');
+
+            console.log(doc.donorName);
+            const NotificationsRef = firestore().collection('notifications').doc();
+            await NotificationsRef.set({
+                type: 'Appointment Confirmed',
+                donorName: doc.donorName,
+                donorId: doc.donorId,
+                receiverName: doc.receiverName,
+                receiverId: doc.receiverId,
+                appointmentDate: doc.appointmentDate,
+                postedAt: new Date(),
+                read: false
+            });
+
+
+
         } catch (error) {
             console.error(error);
         }
         setRefresh(true);
     };
 
-    const handleReject = async (docId) => {
+    const handleReject = async (docId, doc) => {
         try {
             const requestRef = firestore().collection('appointments').doc(docId);
             await requestRef.update({status: 'declined'});
             console.log('Request updated successfully!');
+            console.log(doc.donorName);
+            const NotificationsRef = firestore().collection('notifications').doc();
+            await NotificationsRef.set({
+                type: 'Appointment Request Declined',
+                donorName: doc.donorName,
+                donorId: doc.donorId,
+                receiverName: doc.receiverName,
+                receiverId: doc.receiverId,
+                appointmentDate: doc.appointmentDate,
+                postedAt: new Date(),
+                read: false
+            });
+
         } catch (error) {
             console.error(error);
         }
@@ -130,11 +162,11 @@ const AppointmentRequestsList = ({navigation}) => {
         justifyContent: 'center',
       }}>
         
-        <TouchableOpacity onPress={ () => handleReject(item.id) } style={{ alignItems: 'center', backgroundColor: '#00000000', borderRadius: 10, paddingVertical: 8, paddingHorizontal: 50 }}>
+        <TouchableOpacity onPress={ () => handleReject(item.id, item) } style={{ alignItems: 'center', backgroundColor: '#00000000', borderRadius: 10, paddingVertical: 8, paddingHorizontal: 50 }}>
           <Text style={{ fontSize: 17, color: '#8C8C8C', }}>{'Decline'}</Text>
         </TouchableOpacity>
         <View style={{ marginTop:10, height: '100%', width: 1, backgroundColor: '#8C8C8C'}} />
-        <TouchableOpacity onPress={ () => handleAccept(item.id) } style={{ alignItems: 'center', backgroundColor: '#00000000', borderRadius: 3, paddingVertical: 8, paddingHorizontal: 50 }}>
+        <TouchableOpacity onPress={ () => handleAccept(item.id, item) } style={{ alignItems: 'center', backgroundColor: '#00000000', borderRadius: 3, paddingVertical: 8, paddingHorizontal: 50 }}>
           <Text style={{ fontSize: 17, color: '#DE0A1E' }}>{'Accept'}</Text>
         </TouchableOpacity>
       </View>
@@ -166,13 +198,21 @@ const AppointmentRequestsList = ({navigation}) => {
           style={{ borderRadius: 10, borderColor: '#808080', borderWidth: 1, padding: 5, marginBottom: 10, color: 'black' }}
         />
 
-        <FlatList
+        {refresh ?
+        
+          <Text>Loading...</Text>
+
+          :
+
+          <FlatList
           data={filteredData}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
           scrollEnabled={true}
           extraData={searchQuery}
-        />
+          />
+      
+        }    
 
       </View>
 

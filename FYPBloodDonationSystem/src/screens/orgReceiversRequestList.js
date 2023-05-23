@@ -164,13 +164,23 @@ const ReceiversRequestsList = () => {
           style={{ borderRadius: 10, borderColor: '#808080', borderWidth: 1, padding: 5, marginBottom: 10, color: 'black' }}
         />
 
-        <FlatList
+        {refresh ? 
+        
+          <Text>Loading...</Text>
+
+          :
+
+
+          <FlatList
           data={filteredData}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
           scrollEnabled={true}
           extraData={searchQuery}
-        />
+          />
+      
+      
+        }
 
       </View>
 

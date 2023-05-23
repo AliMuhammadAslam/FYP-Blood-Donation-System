@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {Alert, View, StyleSheet, Text} from "react-native";
+import { useIsFocused } from '@react-navigation/native';
 import Header from "../../components/Header";
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Button, TextInput } from 'react-native-paper';
@@ -13,13 +14,14 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 const CreateRequest = ({navigation}) => {
 
+    const isFocused = useIsFocused();
 
     const [name, setName] = useState("");
     const [bloodType, setBloodType] = useState(null);
     const [bloodItems, setBloodItems] = useState(["A+", "B+", "O+", "O-", "AB+"]);
     const [notes, setNotes] = useState("");
 
-    const currentDate = new Date();
+    var currentDate = new Date();
 
     const [expiryDate, setExpiryDate] = useState(currentDate);
     const [showDatePicker, setShowDatePicker] = useState(false);
@@ -32,6 +34,16 @@ const CreateRequest = ({navigation}) => {
     const renderPicker = () => {
         setShowDatePicker(true);
     };
+
+    useEffect(() => {
+        if (isFocused) {
+          setName("");
+          setBloodType(null);
+          setNotes("");
+          currentDate = new Date();
+          setExpiryDate(currentDate);
+        }
+      }, [isFocused]);
 
     const postRequest = async () => {
 

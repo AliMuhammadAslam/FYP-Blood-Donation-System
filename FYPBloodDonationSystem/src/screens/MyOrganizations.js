@@ -47,6 +47,8 @@ const MyOrganizations = () => {
 
   const navigation = useNavigation();
 
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     
         const associationsRef = firestore().collection('OrganizationAssociations');
@@ -69,6 +71,7 @@ const MyOrganizations = () => {
 
         });
         setFilteredData(data);
+        setIsLoading(false);
         });
         
   }, []);
@@ -144,13 +147,21 @@ const MyOrganizations = () => {
           style={{ borderRadius: 10, borderColor: '#808080', borderWidth: 1, padding: 5, marginBottom: 10, color: 'black' }}
         />
 
+        {isLoading ?
+        
+        <Text>Loading...</Text>
+
+        :
+
         <FlatList
-          data={filteredData}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-          scrollEnabled={true}
-          extraData={searchQuery}
+        data={filteredData}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        scrollEnabled={true}
+        extraData={searchQuery}
         />
+        
+        }
 
       </View>
 
