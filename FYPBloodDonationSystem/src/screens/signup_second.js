@@ -107,7 +107,7 @@ function Signup_second({route}) {
             password,
             isOrg: false
           });
-
+          Alert.alert("User account created & signed in!");
           navigation.navigate('TabNavigation');
           
         } catch (error) {

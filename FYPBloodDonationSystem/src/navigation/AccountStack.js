@@ -6,6 +6,7 @@ import DonationHistory from '../screens/Account/DonationHistory';
 import OrganizationsList from '../screens/organizations_list';
 import OrganisationInfo from '../screens/OrganisationInfo/OrganisationInfo';
 import ApplicationForm from '../screens/Forms/ApplicationForm';
+import EditProfile from '../screens/Account/EditProfile';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,8 +18,8 @@ const AccountStack = () => {
                 headerShown: false,
                 animationEnabled: true,
             }}>
-                <Stack.Screen name="Account" component={AccountScreen} />
-                <Stack.Screen name="ManageAddresses" component={ManageAddresses} />
+                <Stack.Screen name="AccountScreen" component={AccountScreen} />
+                <Stack.Screen name="EditProfile" component={EditProfile} />
                 <Stack.Screen name="DonationHistory" component={DonationHistory} />
                 <Stack.Screen name="OrganizationsList" component={OrganizationsList} />
                 <Stack.Screen name="OrganizationInfo" component={OrganisationInfo} />

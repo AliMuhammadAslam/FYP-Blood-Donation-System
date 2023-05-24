@@ -68,7 +68,7 @@ const TabNavigation = ({ route }) => {
           else if (route.name === 'CreateRequest') {
             iconName = focused ? <Image style={{ width: 25, height: 25 }} source={RequestIcon} /> : <Image style={{ width: 25, height: 25 }} source={RequestIcon} />;
           }
-          else if (route.name === 'Account') {
+          else if (route.name === 'AccountScreen') {
             iconName = focused ? <Image style={{ width: 40, height: 40 }} source={UserIcon} /> : <Image style={{ width: 35, height: 35 }} source={UserIcon} />;
           }
           return iconName;
@@ -79,7 +79,7 @@ const TabNavigation = ({ route }) => {
       <Tab.Screen name='Chat' component={ChatStack} options={{ tabBarLabel: 'Chat' }} />
       <Tab.Screen name='Home' component={HomeStack} options={{ tabBarLabel: 'Home' }} />
       <Tab.Screen name='CreateRequest' component={CreateRequest} options={{ tabBarLabel: 'Requests' }} />
-      <Tab.Screen name='Account' component={AccountStack} options={{ tabBarLabel: 'Account' }} />
+      <Tab.Screen name='AccountScreen' component={AccountStack} options={{ tabBarLabel: 'Account' }} />
     </Tab.Navigator>
   );
 }

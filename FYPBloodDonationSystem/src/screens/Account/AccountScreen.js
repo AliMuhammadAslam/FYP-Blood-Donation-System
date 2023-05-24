@@ -1,16 +1,17 @@
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faStar, faCalendarCheck, faLocation, faArrowRight, faDroplet, faStarOfLife, faHandHoldingHeart, faArrowRotateLeft, faRightFromBracket, faHospital, faHospitalAlt, faHospitalUser, faHospitalWide } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faCalendarCheck, faLocation, faArrowRight, faDroplet, faStarOfLife, faHandHoldingHeart, faArrowRotateLeft, faRightFromBracket, faHospital, faHospitalAlt, faHospitalUser, faHospitalWide, faUserEdit } from '@fortawesome/free-solid-svg-icons';
 // import { fa } from '@fortawesome/free-regular-svg-icons'
-import React, { useState } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, Switch } from 'react-native';
-
+import React, { useState, useEffect } from 'react';
+import { SafeAreaView, View, Text, Image, StyleSheet, TouchableOpacity, Switch } from 'react-native';
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
 
 const OverlapView = () => {
   return <View style={styles.overlay}>
     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
       <View style={{ flexDirection: 'column', alignItems: 'center' }}>
         <FontAwesomeIcon icon={faDroplet} size={20} color='#DE0A1E' />
-        <Text style={{ color: 'black', fontSize: 12 }}>O- Group</Text>
+        <Text style={{ color: 'black', fontSize: 12 }}>Vital Impact</Text>
       </View>
       <View style={{ marginRight: 10 }} />
       <View style={{ flexDirection: 'column', alignItems: 'center' }}>
@@ -29,122 +30,173 @@ const OverlapView = () => {
 
 const AccountScreen = ({ navigation }) => {
 
+  
+
+  const [userDetails, setUserDetails] = useState();
+  
   const [isEnabled, setIsEnabled] = useState(false);
+
+
+  useEffect(() => {
+
+    const UserRef = firestore().collection('users').doc(auth().currentUser.uid);
+
+    UserRef.get().then((doc) => {
+      if (doc.exists) {
+
+        setUserDetails(doc.data());
+      } else {
+        console.log('Document doesnot exist.');
+      }
+    }).catch((error) => {
+      console.log('Error getting document:', error);
+    });
+
+  }, [auth().currentUser.uid]);
+
+
+
 
   const toggleSwitch = () => {
     setIsEnabled(previousState => !previousState);
   };
 
+
+
+  
+
   return (
-    <View style={styles.container}>
-      <View style={styles.profileContainer}>
-        <View style={styles.avatarContainer}>
-          <Image
-            source={{ uri: 'https://placeimg.com/100/100/people' }}
-            style={styles.avatar}
-          />
-        </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.name}>Shahzaib Khan</Text>
-          <Text style={styles.subtitle}>090078601</Text>
-        </View>
-        <View style={styles.starContainer}>
-          <FontAwesomeIcon icon={faStar} size={20} color="#ffcc00" />
-          <FontAwesomeIcon icon={faStar} size={20} color="#ffcc00" />
-          <FontAwesomeIcon icon={faStar} size={20} color="#ffcc00" />
-          <FontAwesomeIcon icon={faStar} size={20} color="#ffcc00" />
-          <FontAwesomeIcon icon={faStar} size={20} color="#c7c7c7" />
-        </View>
+    <SafeAreaView style={styles.container}>
+
+      <View>
+      
+        {userDetails ?
+
+          <><View style={styles.profileContainer}>
+            <View style={styles.avatarContainer}>
+              <Image
+                source={{ uri: 'https://img.freepik.com/premium-vector/portrait-caucasian-woman-avatar-female-person-vector-icon-adult-flat-style-headshot_605517-26.jpg?w=2000' }}
+                style={styles.avatar}
+              />
+            </View>
+            <View style={styles.textContainer}>
+              {/* <Text style={styles.name}>Shahzaib Khan</Text>
+            <Text style={styles.subtitle}>090078601</Text> */}
+              <Text style={styles.name}>{userDetails.name}</Text>
+              <Text style={styles.subtitle}>{userDetails.mobileNumber}</Text>
+
+            </View>
+            <View style={styles.starContainer}>
+              <FontAwesomeIcon icon={faStar} size={20} color="#ffcc00" />
+              <FontAwesomeIcon icon={faStar} size={20} color="#ffcc00" />
+              <FontAwesomeIcon icon={faStar} size={20} color="#ffcc00" />
+              <FontAwesomeIcon icon={faStar} size={20} color="#ffcc00" />
+              <FontAwesomeIcon icon={faStar} size={20} color="#c7c7c7" />
+            </View>
+          </View>
+            <OverlapView />
+            <View style={styles.settingsContainer}>
+              <View style={styles.rowContainer}>
+                <View style={{ flexDirection: 'row', marginRight: 100 }}>
+                  <View style={styles.iconContainer}>
+                    <FontAwesomeIcon icon={faCalendarCheck} size={20} color="#DE0A1E" />
+                  </View>
+                  <Text style={styles.rowText}>Available to Donate</Text>
+                </View>
+                <Switch
+                  trackColor={{ false: "#767577", true: "#DE0A1E" }}
+                  thumbColor='white'
+                  onValueChange={toggleSwitch}
+                  value={isEnabled}
+                />
+              </View>
+              <TouchableOpacity onPress={() => {
+                navigation.navigate('EditProfile')
+              }}>
+                <View style={styles.rowContainer}>
+                  <View style={{ flexDirection: 'row' }}>
+                    <View style={styles.iconContainer}>
+                      <FontAwesomeIcon icon={faUserEdit} size={20} color="#DE0A1E" />
+                    </View>
+                    <Text style={styles.rowText}>Edit Profile</Text>
+                  </View>
+                  <FontAwesomeIcon icon={faArrowRight} size={20} color="black" />
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => {
+                navigation.navigate('DonationHistory')
+              }}>
+                <View style={styles.rowContainer}>
+                  <View style={{ flexDirection: 'row' }}>
+                    <View style={styles.iconContainer}>
+                      <FontAwesomeIcon icon={faHandHoldingHeart} size={20} color="#DE0A1E" />
+                    </View>
+                    <Text style={styles.rowText}>View Donation History</Text>
+                  </View>
+
+                  <FontAwesomeIcon icon={faArrowRight} size={20} color="black" />
+
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => {
+                navigation.navigate('DonationHistory')
+              }}>
+                <View style={styles.rowContainer}>
+                  <View style={{ flexDirection: 'row' }}>
+                    <View style={styles.iconContainer}>
+                      <FontAwesomeIcon icon={faArrowRotateLeft} size={20} color="#DE0A1E" />
+                    </View>
+                    <Text style={styles.rowText}>View Receiving History</Text>
+                  </View>
+                  <FontAwesomeIcon icon={faArrowRight} size={20} color="black" />
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => {
+                navigation.navigate('OrganizationsList')
+              }}>
+                <View style={styles.rowContainer}>
+                  <View style={{ flexDirection: 'row' }}>
+                    <View style={styles.iconContainer}>
+                      <FontAwesomeIcon icon={faHospital} size={20} color="#DE0A1E" />
+                    </View>
+                    <Text style={styles.rowText}>Register With An Organisation</Text>
+                  </View>
+                  <FontAwesomeIcon icon={faArrowRight} size={20} color="black" />
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => {
+                //Log out code
+              }}>
+                <View style={styles.rowContainer}>
+                  <View style={{ flexDirection: 'row' }}>
+                    <View style={styles.iconContainer}>
+                      <FontAwesomeIcon icon={faRightFromBracket} size={20} color="#DE0A1E" />
+                    </View>
+                    <Text style={styles.rowText}>Log Out</Text>
+                  </View>
+                  <FontAwesomeIcon icon={faArrowRight} size={20} color="black" />
+                </View>
+              </TouchableOpacity>
+            </View></>
+
+            :
+
+                    <Text>Loading...</Text>
+
+      }
+
+
       </View>
-      <OverlapView />
-      <View style={styles.settingsContainer}>
-        <View style={styles.rowContainer}>
-          <View style={{ flexDirection: 'row', marginRight: 100 }}>
-            <View style={styles.iconContainer}>
-              <FontAwesomeIcon icon={faCalendarCheck} size={20} color="#DE0A1E" />
-            </View>
-            <Text style={styles.rowText}>Available to Donate</Text>
-          </View>
-          <Switch
-            trackColor={{ false: "#767577", true: "#DE0A1E" }}
-            thumbColor='white'
-            onValueChange={toggleSwitch}
-            value={isEnabled}
-          />
-        </View>
-        <TouchableOpacity onPress={() => {
-          navigation.navigate('ManageAddresses')
-        }}>
-          <View style={styles.rowContainer}>
-            <View style={{ flexDirection: 'row' }}>
-              <View style={styles.iconContainer}>
-                <FontAwesomeIcon icon={faLocation} size={20} color="#DE0A1E" />
-              </View>
-              <Text style={styles.rowText}>Manage Address</Text>
-            </View>
-            <FontAwesomeIcon icon={faArrowRight} size={20} color="black" />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => {
-          navigation.navigate('DonationHistory')
-        }}>
-          <View style={styles.rowContainer}>
-            <View style={{ flexDirection: 'row' }}>
-              <View style={styles.iconContainer}>
-                <FontAwesomeIcon icon={faHandHoldingHeart} size={20} color="#DE0A1E" />
-              </View>
-              <Text style={styles.rowText}>View Donation History</Text>
-            </View>
 
-            <FontAwesomeIcon icon={faArrowRight} size={20} color="black" />
+      
 
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => {
-          navigation.navigate('DonationHistory')
-        }}>
-          <View style={styles.rowContainer}>
-            <View style={{ flexDirection: 'row' }}>
-              <View style={styles.iconContainer}>
-                <FontAwesomeIcon icon={faArrowRotateLeft} size={20} color="#DE0A1E" />
-              </View>
-              <Text style={styles.rowText}>View Receiving History</Text>
-            </View>
-            <FontAwesomeIcon icon={faArrowRight} size={20} color="black" />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => {
-          navigation.navigate('OrganizationsList')
-        }}>
-          <View style={styles.rowContainer}>
-            <View style={{ flexDirection: 'row' }}>
-              <View style={styles.iconContainer}>
-                <FontAwesomeIcon icon={faHospital} size={20} color="#DE0A1E" />
-              </View>
-              <Text style={styles.rowText}>Register With An Organisation</Text>
-            </View>
-            <FontAwesomeIcon icon={faArrowRight} size={20} color="black" />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => {
-          //Log out code
-        }}>
-          <View style={styles.rowContainer}>
-            <View style={{ flexDirection: 'row' }}>
-              <View style={styles.iconContainer}>
-                <FontAwesomeIcon icon={faRightFromBracket} size={20} color="#DE0A1E" />
-              </View>
-              <Text style={styles.rowText}>Log Out</Text>
-            </View>
-            <FontAwesomeIcon icon={faArrowRight} size={20} color="black" />
-          </View>
-        </TouchableOpacity>
-      </View>
+      </SafeAreaView>
 
 
-    </View>
+
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
@@ -223,6 +275,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 2,
     elevation: 3,
+    marginLeft: 42.5
   },
 
 });
