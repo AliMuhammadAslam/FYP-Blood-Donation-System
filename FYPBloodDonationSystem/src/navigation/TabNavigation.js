@@ -6,6 +6,7 @@ import MyAppointments from '../screens/Appointments';
 import CreateRequest from '../screens/Forms/CreateRequest';
 import HomeStack from './HomeStack';
 import ChatStack from './ChatStack';
+import MessagesScreen from '../screens/MessagesScreen';
 
 
 const Tab = createBottomTabNavigator();

@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, Image, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import HomeHeader from '../../components/HomeHeader';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faLocationDot, faDroplet } from '@fortawesome/free-solid-svg-icons';
 import Slideshow from '../../components/slideshow';
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
 
 const HomeScreen = ({ navigation }) => {
@@ -12,6 +14,8 @@ const HomeScreen = ({ navigation }) => {
     const emergency_donor = require('../../../assets/emergencydonor.png');
     const post_request = require('../../../assets/envelope.png');
     const blood_drop = require('../../../assets/blood_drop.jpg')
+
+    const [userDetails, setDetails] = useState();
 
     const HomeBoxData = [
         { icon: <Image style={{ width: 65, height: 55, marginTop: 10 }} source={post_request} />, title: 'Post Blood Request', route: 'CreateRequest' },
@@ -99,9 +103,35 @@ const HomeScreen = ({ navigation }) => {
             </View>
         );
     }
+
+    useEffect(() => {
+
+        const userRef = firestore().collection('users').doc(auth().currentUser.uid);
+
+        userRef.get().then((doc) => {
+        if (doc.exists) {
+            setDetails(doc.data());
+        } else {
+            console.log('Document doesnot exist.');
+        }
+        }).catch((error) => {
+            console.log('Error getting document:', error);
+        });
+
+    }, []);
+
     return (
         <SafeAreaView style={styles.container}>
-            <HomeHeader title="Hello! Rafay" navigation={navigation} />
+            {userDetails ? 
+            
+                <HomeHeader title={"Hello! " + userDetails.name} navigation={navigation} />
+
+                :
+
+                <Text>Loading...</Text>
+        
+            }
+            
             <View style={styles.header}>
                     {/* <Text style={styles.headingText}>Are You Looking for Blood?</Text> */}
                     <Slideshow />

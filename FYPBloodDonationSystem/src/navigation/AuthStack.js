@@ -1,7 +1,6 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AuthenticationScreen from '../screens/Auth/AuthenticationScreen';
-//import Signup from '../screens/Auth/Signup';
 import Signup_first from '../screens/signup_first';
 import Signup_second from '../screens/signup_second';
 import Login from '../screens/Auth/Login';
@@ -11,6 +10,8 @@ import Questionnaire from '../screens/Auth/Questionnaire';
 import ChangePassword from '../screens/Auth/ChangePassword';
 import TabNavigation from './TabNavigation';
 import TabNavigationOrganizations from './TabNavigationOrganizations';
+import ChatScreen from '../screens/Chat/ChatScreen';
+
 
 
 const Stack = createNativeStackNavigator();
@@ -35,6 +36,7 @@ const AuthStack = () => {
             <Stack.Screen name="Questionnaire" component={Questionnaire} />
             <Stack.Screen name="TabNavigation" component={TabNavigation} />
             <Stack.Screen name="TabNavigationOrganizations" component={TabNavigationOrganizations} />
+            <Stack.Screen name="ChatScreen" component={ChatScreen} />
         </Stack.Navigator>
     );
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     SafeAreaView,
     ScrollView,
@@ -8,9 +8,10 @@ import {
     Image,
     Alert,
     Dimensions,
-    StyleSheet
+    StyleSheet,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+//import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const win = Dimensions.get('window');
 const ratio = win.width / 602;
@@ -18,7 +19,16 @@ const ratio = win.width / 602;
 const AuthenticationScreen = () => {
 
     const navigation = useNavigation();
+ 
+    
 
+    // useEffect(() => { 
+    //     //console.log("automatic login"); 
+    //     AsyncStorage.getItem(id);
+    //     if (id != null){
+    //         console.log("automatic login"); 
+    //     }
+    //   }); //No second Argument 
 
 
     return (
