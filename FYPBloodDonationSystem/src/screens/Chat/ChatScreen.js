@@ -1,50 +1,90 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import {View, ScrollView, Text, Button, StyleSheet} from 'react-native';
-import {Bubble, GiftedChat, Send} from 'react-native-gifted-chat';
+import {Bubble, GiftedChat, Send, InputToolbar} from 'react-native-gifted-chat';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Header from "../../components/Header";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faArrowLeft, faBars, faBold, faCalendar, faDroplet, faGear, faHome, faMessage, faPaperPlane, faPerson, faPlusSquare, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faArrowDown, faArrowLeft, faBars, faBold, faCalendar, faDroplet, faGear, faHome, faMessage, faPaperPlane, faPerson, faPlusSquare, faUser } from '@fortawesome/free-solid-svg-icons';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import auth, { firebase } from '@react-native-firebase/auth';
+//import firebase from 'react-native-firebase';
+import firestore from '@react-native-firebase/firestore';
+import { serverTimestamp } from "@react-native-firebase/firestore";
 
-const ChatScreen = ({navigation}) => {
+const ChatScreen = ({route}) => {
+
+  const {name, id} = route.params;
+  //userName = "ALI";
+  console.log("Name: "+name);
   const [messages, setMessages] = useState([]);
+  const user = firebase.auth().currentUser;
+
+  const getAllMessages = async () => {
+    const docid = id > user.uid ? user.uid+"-"+id : id+"-"+user.uid   
+    const msgResponse = await firestore().collection('Chats')
+    .doc(docid)
+    .collection('messages')
+    .orderBy('createdAt', "desc")
+    .get()
+    const allTheMsgs = msgResponse.docs.map(docSanp => {
+      return {
+        ...docSanp.data(),
+        createdAt:docSanp.data().createdAt.toDate()
+      }
+    })
+    setMessages(allTheMsgs)
+  }
 
   useEffect(() => {
-    setMessages([
-      {
-        _id: 1,
-        text: 'Hello developer',
-        createdAt: new Date(),
-        user: {
-          _id: 2,
-          name: 'React Native',
-          avatar: 'https://placeimg.com/140/140/any',
-        },
-      },
-      {
-        _id: 2,
-        text: 'Hello world',
-        createdAt: new Date(),
-        user: {
-          _id: 1,
-          name: 'React Native',
-          avatar: 'https://placeimg.com/140/140/any',
-        },
-      },
-    ]);
-  }, []);
+    getAllMessages()
+  },[]);
 
-  const onSend = useCallback((messages = []) => {
-    setMessages((previousMessages) =>
-      GiftedChat.append(previousMessages, messages),
-    );
-  }, []);
+
+  // const onSend = useCallback((messages = []) => {
+  //   setMessages((previousMessages) =>
+  //     GiftedChat.append(previousMessages, messages),
+  //   );
+  // }, []);
+
+  const onSend = (msgArray) => {
+    const msg = msgArray[0]
+    const usermsg = {
+      ...msg,
+      sentBy: user.uid,
+      sentTo: id,
+      createdAt: new Date()
+    }
+    setMessages(previousMessages => GiftedChat.append(previousMessages, usermsg))
+    const chatid = id > user.uid ? user.uid+ "-" +id : id+ "-" +user.uid
+    
+    firestore().collection('Chats')
+    .doc(chatid)
+    .collection('messages')
+    .add({...usermsg, //createdAt:serverTimestamp()
+    })
+
+    const receiveRef = firestore().collection('users').doc(id);
+    // Atomically add a new region to the "regions" array field.
+    receiveRef.set({
+      'chats': firestore.FieldValue.arrayUnion(auth().currentUser.uid),
+    }, { merge: true });
+    //   await updateDoc(firestore().collection('Chats').doc(), {
+    //     regions: arrayUnion("greater_virginia")
+    // });
+
+    const chatRef = firestore().collection('users').doc(auth().currentUser.uid);
+    // Atomically add a new region to the "regions" array field.
+    chatRef.set({
+      'chats': firestore.FieldValue.arrayUnion(id),
+    }, { merge: true });
+  }
+
 
   const renderSend = (props) => {
     return (
-      <Send {...props}>
-        <View style={{marginBottom: 15, marginRight: 20}} size={32}>
+      <Send style={{color:"#000"}} {...props}>
+        <View style={{marginBottom: 15, marginRight: 20}}>
           {/* <MaterialCommunityIcons
             name="send"
             style={{marginBottom: 5, marginRight: 5}}
@@ -63,13 +103,25 @@ const ChatScreen = ({navigation}) => {
         {...props}
         wrapperStyle={{
           right: {
-            backgroundColor: '#2e64e5',
+            //backgroundColor: '#2e64e5',
+            backgroundColor: '#DE0A1E',
+          },
+          left: {
+            backgroundColor: '#eaeaea'
+          }
+        }}
+        textProps={{
+          style: {
+            color: props.position === 'left' ? '#000' : '#fff',
           },
         }}
         textStyle={{
           right: {
-            color: '#fff',
+            color: '#000000',
           },
+          left:{
+            color: '#ffffff'
+          }
         }}
       />
     );
@@ -77,23 +129,47 @@ const ChatScreen = ({navigation}) => {
 
   const scrollToBottomComponent = () => {
     return(
-      <FontAwesome name='angle-double-down' size={22} color='#333' />
+      <FontAwesomeIcon icon={faArrowDown} size={22} color={'#333'} />
     );
   }
 
+  renderInputToolbar = (props) => {
+    // Here you will return your custom InputToolbar.js file you copied before and include with your stylings, edits.
+    
+    return (
+         <InputToolbar {...props} textInputStyle={{ color: "#000000" }} />
+    );
+}
+
   return (
-    <GiftedChat
-      messages={messages}
-      onSend={(messages) => onSend(messages)}
-      user={{
-        _id: 1,
-      }}
-      renderBubble={renderBubble}
-      alwaysShowSend
-      renderSend={renderSend}
-      scrollToBottom
-      scrollToBottomComponent={scrollToBottomComponent}
-    />
+    <SafeAreaView style={
+      {//styles.container
+        // justifyContent: 'center',
+        // alignItems: 'center',
+        flex: 1,
+        
+      }}>
+        {/* <ScrollView> */}
+       <Header title={name} isRed={true} /> 
+        
+          <GiftedChat
+          
+            messages={messages}
+            onSend={text => onSend(text)}
+            user={{
+              _id: user.uid,
+            }}
+            renderBubble={renderBubble}
+            alwaysShowSend
+            renderSend={renderSend}
+            scrollToBottom
+            scrollToBottomComponent={scrollToBottomComponent}
+            renderInputToolbar={this.renderInputToolbar} 
+            //textProps={{ style: { color: 'red' } }}
+          />
+
+         {/* </ScrollView> */}
+     </SafeAreaView>
   );
 };
 

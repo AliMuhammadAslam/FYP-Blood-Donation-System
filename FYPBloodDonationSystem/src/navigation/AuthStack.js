@@ -10,6 +10,8 @@ import Questionnaire from '../screens/Auth/Questionnaire';
 import ChangePassword from '../screens/Auth/ChangePassword';
 import TabNavigation from './TabNavigation';
 import TabNavigationOrganizations from './TabNavigationOrganizations';
+import ChatScreen from '../screens/Chat/ChatScreen';
+
 
 
 const Stack = createNativeStackNavigator();
@@ -34,6 +36,7 @@ const AuthStack = () => {
             <Stack.Screen name="Questionnaire" component={Questionnaire} />
             <Stack.Screen name="TabNavigation" component={TabNavigation} />
             <Stack.Screen name="TabNavigationOrganizations" component={TabNavigationOrganizations} />
+            <Stack.Screen name="ChatScreen" component={ChatScreen} />
         </Stack.Navigator>
     );
 }

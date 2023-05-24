@@ -1,7 +1,8 @@
 import React from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faBell } from '@fortawesome/free-regular-svg-icons';
+import { faArrowAltCircleDown, faBell } from "@fortawesome/free-solid-svg-icons";
+//import { faBell } from '@fortawesome/free-regular-svg-icons';
 
 
 const HomeHeader = (props) => {
@@ -13,7 +14,7 @@ const HomeHeader = (props) => {
             <TouchableOpacity style={styles.bellIcon} onPress={() => {
                 navigation.navigate('Notifications');
             }}>
-                <FontAwesomeIcon icon={faBell} size={26} color='black' />
+                {/* <FontAwesomeIcon icon={faBell} size={26} color='black' /> */}
                 <View style={{
                     width: 18, height: 18, backgroundColor: '#DE0A1E', borderRadius: 10, left: -12, top: -3
                 }}>

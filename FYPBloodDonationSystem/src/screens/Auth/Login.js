@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Pressable, SafeAreaView, StyleSheet, Text, TouchableOpacity, useColorScheme, View, Alert} from 'react-native';
+import { Button, Pressable, SafeAreaView, StyleSheet, Text, TouchableOpacity, useColorScheme, View, Alert } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import {TextInput} from 'react-native-paper';
@@ -35,13 +35,16 @@ const Login = () => {
             //Alert.alert("Signed in");
             
             const usersRef = firestore().collection('users').doc(auth().currentUser.uid);
-
+            
             usersRef.get().then((doc) => {
                 if (doc.exists) {
+                  const id=auth().currentUser.uid;
                     if(doc.data().isOrg){
                       navigation.navigate('TabNavigationOrganizations');
                     }
                     else{
+                      //AsyncStorage.setItem(id, doc.data())
+                      console.log(id+" "+ doc.data().name);
                       navigation.navigate('TabNavigation');
                     }
                 } else {
