@@ -110,10 +110,10 @@ const PrivateReceiversRequestList = () => {
         justifyContent: 'center',
       }}>
         
-        <TouchableOpacity style={{ alignItems: 'center', backgroundColor: '#00000000', borderRadius: 10, paddingVertical: 8, paddingHorizontal: 50 }}>
+        {/*<TouchableOpacity style={{ alignItems: 'center', backgroundColor: '#00000000', borderRadius: 10, paddingVertical: 8, paddingHorizontal: 50 }}>
           <Text style={{ fontSize: 17, color: '#8C8C8C', }}>{'Decline'}</Text>
         </TouchableOpacity>
-        <View style={{ marginTop:10, height: '100%', width: 1, backgroundColor: '#8C8C8C'}} />
+    <View style={{ marginTop:10, height: '100%', width: 1, backgroundColor: '#8C8C8C'}} />*/}
         <TouchableOpacity onPress={ () => navigation.navigate('Request Info', {docId: item.id})} style={{ alignItems: 'center', backgroundColor: '#00000000', borderRadius: 3, paddingVertical: 8, paddingHorizontal: 50 }}>
           <Text style={{ fontSize: 17, color: '#DE0A1E' }}>{'Donate Now'}</Text>
         </TouchableOpacity>
