@@ -1,55 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View, Image, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { StyleSheet, View, Text, Image, ScrollView, ImageBackground, TouchableOpacity } from "react-native";
-import { MoreOrLess } from "@rntext/more-or-less";
-import {
-    BarChart,
-    PieChart,
-} from "react-native-chart-kit";
+import HomeHeader from '../../components/HomeHeader';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faPhone, faLocationDot, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { faLocationDot, faDroplet } from '@fortawesome/free-solid-svg-icons';
+import Slideshow from '../../components/slideshow';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import { BackgroundImage } from "@rneui/themed/dist/config";
-import { useNavigation } from '@react-navigation/native';
-import Header from "../../components/Header";
+import { BarChart, PieChart } from "react-native-chart-kit";
 
 
-const OrganisationInfo = ({ route }) => {
+const OrgHomeScreen = ({ navigation }) => {
 
-    const { docId } = route.params;
-
-    const [info, setInfo] = useState();
-
-    const navigation = useNavigation();
-
-    useEffect(() => {
-
-        // checkLocation();
-
-        const requestRef = firestore().collection('users').doc(docId);
-
-        requestRef.get().then((doc) => {
-            if (doc.exists) {
-                /*const userRef = firestore().collection('users').doc(doc.data().uid);
-                userRef.get().then((userDoc) => {
-                    if(userDoc.exists){
-                        setDetails(userDoc.data());
-                    }
-                });*/
-                setInfo(doc.data());
-            } else {
-                console.log('Document doesnot exist.');
-            }
-        }).catch((error) => {
-            console.log('Error getting document:', error);
-        });
-
-    }, [docId]);
-
-    //const hospital_image = require('../../../assets/IndusHospital.jpg');
-    const hospital_image = require('../../../assets/IndusHospital.jpg');
-    const star = require('../../../assets/star_icon.png');
+    const [userDetails, setDetails] = useState();
+    const RequestData = [
+        { Name: 'Zulfiqar Khan', Address: 'DHA Phase 4, karachi', Blood_grp: 'O-' },
+        { Name: 'Zulfiqar Khan', Address: 'House no 1, Street no 10, Landhi, karachi', Blood_grp: 'A-' },
+        { Name: 'Zulfiqar Khan', Address: 'Street 2, SMCHS, karachi', Blood_grp: 'B-' },
+        { Name: 'Zulfiqar Khan', Address: 'Clifton, karachi', Blood_grp: 'A+' },
+        { Name: 'Zulfiqar Khan', Address: 'Pechs Block 6, karachi', Blood_grp: 'O+' }
+    ]
     const data = {
         labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June'],
         datasets: [{
@@ -96,45 +66,58 @@ const OrganisationInfo = ({ route }) => {
         { name: 'Quetta', population: 10538, color: 'yellow', legendFontColor: '#7F7F7F', legendFontSize: 12 },
         { name: 'Peshawar', population: 10020, color: 'orange', legendFontColor: '#7F7F7F', legendFontSize: 12 }
     ]
+    const RequestBox = ({ data }) => {
+        return (
+            <View style={{ borderRadius: 10, borderColor: '#B6B6B6', borderWidth: 1, padding: 10, marginBottom: 10 }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <View>
+                        <Text style={{ fontWeight: 600, fontSize: 20, color: '#353535' }}>{data.Name}</Text>
+                        <Text style={{ paddingVertical: 3, color: '#969696' }}>{data.Address}</Text>
+                    </View>
+                    <View style={{}}>
+                        <FontAwesomeIcon icon={faDroplet} size={45} color="#DE0A1E" />
+                        <Text style={{ color: 'white', position: 'absolute', right: 14, marginTop: 14, fontWeight: 'bold', fontSize: 16 }}>{data.Blood_grp}</Text>
+                    </View>
+                </View>
+                <View style={{ margin: 2, marginTop: 4, flex: 1, height: 1, backgroundColor: '#B6B6B6' }} />
+                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', width: '100%' }}>
+                    <TouchableOpacity style={{ alignItems: 'center', backgroundColor: 'white', borderRadius: 10, paddingVertical: 8, width: '50%' }}>
+                        <Text style={{ fontSize: 17, color: '#8C8C8C', }}>Decline</Text>
+                    </TouchableOpacity>
+                    <View style={{ marginTop: 10, height: '100%', width: 1, backgroundColor: '#8C8C8C' }} />
+                    <TouchableOpacity onPress={() => { }} style={{ alignItems: 'center', backgroundColor: '#00000000', borderRadius: 3, paddingVertical: 8, width: '50%' }}>
+                        <Text style={{ fontSize: 17, color: '#DE0A1E' }}>Accept</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        );
+    }
+
+    useEffect(() => {
+
+        const userRef = firestore().collection('users').doc(auth().currentUser.uid);
+
+        userRef.get().then((doc) => {
+            if (doc.exists) {
+                setDetails(doc.data());
+            } else {
+                console.log('Document doesnot exist.');
+            }
+        }).catch((error) => {
+            console.log('Error getting document:', error);
+        });
+
+    }, []);
+
     return (
-
-        <View style={{flex:1}}>
-
-            {
-                info ? <SafeAreaView style={styles.container}>
-                    <ImageBackground style={{ height: 270, width: '100%', backgroundColor: 'green' }} resizeMode="cover" source={hospital_image}>
-                        <TouchableOpacity onPress={() => {
-                            navigation.goBack();
-                        }}>
-                            <FontAwesomeIcon icon={faArrowLeft} size={20} color='black' style={{ marginTop: 20, marginLeft: 10 }} />
-                        </TouchableOpacity>
-                    </ImageBackground>
-                    <ScrollView style={{ width: '100%', padding: 15 }}>
-                        <View style={{ flexDirection: 'row', gap: 20, alignItems: 'center', justifyContent: 'space-between' }}>
-                            <View>
-                                <Text style={{ color: 'black', fontSize: 26 }}>{info.name}</Text>
-                                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
-                                    <Image style={{ width: 15, height: 15 }} source={star} />
-                                    <Text style={styles.text}>4.5/5 Ratings</Text>
-                                </View>
-                            </View>
-                            <FontAwesomeIcon icon={faPhone} size={30} color='#DE0A1E' />
-                        </View>
-                        <View style={{ flexDirection: 'row', gap: 20, alignItems: 'center', justifyContent: 'space-between', marginTop: 10, marginBottom: 10 }}>
-                            <View style={{ width: '70%' }}>
-                                <Text style={{ color: 'grey', fontSize: 16 }}>{info.address}</Text>
-                            </View>
-                            <FontAwesomeIcon icon={faLocationDot} size={30} color='#DE0A1E' />
-                        </View>
-                        <MoreOrLess
-                            numberOfLines={3}
-                            textButtonStyle={{ color: 'lightblue' }}
-                            animated
-                            textStyle={{ color: 'grey' }}
-                        >
-                            {info.description}
-                        </MoreOrLess>
-                        <Text style={{ color: 'black', marginTop: 10, fontSize: 16, marginBottom: 10 }}>Donation and Recieving Statistics</Text>
+        <SafeAreaView style={styles.container}>
+                <HomeHeader title={"Hello!" + userDetails?.name?.substring(userDetails?.name?.lastIndexOf(" "), userDetails?.name?.length)} navigation={navigation} />
+            <View style={styles.header}>
+                <Slideshow />
+            </View>
+            <View style={{ alignItems: 'center', width: '100%', paddingHorizontal: 12, flex: 1 }}>
+                <ScrollView style={styles.scrollView}>
+                <Text style={{ color: 'black', marginTop: 10, fontSize: 18, marginBottom: 10, fontWeight: 600 }}>Donation and Recieving Statistics</Text>
                         <View style={{ alignItems: 'center', marginBottom: 20 }}>
 
                             <PieChart
@@ -206,26 +189,20 @@ const OrganisationInfo = ({ route }) => {
                             />
                             <Text style={styles.text}>Blood Recieving Statistics by City</Text>
                         </View>
-
-                    </ScrollView>
-
-                    <TouchableOpacity onPress={ () => navigation.navigate('ApplicationForm', {orgId: docId, orgName: info.name, orgAddress: info.address})} style={styles.button}>
-                        <Text style={{ fontSize: 22, color: '#DE0A1E' }}>Register</Text>
-                    </TouchableOpacity>
-                    <View style={{height: 55}}></View>
-                </SafeAreaView>
-
-                    :
-
-                    <SafeAreaView style={styles.container}>
-                        <Header title="Orgaization Info" isRed={true} navigation={navigation} />
-                        <Text>Loading...</Text>
-                    </SafeAreaView>
-
-            }
-
-        </View>
-
+                    {/* <View style={styles.donationReqsContainer}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', paddingHorizontal: 5, alignItems: 'center', marginBottom: 10 }}>
+                            <Text style={{ color: '#353535', fontSize: 18 }}>Donation Requests</Text>
+                            <TouchableOpacity onPress={() => navigation.navigate('ReceiversList')}>
+                                <Text style={{ color: '#969696', fontSize: 12 }}>See all</Text>
+                            </TouchableOpacity>
+                        </View>
+                        {RequestData.map((data) => <RequestBox data={data} />)}
+                        <View style={{ height: 55 }}></View>
+                    </View> */}
+                    <View style={{ height: 55 }}></View>
+                </ScrollView>
+            </View>
+        </SafeAreaView>
     );
 }
 
@@ -233,23 +210,23 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+    },
+    header: {
+        marginTop: 6,
+        width: '100%',
+        height: 200,
+    },
+    scrollView: {
+        width: '100%'
+    },
+    donationReqsContainer: {
+        width: '100%',
+        marginTop: 10,
     },
     text: {
         color: 'grey'
     },
-    button: {
-        width: '90%',
-        backgroundColor: 'white',
-        marginTop: 15,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 10,
-        paddingVertical: 5,
-        marginBottom: 30,
-        borderColor: '#DE0A1E',
-        borderWidth: 1
-    }
 });
 
-export default OrganisationInfo;
+export default OrgHomeScreen;
