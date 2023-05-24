@@ -33,11 +33,11 @@ const HomeScreen = ({ navigation }) => {
         { blood_grp: 'AB-', demand: 700, icon: blood_drop },
     ]
     const RequestData = [
-        { Name: 'Zulfiqar Khan', Address: 'Agha Khan Hospital Karachi', Blood_grp: 'O-'},
-        { Name: 'Zulfiqar Khan', Address: 'Agha Khan Hospital Karachi', Blood_grp: 'O-'},
-        { Name: 'Zulfiqar Khan', Address: 'Agha Khan Hospital Karachi', Blood_grp: 'O-'},
-        { Name: 'Zulfiqar Khan', Address: 'Agha Khan Hospital Karachi', Blood_grp: 'O-'},
-        { Name: 'Zulfiqar Khan', Address: 'Agha Khan Hospital Karachi', Blood_grp: 'O-'}
+        { Name: 'Zulfiqar Khan', Address: 'Agha Khan Hospital Karachi', Blood_grp: 'O-' },
+        { Name: 'Zulfiqar Khan', Address: 'Agha Khan Hospital Karachi', Blood_grp: 'O-' },
+        { Name: 'Zulfiqar Khan', Address: 'Agha Khan Hospital Karachi', Blood_grp: 'O-' },
+        { Name: 'Zulfiqar Khan', Address: 'Agha Khan Hospital Karachi', Blood_grp: 'O-' },
+        { Name: 'Zulfiqar Khan', Address: 'Agha Khan Hospital Karachi', Blood_grp: 'O-' }
     ]
     const BloodStatDrop = ({ blood_grp, demand, icon }) => {
         return (
@@ -77,26 +77,30 @@ const HomeScreen = ({ navigation }) => {
             </TouchableOpacity>
         );
     }
-    const RequestBox = ({data}) => {
+    const RequestBox = ({ data }) => {
         return (
             <View style={{ borderRadius: 10, borderColor: '#B6B6B6', borderWidth: 1, padding: 10, marginBottom: 10 }}>
-                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                     <View>
                         <Text style={{ fontWeight: 600, fontSize: 20, color: '#353535' }}>{data.Name}</Text>
                         <Text style={{ paddingVertical: 3, color: '#969696' }}>{data.Address}</Text>
                     </View>
-                    <View style={{  }}>
+                    <View style={{}}>
                         <FontAwesomeIcon icon={faDroplet} size={45} color="#DE0A1E" />
                         <Text style={{ color: 'white', position: 'absolute', right: 14, marginTop: 14, fontWeight: 'bold', fontSize: 16 }}>{data.Blood_grp}</Text>
                     </View>
                 </View>
                 <View style={{ margin: 2, marginTop: 4, flex: 1, height: 1, backgroundColor: '#B6B6B6' }} />
-                <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', width: '100%'}}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', width: '100%' }}>
                     <TouchableOpacity style={{ alignItems: 'center', backgroundColor: 'white', borderRadius: 10, paddingVertical: 8, width: '50%' }}>
                         <Text style={{ fontSize: 17, color: '#8C8C8C', }}>Decline</Text>
                     </TouchableOpacity>
                     <View style={{ marginTop: 10, height: '100%', width: 1, backgroundColor: '#8C8C8C' }} />
-                    <TouchableOpacity onPress={() => { }} style={{ alignItems: 'center', backgroundColor: '#00000000', borderRadius: 3, paddingVertical: 8, width: '50%' }}>
+                    <TouchableOpacity onPress={() => {
+                        navigation.navigate('Request Info', {
+                            docId: 0
+                        })
+                    }} style={{ alignItems: 'center', backgroundColor: '#00000000', borderRadius: 3, paddingVertical: 8, width: '50%' }}>
                         <Text style={{ fontSize: 17, color: '#DE0A1E' }}>Donate Now</Text>
                     </TouchableOpacity>
                 </View>
@@ -109,11 +113,11 @@ const HomeScreen = ({ navigation }) => {
         const userRef = firestore().collection('users').doc(auth().currentUser.uid);
 
         userRef.get().then((doc) => {
-        if (doc.exists) {
-            setDetails(doc.data());
-        } else {
-            console.log('Document doesnot exist.');
-        }
+            if (doc.exists) {
+                setDetails(doc.data());
+            } else {
+                console.log('Document doesnot exist.');
+            }
         }).catch((error) => {
             console.log('Error getting document:', error);
         });
@@ -122,20 +126,12 @@ const HomeScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            {userDetails ? 
-            
-                <HomeHeader title={"Hello! " + userDetails.name} navigation={navigation} />
+            <HomeHeader title={"Hello!" + userDetails?.name?.substring(userDetails?.name?.lastIndexOf(" "), userDetails?.name?.length)} navigation={navigation} />
 
-                :
-
-                <Text>Loading...</Text>
-        
-            }
-            
             <View style={styles.header}>
-                    {/* <Text style={styles.headingText}>Are You Looking for Blood?</Text> */}
-                    <Slideshow />
-                </View>
+                <Text style={styles.headingText}>Are You Looking for Blood?</Text>
+                <Slideshow />
+            </View>
             <View style={{ alignItems: 'center', width: '100%', paddingHorizontal: 12, flex: 1 }}>
                 <View style={styles.boxRow}>
                     {HomeBoxData.map((data) => <HomeBox icon={data.icon} title={data.title} route={data.route} />)}
@@ -161,7 +157,7 @@ const HomeScreen = ({ navigation }) => {
                             </TouchableOpacity>
                         </View>
                         {RequestData.map((data) => <RequestBox data={data} />)}
-                        <View style={{height: 55}}></View>
+                        <View style={{ height: 55 }}></View>
                     </View>
                 </ScrollView>
             </View>
@@ -172,12 +168,13 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
+        // alignItems: 'center',
         backgroundColor: 'white',
     },
     headingText: {
         color: 'black',
-        fontSize: 18
+        fontSize: 18,
+        paddingHorizontal: 12
     },
     header: {
         marginTop: 6,

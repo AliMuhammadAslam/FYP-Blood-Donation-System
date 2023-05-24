@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Image, ImageBackground, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import MapView from "react-native-maps";
 import Header from "../components/Header";
 import checkLocation from "../components/Location";
 import { MoreOrLess } from "@rntext/more-or-less";
@@ -11,13 +10,16 @@ import { useNavigation } from '@react-navigation/native';
 import { faMessage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 //import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+//import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faPhone, faLocationDot, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import MapView, { Polyline, Marker, Circle } from 'react-native-maps';
 
 
-const DonationRequestInfoPage = ({route}) => {
+const DonationRequestInfoPage = ({ route, navigation }) => {
 
-    const { docId } = route.params;
+    const { docId } = route.params.docId;
 
-    const navigation = useNavigation();
+    // const navigation = useNavigation();
 
     const sample_image = require('../../assets/sample_image.jpg');
     const star = require('../../assets/star_icon.png');
@@ -26,27 +28,27 @@ const DonationRequestInfoPage = ({route}) => {
 
     const [request, setRequest] = useState();
     const [userDetails, setDetails] = useState();
-    const[reqID, setReqId] = useState();
+    const [reqID, setReqId] = useState();
 
-    useEffect( () => {
+    useEffect(() => {
 
         // checkLocation();
 
         const requestRef = firestore().collection('requests').doc(docId);
 
         requestRef.get().then((doc) => {
-        if (doc.exists) {
-            setReqId(doc.id);
-            const userRef = firestore().collection('users').doc(doc.data().uid);
-            userRef.get().then((userDoc) => {
-                if(userDoc.exists){
-                    setDetails(userDoc.data());
-                }
-            });
-            setRequest(doc.data());
-        } else {
-            console.log('Document doesnot exist.');
-        }
+            if (doc.exists) {
+                setReqId(doc.id);
+                const userRef = firestore().collection('users').doc(doc.data().uid);
+                userRef.get().then((userDoc) => {
+                    if (userDoc.exists) {
+                        setDetails(userDoc.data());
+                    }
+                });
+                setRequest(doc.data());
+            } else {
+                console.log('Document doesnot exist.');
+            }
         }).catch((error) => {
             console.log('Error getting document:', error);
         });
@@ -57,22 +59,25 @@ const DonationRequestInfoPage = ({route}) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            {/*<View style={styles.backArrow}>
-                <Text style={styles.text}>back</Text>
-            </View>*/}
-            <Header title="Request Info" isRed={true} navigation={navigation} />
             <MapView style={styles.map}
-                initialRegion={{
+                region={{
                     latitude: 24.891975,
                     longitude: 67.072861,
                     latitudeDelta: 0.0922,
                     longitudeDelta: 0.0421,
                 }}
-            />
+            >
+                <Marker coordinate={{latitude: 24.891975, longitude: 67.072861}}/>
+            </MapView>
+            <TouchableOpacity onPress={() => {
+                navigation.goBack();
+            }}>
+                <FontAwesomeIcon icon={faArrowLeft} size={22} color='black' style={{ marginTop: -340, marginLeft: 10 }} />
+            </TouchableOpacity>
             <View style={styles.infoContainer}>
                 {request && userDetails ? (
 
-                    <ScrollView>
+                <ScrollView>
                     <View style={{ flexDirection: 'row', gap: 20, alignItems: 'center' }}>
                         <Image style={{ width: 80, height: 80, borderRadius: 40 }} source={sample_image} />
                         <View>
@@ -92,7 +97,7 @@ const DonationRequestInfoPage = ({route}) => {
                         <Text style={styles.text}>{request.hospitalName}</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Text style={styles.text}>Request Expiry Date: </Text>
-                            <Text style={styles.text}>{request.expiryDate.toDate().toLocaleDateString()}</Text>
+                            <Text style={styles.text}>{request.expiryDate.toLocaleDateString()}</Text>
                         </View>
                         <MoreOrLess
                             numberOfLines={3}
@@ -121,9 +126,9 @@ const DonationRequestInfoPage = ({route}) => {
                     </ScrollView>
                     
                 ) : (
-
-                    <Text>Loading...</Text>
                     
+                    <Text style={{color: 'black'}}>Loading...</Text>
+
                 )}
 
             </View>
@@ -140,12 +145,6 @@ const styles = StyleSheet.create({
         // marginBottom: 80,
         // height: 1000,
     },
-    //backArrow: {
-        //...StyleSheet.absoluteFillObject,
-        //width: 50,
-        //height: 50,
-        //backgroundColor: 'black'
-    //},
     text: {
         color: 'black',
     },
@@ -154,7 +153,6 @@ const styles = StyleSheet.create({
         height: '100%',
     },
     map: {
-        //...StyleSheet.absoluteFillObject,
         width: '100%',
         height: '47.5%',
     },
