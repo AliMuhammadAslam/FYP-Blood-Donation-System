@@ -157,7 +157,7 @@ const EditProfile = () => {
       //backgroundStyle
     ]}>
       {/* <Text style={styles.header}>EditProfile</Text> */}
-      <Header title="Edit Profile" style={styles.header} isRed={true} />
+      <Header title="Edit Profile" style={styles.header} isRed={true} navigation={navigation}/>
 
 
       <View style={styles.avatarContainer}>

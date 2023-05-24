@@ -14,7 +14,7 @@ const HomeHeader = (props) => {
             <TouchableOpacity style={styles.bellIcon} onPress={() => {
                 navigation.navigate('Notifications');
             }}>
-                {/* <FontAwesomeIcon icon={faBell} size={26} color='black' /> */}
+                <FontAwesomeIcon icon={faBell} size={26} color='black' />
                 <View style={{
                     width: 18, height: 18, backgroundColor: '#DE0A1E', borderRadius: 10, left: -12, top: -3
                 }}>

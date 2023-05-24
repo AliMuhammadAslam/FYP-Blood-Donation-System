@@ -18,7 +18,6 @@ import MapView, { Polyline, Marker, Circle } from 'react-native-maps';
 const DonationRequestInfoPage = ({ route, navigation }) => {
 
     const { docId } = route.params;
-    console.log(docId);
 
     // const navigation = useNavigation();
 

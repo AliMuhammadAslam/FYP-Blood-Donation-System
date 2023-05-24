@@ -11,6 +11,7 @@ import auth, { firebase } from '@react-native-firebase/auth';
 //import firebase from 'react-native-firebase';
 import firestore from '@react-native-firebase/firestore';
 import { serverTimestamp } from "@react-native-firebase/firestore";
+import { useNavigation } from '@react-navigation/native';
 
 const ChatScreen = ({route}) => {
 
@@ -19,6 +20,8 @@ const ChatScreen = ({route}) => {
   console.log("Name: "+name);
   const [messages, setMessages] = useState([]);
   const user = firebase.auth().currentUser;
+
+  const navigation = useNavigation();
 
   const getAllMessages = async () => {
     const docid = id > user.uid ? user.uid+"-"+id : id+"-"+user.uid   
@@ -150,7 +153,7 @@ const ChatScreen = ({route}) => {
         
       }}>
         {/* <ScrollView> */}
-       <Header title={name} isRed={true} /> 
+       <Header title={name} isRed={true} navigation={navigation}/> 
         
           <GiftedChat
           

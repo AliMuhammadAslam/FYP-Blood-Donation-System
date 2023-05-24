@@ -208,7 +208,7 @@ useEffect(()=>{
 
   return (
     <>
-      <Header title="Messages" isRed={true} />
+      <Header title="Messages" isRed={true} navigation={navigation}/>
       {isLoading && users ? (
         <ActivityIndicator size="large" color="black" />
       ) : (
