@@ -8,6 +8,9 @@ import { MoreOrLess } from "@rntext/more-or-less";
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import { useNavigation } from '@react-navigation/native';
+import { faMessage } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+//import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 
 const DonationRequestInfoPage = ({route}) => {
@@ -48,6 +51,7 @@ const DonationRequestInfoPage = ({route}) => {
             console.log('Error getting document:', error);
         });
 
+        //console.log(request.uid);
     }, [docId]);
 
 
@@ -105,9 +109,15 @@ const DonationRequestInfoPage = ({route}) => {
                             PageMaker including versions of Lorem.{request.notes}
                         </MoreOrLess>
                     </View>
+                    <View style={{flexDirection: "row" , justifyContent: 'space-evenly'}}>
                     <TouchableOpacity style={styles.button} onPress={ () => navigation.navigate('Create Appointment', {reqId: reqID, receiverName: request.userName, receiverId: request.uid , hospital: request.hospitalName, bloodType: request.bloodType, maxDateLimit: request.expiryDate.toDate().toISOString()})}>
-                        <Text style={{fontSize: 22, color: 'white'}}>Create An Appointment</Text>
+                        <Text style={{fontSize: 22, color: 'white', paddingHorizontal: 20}}>Create An Appointment</Text>
                     </TouchableOpacity>
+                    <TouchableOpacity style={styles.chatButton} onPress={ () => navigation.navigate("ChatScreen", {name: request.userName, id:request.uid})}>
+                        
+                        <FontAwesomeIcon icon={faMessage} size={20} color={"#DE0A1E"} />
+                    </TouchableOpacity>
+                    </View>
                     </ScrollView>
                     
                 ) : (
@@ -127,6 +137,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-end',
         alignItems: "center",
+        // marginBottom: 80,
+        // height: 1000,
     },
     //backArrow: {
         //...StyleSheet.absoluteFillObject,
@@ -152,7 +164,9 @@ const styles = StyleSheet.create({
         height: '45%',
         borderTopRightRadius: 40,
         borderTopLeftRadius: 40,
-        padding: 20
+        padding: 20,
+        //marginBottom: 30,
+        
     },
     button: {
         backgroundColor: '#DE0A1E',
@@ -161,6 +175,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 10,
         paddingVertical: 5
+    },
+    chatButton: {
+        backgroundColor: '#eaeaea',
+        marginTop: 15,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10,
+        paddingVertical: 5,
+        paddingHorizontal: 15
     }
 });
 
