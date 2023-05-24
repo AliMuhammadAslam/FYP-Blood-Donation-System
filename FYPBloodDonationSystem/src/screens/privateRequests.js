@@ -57,8 +57,10 @@ const PrivateReceiversRequestList = () => {
       const data = [];
       querySnapshot.forEach((doc) => {
         const userId = doc.data().uid;
+        
         if(auth().currentUser.uid != userId){
             if(doc.data().expiryDate.toDate() > currentDate){
+              //console.log(doc.id);
               data.push({
               id: doc.id,
               name: doc.data().userName,

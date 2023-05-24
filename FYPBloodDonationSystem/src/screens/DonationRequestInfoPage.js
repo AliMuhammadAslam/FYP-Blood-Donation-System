@@ -17,7 +17,8 @@ import MapView, { Polyline, Marker, Circle } from 'react-native-maps';
 
 const DonationRequestInfoPage = ({ route, navigation }) => {
 
-    const { docId } = route.params.docId;
+    const { docId } = route.params;
+    console.log(docId);
 
     // const navigation = useNavigation();
 
@@ -97,7 +98,7 @@ const DonationRequestInfoPage = ({ route, navigation }) => {
                         <Text style={styles.text}>{request.hospitalName}</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Text style={styles.text}>Request Expiry Date: </Text>
-                            <Text style={styles.text}>{request.expiryDate.toLocaleDateString()}</Text>
+                            <Text style={styles.text}>{request.expiryDate.toDate().toLocaleDateString()}</Text>
                         </View>
                         <MoreOrLess
                             numberOfLines={3}
