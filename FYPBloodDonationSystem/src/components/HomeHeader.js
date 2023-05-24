@@ -20,7 +20,6 @@ const HomeHeader = (props) => {
                 }}>
                     <Text style={{ fontWeight: 'bold', fontSize: 14, alignSelf: 'center', justifyContent: 'center', alignItems: 'center', color: 'white' }}>3</Text>
                 </View>
-
             </TouchableOpacity>
         </View>
     );
@@ -39,7 +38,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24,
         flex: 1,
-        color: 'black',
+        color: '#353535',
         fontWeight: 600,
     },
 });

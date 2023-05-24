@@ -3,6 +3,8 @@ import { View, Image } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import OrgPatientsStack from './OrgPatientsStack';
 import OrgRequestsStack from './OrgRequestsStack';
+import OrgHomeScreen from '../screens/Home/OrgHomeScreen';
+import OrgHomeStack from './OrgHomeStack';
 
 
 const Tab = createBottomTabNavigator();
@@ -27,7 +29,7 @@ const TabNavigationOrganizations = ({ route }) => {
 
   return (
     <Tab.Navigator
-      initialRouteName='Home'
+      initialRouteName='OrgHomeStack'
       backBehavior='initialRoute'
       screenOptions={({ route }) => ({
         headerShown: false,
@@ -54,9 +56,9 @@ const TabNavigationOrganizations = ({ route }) => {
           if (route.name === 'Patients') {
             iconName = focused ? <Image style={{ width: 40, height: 40 }} source={UserIcon} /> : <Image style={{ width: 35, height: 35 }} source={UserIcon} />;
           }
-          //else if (route.name === 'Home') {
-            //iconName = focused ? <View style={HomeTabStyle}><Image style={{ width: 35, height: 35 }} source={HomeIcon} /></View> : <View style={HomeTabStyle}><Image style={{ width: 35, height: 35 }} source={HomeIcon} /></View>;
-          //}
+          else if (route.name === 'OrgHomeStack') {
+            iconName = focused ? <View style={HomeTabStyle}><Image style={{ width: 35, height: 35 }} source={HomeIcon} /></View> : <View style={HomeTabStyle}><Image style={{ width: 35, height: 35 }} source={HomeIcon} /></View>;
+          }
           else if (route.name === 'Requests') {
             iconName = focused ? <Image style={{ width: 25, height: 25 }} source={RequestIcon} /> : <Image style={{ width: 25, height: 25 }} source={RequestIcon} />;
           }
@@ -67,7 +69,7 @@ const TabNavigationOrganizations = ({ route }) => {
       })}>
       
       <Tab.Screen name='Patients' component={OrgPatientsStack} options={{ tabBarLabel: 'Patients' }} />
-      {/*<Tab.Screen name='Home' component={OrganizationRegPatients} options={{ tabBarLabel: 'Home' }} />*/}
+      <Tab.Screen name='OrgHomeStack' component={OrgHomeStack} options={{ tabBarLabel: 'Home' }} />
       <Tab.Screen name='Requests' component={OrgRequestsStack} options={{ tabBarLabel: 'Requests' }} />
 
     </Tab.Navigator>
