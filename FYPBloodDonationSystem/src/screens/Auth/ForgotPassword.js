@@ -1,120 +1,104 @@
 import React, { useState } from 'react';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, useColorScheme, View, Image } from 'react-native';
-import DropDownPicker from 'react-native-dropdown-picker';
-import { Dropdown } from 'react-native-dropdown';
-import SelectDropdown from 'react-native-select-dropdown';
+import { SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View, Image, Alert } from 'react-native';
 import Header from "../../components/Header";
-import { useNavigation } from '@react-navigation/native';
+import auth from '@react-native-firebase/auth';
 
+const ForgotPassword = ({ navigation }) => {
+  const forgotPassImage = require('../../../assets/forgotPassPic.png');
 
+  const [email, setEmail] = useState('');
 
-const ForgotPassword = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+  const handlePasswordReset = async() => {
+    if(email.length == 0){
 
-  const navigation = useNavigation();
+      Alert.alert('Please fill in the required fields')
 
-  const [email, onChangeEmail] = React.useState('');
-  
+    }
+     try {
+      await auth().sendPasswordResetEmail(email);
+      Alert.alert('Password reset email sent successfully')
+      navigation.navigate('Login');
+    } catch (error) {
+      Alert.alert('Error:', error.message)
+    }
+  }
+
   return (
-    <SafeAreaView style={[
-      {//styles.container
-        justifyContent: 'center',
-        alignItems: 'center',
-        flex: 1,
-      },
-      backgroundStyle
-    ]}>
-
-      
-
-      <Header title="Forgot Password" isRed={true} navigation={navigation}/>
-      <View
-
-        style={{
-          backgroundColor: isDarkMode ? Colors.black : Colors.white,
-        }}>
-
-        <Image style={styles.image}
-            resizeMode={'contain'}
-            source={require('../../../assets/forgotPassPic.png')} />  
-
+    <SafeAreaView style={styles.container}>
+      <Header title="Forgot Password" isRed={true} navigation={navigation} />
+      <View style={styles.innerContainer}>
+        <Image source={forgotPassImage} />
+        <Text style={styles.text}>Enter the email address associated with your account.</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={setEmail}
+          value={email}
+          placeholder="Email Address"
+          placeholderTextColor='#969696'
+          inputMode='email'
+          keyboardType='email-address'
+        />
+        <Text style={styles.text}>We will email you a link to reset your password.</Text>
+        <TouchableOpacity style={styles.button} onPress={handlePasswordReset}>
+          <Text style={styles.buttonText}>Send</Text>
+        </TouchableOpacity>
+        <View style={styles.footer}>
+          <Text style={{ color: '#353535' }}>Did not recieve an email?</Text>
+          <TouchableOpacity onPress={handlePasswordReset}>
+            <Text style={{ color: "#DE0A1E" }}>Resend</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-
-    
-      <Text style={{marginLeft:40, marginRight:40, marginTop:10, fontSize:20}}>Enter the email address associated with your account.</Text>
-      <Text style={{marginLeft:40, marginRight:25, marginTop:10, fontSize:20}}>We will email you a link to reset your password.</Text>
-      <TextInput
-        style={styles.input}
-        onChangeText={onChangeEmail}
-        value={email}
-        placeholder="Email Address"
-        inputMode='email'
-        keyboardType='email-address'
-      />
-      
-
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.btnText}>Send</Text>
-      </TouchableOpacity>
-
-      {/* <View style={styles.button}>
-            <Button title="Log In" />
-        </View> */}
-      <Text style={styles.footer}>Did not receive an email?<TouchableOpacity
-      // onPress={() =>
-      //   navigation.navigate('Signup')
-      // }
-      >
-        <Text style={{color: "#DE0A1E"}}>Resend</Text></TouchableOpacity></Text>
-
     </SafeAreaView>
   );
 }
 
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white'
+  },
+  innerContainer: {
+    width: '100%',
+    alignItems: 'center',
+    paddingHorizontal: 20
+  },
+  text: {
+    marginTop: 10,
+    fontSize: 16,
+    color: '#353535',
+    width: '100%'
+  },
   input: {
+    marginTop: 10,
     height: 40,
-    width: 300,
-    margin: 12,
+    width: '100%',
     borderWidth: 1,
     padding: 12,
-    //elevation: 20,
     borderRadius: 5,
-    //backgroundColor: "white",
-  },
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-    //width: "80%",
-  },
-  header: {
-    fontSize: 30,
-    marginBottom: 15,
-    marginTop: -50,
+    borderColor: '#969696',
+    color: '#353535'
   },
   footer: {
-    margin: 10,
+    flexDirection: 'row',
+    gap: 10,
+    marginTop: 10,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   button: {
-    width: 300,
+    width: '100%',
     height: 40,
-    margin: 10,
+    marginTop: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    // paddingVertical: 12,
-    // paddingHorizontal: 32,
     elevation: 3,
     backgroundColor: "#DE0A1E",
     borderRadius: 5,
   },
-  btnText: {
-    fontSize: 18,
+  buttonText: {
+    fontSize: 20,
     color: "white",
   },
 });
