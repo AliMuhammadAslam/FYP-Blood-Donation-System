@@ -23,7 +23,7 @@ const MyNotifications = () => {
   useEffect(() => {
     
     const NotificationsRef = firestore().collection('notifications');
-    NotificationsRef.onSnapshot((querySnapshot) => {
+    const unsubscribe = NotificationsRef.onSnapshot((querySnapshot) => {
     const data = [];
     var message;
     querySnapshot.forEach((doc) => {
@@ -83,6 +83,11 @@ const MyNotifications = () => {
     setNotifications(data);
     setIsLoading(false);
     });
+
+    return () => {
+      // Unsubscribe from the listener when the component is unmounted or when the user logs out
+      unsubscribe();
+    };
     
   }, []);
 

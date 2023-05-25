@@ -52,8 +52,9 @@ const MyOrganizations = () => {
   useEffect(() => {
     
         const associationsRef = firestore().collection('OrganizationAssociations');
-        associationsRef.onSnapshot((querySnapshot) => {
+        const unsubscribe = associationsRef.onSnapshot((querySnapshot) => {
         const data = [];
+        //if(querySnapshot){
         querySnapshot.forEach((doc) => {
 
             if(auth().currentUser.uid == doc.data().userId){
@@ -70,9 +71,16 @@ const MyOrganizations = () => {
             }
 
         });
+        //}
         setFilteredData(data);
         setIsLoading(false);
+
         });
+
+        return () => {
+          // Unsubscribe from the listener when the component is unmounted or when the user logs out
+          unsubscribe();
+        };
         
   }, []);
 

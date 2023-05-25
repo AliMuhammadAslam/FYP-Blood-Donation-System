@@ -51,7 +51,7 @@ const OrganizationsList = () => {
 
   useEffect(() => {
     const requestsRef = firestore().collection('users');
-    requestsRef.onSnapshot((querySnapshot) => {
+    const unsubscribe = requestsRef.onSnapshot((querySnapshot) => {
       const data = [];
       flag = false;
       querySnapshot.forEach((doc) => {
@@ -61,7 +61,7 @@ const OrganizationsList = () => {
 
           const associationsRef = firestore().collection('OrganizationAssociations');
           associationsRef.onSnapshot((querySnapshot) => {
-
+            if(querySnapshot){
             querySnapshot.forEach((doc) => {
 
               if (orgId == doc.data().orgId && auth().currentUser.uid == doc.data().userId) {
@@ -88,6 +88,8 @@ const OrganizationsList = () => {
               flag = false;
             }
 
+            }
+
           });
             
         }
@@ -95,6 +97,12 @@ const OrganizationsList = () => {
       setFilteredData(data);
       setIsLoading(false);
     });
+
+    return () => {
+      // Unsubscribe from the listener when the component is unmounted or when the user logs out
+      unsubscribe();
+    };
+
   }, []);
 
   /*useEffect(() => {

@@ -48,7 +48,7 @@ const AppointmentRequestsList = ({navigation}) => {
   useEffect(() => {
     if(refresh){
         const appointmentsRef = firestore().collection('appointments');
-        appointmentsRef.onSnapshot((querySnapshot) => {
+        const unsubscribe = appointmentsRef.onSnapshot((querySnapshot) => {
         const data = [];
         querySnapshot.forEach((doc) => {
             const receiverId = doc.data().receiverId;
@@ -70,6 +70,12 @@ const AppointmentRequestsList = ({navigation}) => {
         setFilteredData(data);
         setRefresh(false);
         });
+
+        return () => {
+          // Unsubscribe from the listener when the component is unmounted or when the user logs out
+          unsubscribe();
+        };
+
     }
   }, [refresh]);
 

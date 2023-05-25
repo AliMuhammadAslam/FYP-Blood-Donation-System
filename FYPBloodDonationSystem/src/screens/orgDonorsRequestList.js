@@ -51,7 +51,7 @@ const DonorsRequestsList = () => {
   useEffect(() => {
     if(refresh){
         const associationRef = firestore().collection('OrganizationAssociations');
-        associationRef.onSnapshot((querySnapshot) => {
+        const unsubscribe = associationRef.onSnapshot((querySnapshot) => {
         const data = [];
         querySnapshot.forEach((doc) => {
             const orgId = doc.data().orgId;
@@ -69,6 +69,11 @@ const DonorsRequestsList = () => {
         setFilteredData(data);
         setRefresh(false);
         });
+
+        return () => {
+          // Unsubscribe from the listener when the component is unmounted or when the user logs out
+          unsubscribe();
+        };
     }
   }, [refresh]);
 
