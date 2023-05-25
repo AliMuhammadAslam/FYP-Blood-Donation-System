@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faStar, faCalendarCheck, faLocation, faArrowRight, faDroplet, faStarOfLife, faHandHoldingHeart, faArrowRotateLeft, faRightFromBracket, faHospital, faHospitalAlt, faHospitalUser, faHospitalWide, faUserEdit } from '@fortawesome/free-solid-svg-icons';
-// import { fa } from '@fortawesome/free-regular-svg-icons'
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView, View, Text, Image, StyleSheet, TouchableOpacity, Switch, Alert } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
@@ -8,18 +7,16 @@ import auth from '@react-native-firebase/auth';
 
 const OverlapView = () => {
   return <View style={styles.overlay}>
-    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-      <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }}>
+      <View style={{ alignItems: 'center', justifyContent: 'center' }}>
         <FontAwesomeIcon icon={faDroplet} size={20} color='#DE0A1E' />
         <Text style={{ color: 'black', fontSize: 12 }}>Vital Impact</Text>
       </View>
-      <View style={{ marginRight: 10 }} />
-      <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+      <View style={{ alignItems: 'center', justifyContent: 'center' }}>
         <FontAwesomeIcon icon={faStarOfLife} size={20} color='#DE0A1E' />
         <Text style={{ color: 'black', fontSize: 12 }}>5 lives Saved</Text>
       </View>
-      <View style={{ marginRight: 10 }} />
-      <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+      <View style={{ alignItems: 'center', justifyContent: 'center' }}>
         <Text style={{ color: '#DE0A1E', fontWeight: 'bold', fontSize: 15 }}>13 March</Text>
         <Text style={{ color: 'black', fontSize: 12 }}>Next Donation</Text>
       </View>
@@ -30,10 +27,10 @@ const OverlapView = () => {
 
 const AccountScreen = ({ navigation }) => {
 
-  
+
 
   const [userDetails, setUserDetails] = useState();
-  
+
   const [isEnabled, setIsEnabled] = useState(false);
 
 
@@ -63,7 +60,7 @@ const AccountScreen = ({ navigation }) => {
 
   const userLogout = async () => {
 
-    try{
+    try {
 
       await auth().signOut();
       Alert.alert("You have been successfully logged out.");
@@ -74,43 +71,40 @@ const AccountScreen = ({ navigation }) => {
 
       console.log(error.code);
       Alert.alert(error.code);
-      
+
     }
 
 
 
   }
 
-  
+
 
   return (
     <SafeAreaView style={styles.container}>
 
       <View>
-      
+
         {userDetails ?
 
           <><View style={styles.profileContainer}>
             <View style={styles.avatarContainer}>
               <Image
-                // source={{ uri: 'https://img.freepik.com/premium-vector/portrait-caucasian-woman-avatar-female-person-vector-icon-adult-flat-style-headshot_605517-26.jpg?w=2000' }}
-                source={{ uri: userDetails.image}}
+                source={{ uri: userDetails.image }}
                 style={styles.avatar}
               />
             </View>
             <View style={styles.textContainer}>
-              {/* <Text style={styles.name}>Shahzaib Khan</Text>
-            <Text style={styles.subtitle}>090078601</Text> */}
               <Text style={styles.name}>{userDetails.name}</Text>
               <Text style={styles.subtitle}>{userDetails.mobileNumber}</Text>
 
             </View>
             <View style={styles.starContainer}>
-              <FontAwesomeIcon icon={faStar} size={20} color="#ffcc00" />
-              <FontAwesomeIcon icon={faStar} size={20} color="#ffcc00" />
-              <FontAwesomeIcon icon={faStar} size={20} color="#ffcc00" />
-              <FontAwesomeIcon icon={faStar} size={20} color="#ffcc00" />
-              <FontAwesomeIcon icon={faStar} size={20} color="#c7c7c7" />
+              <FontAwesomeIcon icon={faStar} size={15} color="#ffcc00" />
+              <FontAwesomeIcon icon={faStar} size={15} color="#ffcc00" />
+              <FontAwesomeIcon icon={faStar} size={15} color="#ffcc00" />
+              <FontAwesomeIcon icon={faStar} size={15} color="#ffcc00" />
+              <FontAwesomeIcon icon={faStar} size={15} color="#c7c7c7" />
             </View>
           </View>
             <OverlapView />
@@ -143,7 +137,9 @@ const AccountScreen = ({ navigation }) => {
                 </View>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => {
-                navigation.navigate('DonationHistory')
+                navigation.navigate('History', {
+                  title: 'Donation History'
+                })
               }}>
                 <View style={styles.rowContainer}>
                   <View style={{ flexDirection: 'row' }}>
@@ -158,7 +154,9 @@ const AccountScreen = ({ navigation }) => {
                 </View>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => {
-                navigation.navigate('DonationHistory')
+                navigation.navigate('History', {
+                  title: 'Recieving History'
+                })
               }}>
                 <View style={styles.rowContainer}>
                   <View style={{ flexDirection: 'row' }}>
@@ -196,18 +194,18 @@ const AccountScreen = ({ navigation }) => {
               </TouchableOpacity>
             </View></>
 
-            :
+          :
 
-                    <Text>Loading...</Text>
+          <Text>Loading...</Text>
 
-      }
+        }
 
 
       </View>
 
-      
 
-      </SafeAreaView>
+
+    </SafeAreaView>
 
 
 
@@ -257,7 +255,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: 'white',
     paddingTop: 50,
-    //marginHorizontal: 20,
   },
   rowContainer: {
     flexDirection: 'row',
@@ -271,21 +268,17 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   rowText: {
-    //flex: 1,
     fontSize: 16,
     color: 'black',
-    //fontWeight: 'bold',
-    //paddingRight: 100
   },
   overlay: {
     backgroundColor: '#fff',
-    borderRadius: 20,
+    borderRadius: 15,
     width: 270,
     height: 70,
     zIndex: 2,
     position: 'absolute',
-    top: 245,
-    alignItems: 'center',
+    top: '33%',
     justifyContent: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },

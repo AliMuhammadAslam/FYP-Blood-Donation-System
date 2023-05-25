@@ -2,7 +2,7 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AccountScreen from '../screens/Account/AccountScreen';
 import ManageAddresses from '../screens/Account/Manage_Addresses';
-import DonationHistory from '../screens/Account/DonationHistory';
+import History from '../screens/Account/History';
 import OrganizationsList from '../screens/organizations_list';
 import OrganisationInfo from '../screens/OrganisationInfo/OrganisationInfo';
 import ApplicationForm from '../screens/Forms/ApplicationForm';
@@ -20,7 +20,7 @@ const AccountStack = () => {
             }}>
                 <Stack.Screen name="AccountScreen" component={AccountScreen} />
                 <Stack.Screen name="EditProfile" component={EditProfile} />
-                <Stack.Screen name="DonationHistory" component={DonationHistory} />
+                <Stack.Screen name="History" component={History} />
                 <Stack.Screen name="OrganizationsList" component={OrganizationsList} />
                 <Stack.Screen name="OrganizationInfo" component={OrganisationInfo} />
                 <Stack.Screen name="ApplicationForm" component={ApplicationForm} />

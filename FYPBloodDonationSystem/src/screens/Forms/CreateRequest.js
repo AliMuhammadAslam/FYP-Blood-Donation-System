@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
-import {Alert, View, StyleSheet, Text} from "react-native";
+import { Alert, View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { useIsFocused } from '@react-navigation/native';
 import Header from "../../components/Header";
-import DropDownPicker from 'react-native-dropdown-picker';
 import { Button, TextInput } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import SelectDropdown from 'react-native-select-dropdown'
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import { useNavigation } from '@react-navigation/native';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faCalendar, faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 
 
-const CreateRequest = ({navigation}) => {
+const CreateRequest = ({ navigation }) => {
 
     const isFocused = useIsFocused();
 
@@ -37,67 +37,67 @@ const CreateRequest = ({navigation}) => {
 
     useEffect(() => {
         if (isFocused) {
-          setName("");
-          setBloodType(null);
-          setNotes("");
-          currentDate = new Date();
-          setExpiryDate(currentDate);
+            setName("");
+            setBloodType(null);
+            setNotes("");
+            currentDate = new Date();
+            setExpiryDate(currentDate);
         }
-      }, [isFocused]);
+    }, [isFocused]);
 
     const postRequest = async () => {
 
-        if(name.length == 0 || bloodType == null || notes.length == 0){
+        if (name.length == 0 || bloodType == null || notes.length == 0) {
             Alert.alert("Please provide the required information");
             console.log(name.length);
             console.log(notes.length);
             console.log(bloodType);
         }
-        else{
-    
+        else {
+
             try {
-  
-              const uid = auth().currentUser.uid;
-              console.log(uid);
 
-              var userName = "";
+                const uid = auth().currentUser.uid;
+                console.log(uid);
 
-              const userDoc = firestore().collection('users').doc(uid);
+                var userName = "";
 
-              await userDoc.get().then((doc) => {
-                if (doc.exists) {
-                  userName = doc.data().name;
-                  console.log(userName);
-                } else {
-                  console.log("No such document!");
-                }
-              }).catch((error) => {
-                console.log("Error getting document:", error);
-              });
+                const userDoc = firestore().collection('users').doc(uid);
 
-              const RequestsRef = firestore().collection('requests').doc();
-              await RequestsRef.set({
-                uid,
-                userName,
-                hospitalName: name,
-                bloodType,
-                notes,
-                postedAt: currentDate,
-                expiryDate: expiryDate
-              });
-    
-              //navigation.navigate('Slideshow');
-              Alert.alert("Request successfully posted");
-              navigation.navigate('Home');
-              
+                await userDoc.get().then((doc) => {
+                    if (doc.exists) {
+                        userName = doc.data().name;
+                        console.log(userName);
+                    } else {
+                        console.log("No such document!");
+                    }
+                }).catch((error) => {
+                    console.log("Error getting document:", error);
+                });
+
+                const RequestsRef = firestore().collection('requests').doc();
+                await RequestsRef.set({
+                    uid,
+                    userName,
+                    hospitalName: name,
+                    bloodType,
+                    notes,
+                    postedAt: currentDate,
+                    expiryDate: expiryDate
+                });
+
+                //navigation.navigate('Slideshow');
+                Alert.alert("Request successfully posted");
+                navigation.navigate('Home');
+
             } catch (error) {
-              console.log(error);
-              Alert.alert(error.code);
-              
+                console.log(error);
+                Alert.alert(error.code);
+
             }
-    
+
         }
-  
+
     };
 
 
@@ -112,6 +112,13 @@ const CreateRequest = ({navigation}) => {
                         onChangeText={setName}
                         underlineColorAndroid="transparent"
                         placeholder="Select Hospital"
+                        placeholderTextColor='#969696'
+                        mode="outlined"
+                        outlineStyle={{
+                            borderWidth: 1,
+                            borderRadius: 10,
+                            borderColor: '#b6b6b6',
+                        }}
                     />
                     <SelectDropdown
                         data={bloodItems}
@@ -127,25 +134,25 @@ const CreateRequest = ({navigation}) => {
                         }}
                         defaultButtonText={'Select Blood Group'}
                         buttonStyle={styles.picker}
-                        buttonTextStyle={{fontSize: 16, color: 'grey', textAlign: 'left'}}
+                        buttonTextStyle={{ fontSize: 16, color: '#969696', textAlign: 'left' }}
                     />
-                    <Text style={{fontSize: 16, color:'black'}}>Current Date: {currentDate.toLocaleDateString()}</Text>
+                    <Text style={{ fontSize: 16, color: '#969696' }}>Current Date: {currentDate.toLocaleDateString()}</Text>
 
-                    <View style={{flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}>
+                    <View style={{ flexDirection: 'row', gap: 15, alignItems: 'center' }}>
 
-                    <Text style={{fontSize: 16, color:'black'}}>Expiry Date: {expiryDate.toLocaleDateString()}</Text>
-                    <Button mode="contained" onPress={renderPicker} buttonColor="#DE0A1E" labelStyle={{ fontSize: 18 }} style={{ height: 45, borderRadius: 10, justifyContent: 'center'}}>
-                        Select Date
-                    </Button>
+                        <Text style={{ fontSize: 16, color: '#969696' }}>Expiry Date: {expiryDate.toLocaleDateString()}</Text>
+                        <TouchableOpacity onPress={renderPicker}>
+                            <FontAwesomeIcon icon={faCalendarDays} size={26} color='#DE0A1E' />
+                        </TouchableOpacity>
 
                     </View>
-                    
+
                     {showDatePicker && (
                         <DateTimePicker
-                        value={expiryDate}
-                        mode="date"
-                        minimumDate={currentDate}
-                        onChange={onExpiryDateChange}
+                            value={expiryDate}
+                            mode="date"
+                            minimumDate={currentDate}
+                            onChange={onExpiryDateChange}
                         />
                     )}
 
@@ -154,6 +161,7 @@ const CreateRequest = ({navigation}) => {
                         underlineColorAndroid="transparent"
                         underlineColor="transparent"
                         placeholder="Note"
+                        placeholderTextColor='#969696'
                         multiline={true}
                         numberOfLines={4}
                         maxLength={40}
@@ -174,7 +182,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
-        alignItems: 'center',    },
+        alignItems: 'center',
+    },
     innerContainer: {
         paddingTop: 40,
         width: '100%',
@@ -188,15 +197,12 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 40,
-        borderWidth: 1,
-        borderRadius: 10,
-        borderColor: 'grey',
         backgroundColor: "white",
     },
     multiline_input: {
         borderWidth: 1,
         borderRadius: 10,
-        borderColor: 'grey',
+        borderColor: '#b6b6b6',
         backgroundColor: "white",
     },
     picker: {
@@ -204,7 +210,7 @@ const styles = StyleSheet.create({
         height: 40,
         borderWidth: 1,
         borderRadius: 10,
-        borderColor: 'grey',
+        borderColor: '#b6b6b6',
         backgroundColor: "white",
     },
 });

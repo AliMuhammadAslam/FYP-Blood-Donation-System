@@ -4,9 +4,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from "../../components/Header";
 
 
-const DonationHistory = ({navigation}) => {
+const History = (props) => {
     const star = require('../../../assets/star_icon.png');
 
+    const {title} = props.route.params;
     const data = [
         {
             key: 1,
@@ -113,7 +114,7 @@ const DonationHistory = ({navigation}) => {
     }
     return (
         <SafeAreaView style={styles.container}>
-            <Header title="Donation History" isRed={true} navigation={navigation} />
+            <Header title={title} isRed={true} navigation={props.navigation} />
             <View style={styles.innerContainer}>
                 <View style={{ width: '85%', marginBottom: 100 }}>
                     <FlatList
@@ -152,4 +153,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default DonationHistory;
+export default History;
