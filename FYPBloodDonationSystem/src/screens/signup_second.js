@@ -8,6 +8,7 @@ import {TextInput} from 'react-native-paper';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+// import emailjs from '@emailjs/browser';
 
 function Signup_second({route}) {
     const {name, address, mobileNumber, genderValue, bloodValue, email} = route.params;
@@ -97,17 +98,63 @@ function Signup_second({route}) {
           const { uid } = userCredential.user;
       
           const userRef = firestore().collection('users').doc(uid);
-          await userRef.set({
-            name,
-            address,
-            mobileNumber,
-            genderValue,
-            bloodValue,
-            email,
-            password,
-            isOrg: false
-          });
+
+          if (genderValue == "male") {
+            await userRef.set({
+              name,
+              address,
+              mobileNumber,
+              genderValue,
+              bloodValue,
+              email,
+              password,
+              isOrg: false,
+              image: "https://static.vecteezy.com/system/resources/previews/002/002/427/original/man-avatar-character-isolated-icon-free-vector.jpg"
+
+            });
+          }
+          else {
+            await userRef.set({
+              name,
+              address,
+              mobileNumber,
+              genderValue,
+              bloodValue,
+              email,
+              password,
+              isOrg: false,
+              image: "https://media.istockphoto.com/id/1331335536/vector/female-avatar-icon.jpg?s=170667a&w=0&k=20&c=-iyD_53ZEeZPc4SmvmGB1FJXZcHy_fvbJBv6O8HblHs="
+            });
+          }
           Alert.alert("User account created & signed in!");
+          // // const sendEmail = (e) => {
+          //   // const e = {userRef.email}
+          //   // e.preventDefault();
+          // UserRef.get().then((doc) => {
+          //   console.log(1);
+          //   const e = doc.data().email;
+          //   console.log(e);
+          //   emailjs.sendForm('service_jbmyhht', 'template_zhzhf4s', e, 'FNEB2PG8inA-lciwa')
+          //     .then((result) => {
+          //       console.log("Email sent successfully");
+          //     }, (error) => {
+          //       console.log("Email not sent");
+          //     });
+          //   // confirmAlert({
+          //   //     title: 'Subscription',
+          //   //     message: 'You will receive an email to confirm your subscription.',
+          //   //     buttons: [
+          //   //       {
+          //   //         label: 'Ok',
+          //   //         onClick: () => {refreshPage()}
+          //   //       },
+          //   //     ]
+          //   //   });
+          //   // console.log(form.current)
+          //   // form.current.reset();
+          // });
+    
+        //}
           navigation.navigate('TabNavigation');
           
         } catch (error) {

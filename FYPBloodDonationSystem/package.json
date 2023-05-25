@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@emailjs/browser": "^3.11.0",
     "@emotion/react": "^11.10.6",
     "@emotion/stylis": "^0.8.5",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",

@@ -51,6 +51,7 @@ const EditProfile = () => {
   const [mobileNumber, onChangeMobNum] = React.useState('');
   const [address, onChangeAddress] = React.useState('');
   const [name, onChangeName] = React.useState('');
+  const [image, setImage] = useState('');
 
 
   useEffect(() => {
@@ -71,6 +72,7 @@ const EditProfile = () => {
         onChangeAddress(doc.data().address);
         setBloodValue(doc.data().bloodValue);
         setGenderValue(doc.data().genderValue);
+        setImage(doc.data().image);
 
 
 
@@ -162,7 +164,8 @@ const EditProfile = () => {
 
       <View style={styles.avatarContainer}>
         <Image
-          source={{ uri: 'https://img.freepik.com/premium-vector/portrait-caucasian-woman-avatar-female-person-vector-icon-adult-flat-style-headshot_605517-26.jpg?w=2000' }}
+          // source={{ uri: 'https://img.freepik.com/premium-vector/portrait-caucasian-woman-avatar-female-person-vector-icon-adult-flat-style-headshot_605517-26.jpg?w=2000' }}
+          source={{ uri: image}}
           style={styles.avatar}
         />
       </View>

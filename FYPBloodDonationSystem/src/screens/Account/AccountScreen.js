@@ -75,7 +75,8 @@ const AccountScreen = ({ navigation }) => {
           <><View style={styles.profileContainer}>
             <View style={styles.avatarContainer}>
               <Image
-                source={{ uri: 'https://img.freepik.com/premium-vector/portrait-caucasian-woman-avatar-female-person-vector-icon-adult-flat-style-headshot_605517-26.jpg?w=2000' }}
+                // source={{ uri: 'https://img.freepik.com/premium-vector/portrait-caucasian-woman-avatar-female-person-vector-icon-adult-flat-style-headshot_605517-26.jpg?w=2000' }}
+                source={{ uri: userDetails.image}}
                 style={styles.avatar}
               />
             </View>
