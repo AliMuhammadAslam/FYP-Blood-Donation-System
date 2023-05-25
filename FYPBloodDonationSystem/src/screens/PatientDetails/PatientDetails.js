@@ -60,7 +60,7 @@ const PatientDetails = ({ route }) => {
                 {patientDetails && userDetails ? 
 
 
-                    <><Image style={{ width: 130, height: 130, borderRadius: 70 }} source={sample_image} /><View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 65, marginLeft: 100 }}>
+                    <><Image style={{ width: 130, height: 130, borderRadius: 70 }} source={{ uri: userDetails.image}} /><View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 65, marginLeft: 100 }}>
                         <View style={{ alignItems: 'center' }}>
                             <Text style={{ color: 'black', fontSize: 22, marginTop: 10, fontWeight: '600' }}>{patientDetails.userName}</Text>
                             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
