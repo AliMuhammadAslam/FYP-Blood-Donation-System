@@ -68,6 +68,7 @@ const ChatScreen = ({route}) => {
     })
 
     const receiveRef = firestore().collection('users').doc(id);
+    console.log("receiver: "+receiveRef);
     // Atomically add a new region to the "regions" array field.
     receiveRef.set({
       'chats': firestore.FieldValue.arrayUnion(auth().currentUser.uid),
@@ -77,6 +78,7 @@ const ChatScreen = ({route}) => {
     // });
 
     const chatRef = firestore().collection('users').doc(auth().currentUser.uid);
+    console.log("sender: "+chatRef);
     // Atomically add a new region to the "regions" array field.
     chatRef.set({
       'chats': firestore.FieldValue.arrayUnion(id),
@@ -110,7 +112,9 @@ const ChatScreen = ({route}) => {
             backgroundColor: '#DE0A1E',
           },
           left: {
-            backgroundColor: '#eaeaea'
+            backgroundColor: '#eaeaea',
+            marginLeft: -40,
+            //left: '0%',
           }
         }}
         textProps={{
