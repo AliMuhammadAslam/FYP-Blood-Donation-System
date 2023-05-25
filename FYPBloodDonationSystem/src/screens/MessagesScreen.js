@@ -14,7 +14,7 @@ import {
 } from '../../src/screens/MessageStyles';
 import Header from "../components/Header";
 //import ChatScreen from './ChatScreen';
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import firebase from "@react-native-firebase/app";
@@ -29,6 +29,8 @@ const MessagesScreen = () => {
   const [count, setCount] = useState(0);
 
   const [refreshing, setRefreshing] = React.useState(false);
+
+  const isFocused = useIsFocused();
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
@@ -62,7 +64,9 @@ const MessagesScreen = () => {
    const [users, setUsers] = useState(null)
 
 useEffect(()=>{
+  if(isFocused){
   //getAllChats();
+  setLoading(true);
   console.log("effectCount: "+count);
   setTimeout(() => {
     
@@ -106,7 +110,9 @@ useEffect(()=>{
     setUsers(data);
     setLoading(false);
   });
-},[isLoading, count]);
+
+  }
+},[isLoading, count, isFocused]);
 
   const navigation = useNavigation();
 

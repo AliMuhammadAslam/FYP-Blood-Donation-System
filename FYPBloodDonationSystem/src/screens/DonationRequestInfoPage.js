@@ -79,7 +79,7 @@ const DonationRequestInfoPage = ({ route, navigation }) => {
 
                 <ScrollView>
                     <View style={{ flexDirection: 'row', gap: 20, alignItems: 'center' }}>
-                        <Image style={{ width: 80, height: 80, borderRadius: 40 }} source={sample_image} />
+                        <Image style={{ width: 80, height: 80, borderRadius: 40 }} source={{ uri: userDetails.image}} />
                         <View>
                             <Text style={{ color: 'black', fontSize: 20 }}>{request.userName}</Text>
                             <Text style={styles.text}>{userDetails.address}</Text>

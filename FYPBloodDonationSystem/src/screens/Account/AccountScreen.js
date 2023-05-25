@@ -61,7 +61,24 @@ const AccountScreen = ({ navigation }) => {
     setIsEnabled(previousState => !previousState);
   };
 
+  const userLogout = async () => {
 
+    try{
+
+      await auth().signOut();
+      navigation.navigate('Authentication');
+
+    }
+    catch (error) {
+
+      console.log(error.code);
+      Alert.alert(error.code);
+      
+    }
+
+
+
+  }
 
   
 
@@ -165,9 +182,7 @@ const AccountScreen = ({ navigation }) => {
                   <FontAwesomeIcon icon={faArrowRight} size={20} color="black" />
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => {
-                //Log out code
-              }}>
+              <TouchableOpacity onPress={userLogout}>
                 <View style={styles.rowContainer}>
                   <View style={{ flexDirection: 'row' }}>
                     <View style={styles.iconContainer}>
