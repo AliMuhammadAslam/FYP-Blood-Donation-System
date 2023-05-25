@@ -20,7 +20,7 @@ const Slideshow = () => {
     <Swiper
       autoplay={true}
       showsPagination={false}
-      autoplayTimeout={2.5}
+      autoplayTimeout={10}
     >
       {images.map((data, index) => {
         return (
