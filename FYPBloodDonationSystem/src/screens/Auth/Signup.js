@@ -97,8 +97,6 @@ const Signup = () => {
           value={name}
           placeholder="Full Name"
           placeholderTextColor= "#808080"
-          //inputMode='email'
-          //keyboardType=''
         />
         
         <TextInput

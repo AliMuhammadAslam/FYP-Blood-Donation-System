@@ -15,12 +15,6 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 
 const EditProfile = () => {
-  // const isDarkMode = useColorScheme() === 'dark';
-  // const backgroundStyle = {
-  //     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  // };
-  
-  
 
   const [userDetails, setUserDetails] = useState();
   const navigation = useNavigation();
@@ -150,14 +144,7 @@ const EditProfile = () => {
 
   return (
 
-    <SafeAreaView style={[
-      {//styles.container
-        // justifyContent: 'center',
-        alignItems: 'center',
-        flex: 1,
-      },
-      //backgroundStyle
-    ]}>
+    <SafeAreaView style={styles.container}>
       {/* <Text style={styles.header}>EditProfile</Text> */}
       <Header title="Edit Profile" style={styles.header} isRed={true} navigation={navigation}/>
 
@@ -293,15 +280,11 @@ const styles = StyleSheet.create({
       //backgroundColor: "white",
     },
     container: {
-        justifyContent: 'center',
         alignItems: 'center',
         flex: 1,
-        //width: "80%",
+        backgroundColor: 'white'
     },
     header:{
-        // fontSize: 30,
-        // marginBottom: 30,
-        // color: "black",
         marginTop: 0,
         marginBottom: 100,
     },

@@ -20,7 +20,7 @@ const HomeScreen = ({ navigation }) => {
     const HomeBoxData = [
         { icon: <Image style={{ width: 65, height: 55, marginTop: 10 }} source={post_request} />, title: 'Post Blood Request', route: 'CreateRequest' },
         { icon: <Image style={{ width: 70, height: 90, }} source={blood_bank_icon} />, title: 'Blood Bank', route: 'My Organizations' },
-        { icon: <Image style={{ width: 55, height: 60, marginTop: 10 }} source={emergency_donor} />, title: 'Emergency Donors', route: 'Account' }
+        { icon: <Image style={{ width: 55, height: 60, marginTop: 10 }} source={emergency_donor} />, title: 'Emergency Donors', route: 'AccountScreen' }
     ]
     const BloodDonationStats = [
         { blood_grp: 'A+', demand: 10000, icon: blood_drop },
@@ -126,7 +126,7 @@ const HomeScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <HomeHeader title={"Hello!" + userDetails?.name?.substring(userDetails?.name?.lastIndexOf(" "), userDetails?.name?.length)} navigation={navigation} />
+            {userDetails?.name ? <HomeHeader title={"Hello! " + userDetails?.name} navigation={navigation} /> : 'Loading'}
 
             <View style={styles.header}>
                 <Text style={styles.headingText}>Are You Looking for Blood?</Text>

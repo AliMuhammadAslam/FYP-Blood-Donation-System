@@ -111,7 +111,7 @@ const OrgHomeScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-                <HomeHeader title={"Hello!" + userDetails?.name?.substring(userDetails?.name?.lastIndexOf(" "), userDetails?.name?.length)} navigation={navigation} />
+                 {userDetails?.name ? <HomeHeader title={"Hello! " + userDetails?.name} navigation={navigation} /> : 'Loading'}
             <View style={styles.header}>
                 <Slideshow />
             </View>

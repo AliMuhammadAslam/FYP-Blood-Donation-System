@@ -103,13 +103,6 @@ const AuthenticationScreen = () => {
                                 {"Continue With Facebook"}
                             </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity
-                            style={{ marginTop: 15 }}
-                            onPress={() => navigation.navigate('Slideshow')}>
-                            <Text style={styles.buttonText2}>
-                                {"View an Excellent Slideshow"}
-                            </Text>
-                        </TouchableOpacity>
                     </View>
                     <View style={styles.plainPaddingBottom} />
 
@@ -128,10 +121,10 @@ const styles = StyleSheet.create({
         padding: 30,
     },
     fixToColumn: {
-        flexDirection: 'column',
+        // flexDirection: 'column',
         justifyContent: 'center',
         paddingVertical: 10,
-        paddingHorizontal: 80,
+        paddingHorizontal: 70,
     },
     buttonView: {
         //flex:1,
@@ -145,8 +138,8 @@ const styles = StyleSheet.create({
         //width: '100%',
         backgroundColor: '#00CC66',
         //paddingRight: 50,
-        borderColor: 'white',
-        borderWidth: 1,
+        // borderColor: 'white',
+        // borderWidth: 1,
         borderRadius: 10,
         paddingVertical: 10,
         paddingHorizontal: 25,
@@ -156,8 +149,8 @@ const styles = StyleSheet.create({
         // width: '40%',
         backgroundColor: '#0080FF',
         //paddingRight: 50,
-        borderColor: 'white',
-        borderWidth: 1,
+        // borderColor: 'white',
+        // borderWidth: 1,
         borderRadius: 10,
         paddingVertical: 10,
         paddingHorizontal: 25,
@@ -169,9 +162,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: 'white',
         borderRadius: 10,
-        //paddingHorizontal: 0,
         paddingVertical: 5,
-        //paddingLeft: 50
+        paddingHorizontal: 3
     },
     buttonText: {
 
@@ -185,7 +177,7 @@ const styles = StyleSheet.create({
 
         paddingLeft: 5,
         fontSize: 17,
-        fontWeight: 'bold',
+        fontWeight: 500,
         color: 'black',
         //justifyContent: 'center'
 

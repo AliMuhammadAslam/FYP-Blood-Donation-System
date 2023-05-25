@@ -1,9 +1,7 @@
 import React from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faArrowAltCircleDown, faBell } from "@fortawesome/free-solid-svg-icons";
-//import { faBell } from '@fortawesome/free-regular-svg-icons';
-
+import { faBell } from "@fortawesome/free-solid-svg-icons";
 
 const HomeHeader = (props) => {
 
@@ -36,7 +34,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     title: {
-        fontSize: 24,
+        fontSize: 22,
         flex: 1,
         color: '#353535',
         fontWeight: 600,
