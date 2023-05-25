@@ -66,7 +66,7 @@ useEffect(()=>{
   }, 2000);
   const usersRef = firestore().collection('users');
 
-  usersRef.onSnapshot((querySnapshot) => {
+  const unsubscribe = usersRef.onSnapshot((querySnapshot) => {
     const data = [];
 
     querySnapshot.forEach((doc) => {
@@ -103,6 +103,11 @@ useEffect(()=>{
     setUsers(data);
     setLoading(false);
   });
+
+  return () => {
+    // Unsubscribe from the listener when the component is unmounted or when the user logs out
+    unsubscribe();
+  };
 
 },[isLoading, count]);
 
