@@ -16,7 +16,7 @@ const HomeHeader = (props) => {
                 <View style={{
                     width: 18, height: 18, backgroundColor: '#DE0A1E', borderRadius: 10, left: -12, top: -3
                 }}>
-                    <Text style={{ fontWeight: 'bold', fontSize: 14, alignSelf: 'center', justifyContent: 'center', alignItems: 'center', color: 'white' }}>3</Text>
+                    <Text style={{ fontWeight: 'bold', fontSize: 14, alignSelf: 'center', justifyContent: 'center', alignItems: 'center', color: 'white' }}>1</Text>
                 </View>
             </TouchableOpacity>
         </View>

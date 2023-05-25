@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faStar, faCalendarCheck, faLocation, faArrowRight, faDroplet, faStarOfLife, faHandHoldingHeart, faArrowRotateLeft, faRightFromBracket, faHospital, faHospitalAlt, faHospitalUser, faHospitalWide, faUserEdit } from '@fortawesome/free-solid-svg-icons';
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, View, Text, Image, StyleSheet, TouchableOpacity, Switch } from 'react-native';
+import { SafeAreaView, View, Text, Image, StyleSheet, TouchableOpacity, Switch, Alert } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 
@@ -63,6 +63,7 @@ const AccountScreen = ({ navigation }) => {
     try {
 
       await auth().signOut();
+      Alert.alert("You have been successfully logged out.");
       navigation.navigate('Authentication');
 
     }
