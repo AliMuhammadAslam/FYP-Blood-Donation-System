@@ -54,35 +54,37 @@ const EmergencyDonors = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const handleCall = async (phoneNumber) => {
-
-    try {
-        const granted = await PermissionsAndroid.request(
-          PermissionsAndroid.PERMISSIONS.CALL_PHONE,
-          {
-            title: 'Phone Call Permission',
-            message: 'Your app needs access to make phone calls.',
-            buttonPositive: 'OK',
-            buttonNegative: 'Cancel',
-          }
-        );
+    const url = `tel:${phoneNumber}`;
+    Linking.openURL(url)
+    // try {
+    //     const granted = await PermissionsAndroid.request(
+    //       PermissionsAndroid.PERMISSIONS.CALL_PHONE,
+    //       {
+    //         title: 'Phone Call Permission',
+    //         message: 'Your app needs access to make phone calls.',
+    //         buttonPositive: 'OK',
+    //         buttonNegative: 'Cancel',
+    //       }
+    //     );
         
-        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-            const url = `tel:${phoneNumber}`;
-            Linking.canOpenURL(url)
-              .then(supported => {
-                if (!supported) {
-                  console.log(`Call functionality is not available on this device.`);
-                } else {
-                  return Linking.openURL(url);
-                }
-              })
-              .catch(error => console.log('An error occurred:', error));
-        } else {
-          // Permission denied or not granted, handle accordingly
-        }
-      } catch (error) {
-        console.error('Failed to request call permission:', error);
-      } 
+        // if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        //     const url = `tel:${phoneNumber}`;
+        //     Linking.openURL(`tel:${'11111111'}`)
+            // Linking.canOpenURL(url)
+            //   .then(supported => {
+            //     if (!supported) {
+            //       console.log(`Call functionality is not available on this device.`);
+            //     } else {
+            //       return Linking.openURL(url);
+            //     }
+            //   })
+            //   .catch(error => console.log('An error occurred:', error));
+        // } else {
+        //   // Permission denied or not granted, handle accordingly
+        // }
+      // } catch (error) {
+      //   console.error('Failed to request call permission:', error);
+      // } 
 
     }      
 
@@ -145,7 +147,9 @@ const EmergencyDonors = () => {
       <Text style={{ paddingVertical: 5, color: 'black' }}>{item.contactNumber}</Text>
       </View>
       <View style={{position: 'absolute', right: 0}}>
-        <TouchableOpacity onPress={ () => handleCall(item.contactNumber)}>
+        <TouchableOpacity onPress={() => {
+          handleCall(item.contactNumber)
+        }}>
       <FontAwesomeIcon icon={faPhone} size={55} color="#DE0A1E" />
       </TouchableOpacity>
       </View>

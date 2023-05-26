@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
     SafeAreaView,
     ScrollView,
@@ -6,12 +6,10 @@ import {
     Text,
     View,
     Image,
-    Alert,
     Dimensions,
     StyleSheet,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-//import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const win = Dimensions.get('window');
 const ratio = win.width / 602;
@@ -19,30 +17,11 @@ const ratio = win.width / 602;
 const AuthenticationScreen = () => {
 
     const navigation = useNavigation();
- 
-    
-
-    // useEffect(() => { 
-    //     //console.log("automatic login"); 
-    //     AsyncStorage.getItem(id);
-    //     if (id != null){
-    //         console.log("automatic login"); 
-    //     }
-    //   }); //No second Argument 
-
 
     return (
         <SafeAreaView>
-            <ScrollView
-                contentInsetAdjustmentBehavior="automatic"
-            //style={backgroundStyle}
-            >
-
-                <View
-
-                    style={{
-                        backgroundColor: "#DE0A1E"
-                    }}>
+            <ScrollView contentInsetAdjustmentBehavior="automatic">
+                <View style={{backgroundColor: "#DE0A1E", alignItems: 'center'}}>
 
                     <Image style={styles.image}
                         resizeMode={'contain'}
@@ -55,9 +34,24 @@ const AuthenticationScreen = () => {
                             paddingTop: 30,
                             fontSize: 25,
                             fontWeight: '900'
-
                         }}>
-                        {"Blood Connect\n"}
+                        Blood Connect
+                    </Text>
+                    <View style={{flexDirection: 'row', alignItems: 'center', gap: 10, paddingTop: 5}}>
+                        <View style={{backgroundColor: '#b6b6b6', width: 40, height: 3}}></View>
+                        <Text style={{fontSize: 14, fontWeight: 500, color: 'white'}}>When the blood flows, a life glows</Text>
+                        <View style={{backgroundColor: '#b6b6b6', width: 40, height: 3}}></View>
+                    </View>
+                    <Text
+                        style={{
+                            color: 'white',
+                            textAlign: 'center',
+                            paddingTop: 30,
+                            fontSize: 16,
+                            fontWeight: '500',
+                            paddingHorizontal: 20
+                        }}>
+                        Discover nearby blood donation centers, schedule appointments, and track your donation history with our user-friendly Blood Donation Application. Join us in saving lives today!
                     </Text>
 
                     <View style={styles.fixToText}>
@@ -115,20 +109,17 @@ const AuthenticationScreen = () => {
 }
 
 const styles = StyleSheet.create({
-
     fixToText: {
         flexDirection: 'row',
         justifyContent: 'center',
         padding: 30,
     },
     fixToColumn: {
-        // flexDirection: 'column',
         justifyContent: 'center',
         paddingVertical: 10,
         paddingHorizontal: 70,
     },
     buttonView: {
-        //flex:1,
         flexDirection: 'row',
         paddingRight: 20
     },
@@ -136,26 +127,16 @@ const styles = StyleSheet.create({
         paddingBottom: 40
     },
     buttonStyle: {
-        //width: '100%',
         backgroundColor: '#00CC66',
-        //paddingRight: 50,
-        // borderColor: 'white',
-        // borderWidth: 1,
         borderRadius: 10,
         paddingVertical: 10,
         paddingHorizontal: 25,
-        //width: 105
     },
     buttonStyle2: {
-        // width: '40%',
         backgroundColor: '#0080FF',
-        //paddingRight: 50,
-        // borderColor: 'white',
-        // borderWidth: 1,
         borderRadius: 10,
         paddingVertical: 10,
         paddingHorizontal: 25,
-        //width: 105
     },
     buttonStyle3: {
         flexDirection: 'row',
@@ -167,21 +148,16 @@ const styles = StyleSheet.create({
         paddingHorizontal: 3
     },
     buttonText: {
-
         fontSize: 20,
         fontWeight: 'bold',
         color: 'white',
         justifyContent: 'center'
-
     },
     buttonText2: {
-
         paddingLeft: 5,
         fontSize: 17,
         fontWeight: 500,
         color: 'black',
-        //justifyContent: 'center'
-
     },
     image: {
         flex: 1,
@@ -191,18 +167,14 @@ const styles = StyleSheet.create({
         marginBottom: 20
     },
     imageIcon: {
-        //flex: 1,
-        //alignSelf: 'stretch',
         width: 15,
         height: 15,
     },
     divider: {
         borderBottomColor: 'white',
         borderBottomWidth: 1,
-        //marginVertical: 10,
         marginHorizontal: 30,
         marginBottom: 40
-
     },
     plainPaddingBottom: {
         paddingBottom: 174

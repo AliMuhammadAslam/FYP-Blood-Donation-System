@@ -97,9 +97,7 @@ const HomeScreen = ({ navigation }) => {
                     </TouchableOpacity>
                     <View style={{ marginTop: 10, height: '100%', width: 1, backgroundColor: '#8C8C8C' }} />
                     <TouchableOpacity onPress={() => {
-                        navigation.navigate('Request Info', {
-                            docId: 0
-                        })
+                        navigation.navigate('ReceiversList')
                     }} style={{ alignItems: 'center', backgroundColor: '#00000000', borderRadius: 3, paddingVertical: 8, width: '50%' }}>
                         <Text style={{ fontSize: 17, color: '#DE0A1E' }}>Donate Now</Text>
                     </TouchableOpacity>
@@ -126,7 +124,7 @@ const HomeScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            {userDetails?.name ? <HomeHeader title={"Hello! " + userDetails?.name} navigation={navigation} /> : <Text>Loading</Text>}
+            {userDetails?.name ? <HomeHeader title={"Hello! " + userDetails?.name} navigation={navigation} isOrgHeader={false} /> : <Text>Loading</Text>}
 
             <View style={styles.header}>
                 <Text style={styles.headingText}>Are You Looking for Blood?</Text>
