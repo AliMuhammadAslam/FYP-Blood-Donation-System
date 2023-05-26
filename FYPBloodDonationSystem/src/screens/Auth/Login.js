@@ -3,8 +3,11 @@ import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View, Alert } from 'r
 import { TextInput } from 'react-native-paper';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 
-const Login = ({navigation}) => {
+const Login = () => {
+  const navigation = useNavigation();
 
   const [email, onChangeEmail] = React.useState('');
   const [password, onChangePassword] = React.useState('');
@@ -30,13 +33,20 @@ const Login = ({navigation}) => {
               const id = auth().currentUser.uid;
               if (doc.data().isOrg) {
                 navigation.navigate('TabNavigationOrganizations');
+                console.log("user: ", doc.data());
+                AsyncStorage.setItem('@user_Id', JSON.stringify(id));
+                AsyncStorage.setItem('@user_data', JSON.stringify(doc.data()));
               }
               else {
                 console.log(id + " " + doc.data().name);
+                console.log("user: ", doc.data());
+                AsyncStorage.setItem('@user_Id', JSON.stringify(id));
+                AsyncStorage.setItem('@user_data', JSON.stringify(doc.data()));
                 navigation.navigate('TabNavigation');
               }
             } else {
               console.log('Document doesnot exist.');
+              Alert.alert('User does not exist. Kindly Signin')
             }
           }).catch((error) => {
             console.log('Error getting document:', error);
