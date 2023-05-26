@@ -8,75 +8,57 @@ const History = (props) => {
     const star = require('../../../assets/star_icon.png');
 
     const {title} = props.route.params;
-    const data = [
+    const donationData = [
         {
             key: 1,
-            name: 'John Doe',
-            location: 'Jinah Hospital',
-            recieval_date: '02/12/2022',
+            name: 'Ali Muhammad',
+            location: 'Agha Khan Hospital',
+            recieval_date: '02/03/2023',
             rating: '3',
             blood_group: 'O-'
         },
         {
             key: 2,
-            name: 'John Doe',
+            name: 'Abdul Rafay',
             location: 'Jinah Hospital',
+            recieval_date: '04/12/2022',
+            rating: '4',
+            blood_group: 'AB-'
+        },
+        {
+            key: 3,
+            name: 'Maaz Khan',
+            location: 'Liaqat National Hospital',
+            recieval_date: '05/10/2022',
+            rating: '2',
+            blood_group: 'B+'
+        },
+    ]
+    const recievingData = [
+        {
+            key: 1,
+            name: 'Behroz Khan',
+            location: 'Jinnah Hospital',
             recieval_date: '02/12/2022',
+            rating: '3',
+            blood_group: 'B+'
+        },
+        {
+            key: 2,
+            name: 'Ali Shakeel',
+            location: 'Liaqat National Hospital',
+            recieval_date: '15/10/2022',
             rating: '1',
             blood_group: 'O-'
         },
         {
             key: 3,
-            name: 'John Doe',
-            location: 'Jinah Hospital',
-            recieval_date: '02/12/2022',
+            name: 'Areeba Liaqat',
+            location: 'Jinnah Hospital',
+            recieval_date: '03/09/2022',
             rating: '4',
-            blood_group: 'O-'
+            blood_group: 'A-'
         },
-        {
-            key: 4,
-            name: 'John Doe',
-            location: 'Jinah Hospital',
-            recieval_date: '02/12/2022',
-            rating: '2',
-            blood_group: 'O-'
-        },
-        {
-            key: 5,
-            name: 'John Doe',
-            location: 'Jinah Hospital',
-            recieval_date: '02/12/2022',
-            rating: '5',
-            blood_group: 'O-'
-        }, {
-            key: 6,
-            name: 'John Doe',
-            location: 'Jinah Hospital',
-            recieval_date: '02/12/2022',
-            rating: '4',
-            blood_group: 'O-'
-        }, {
-            key: 7,
-            name: 'John Doe',
-            location: 'Jinah Hospital',
-            recieval_date: '02/12/2022',
-            rating: '3',
-            blood_group: 'O-'
-        }, {
-            key: 8,
-            name: 'John Doe',
-            location: 'Jinah Hospital',
-            recieval_date: '02/12/2022',
-            rating: '2',
-            blood_group: 'O-'
-        }, {
-            key: 9,
-            name: 'John Doe',
-            location: 'Jinah Hospital',
-            recieval_date: '02/12/2022',
-            rating: '1',
-            blood_group: 'O-'
-        }
     ]
 
     const InfoBox = ({ data }) => (
@@ -118,7 +100,7 @@ const History = (props) => {
             <View style={styles.innerContainer}>
                 <View style={{ width: '85%', marginBottom: 100 }}>
                     <FlatList
-                        data={data}
+                        data={title == 'Donation History' ? donationData : recievingData}
                         renderItem={({ item }) => <InfoBox data={item} />}
                         keyExtractor={(item) => item.key}
                         scrollEnabled={true}

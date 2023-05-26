@@ -169,9 +169,9 @@ const PrivateReceiversRequestList = () => {
         />
       
         }
-
+        
       </View>
-
+      <View style={{height: 50}}></View>
     </SafeAreaView>
   );
 

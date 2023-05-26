@@ -31,7 +31,7 @@ const AccountScreen = ({ navigation }) => {
 
   const [userDetails, setUserDetails] = useState();
 
-  const [isEnabled, setIsEnabled] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(true);
 
 
   useEffect(() => {

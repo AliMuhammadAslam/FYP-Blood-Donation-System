@@ -150,7 +150,7 @@ const EmergencyDonors = () => {
         <TouchableOpacity onPress={() => {
           handleCall(item.contactNumber)
         }}>
-      <FontAwesomeIcon icon={faPhone} size={55} color="#DE0A1E" />
+      <FontAwesomeIcon icon={faPhone} size={35} color="#DE0A1E" />
       </TouchableOpacity>
       </View>
       </View>
