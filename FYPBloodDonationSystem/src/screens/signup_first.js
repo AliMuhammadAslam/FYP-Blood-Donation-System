@@ -45,6 +45,14 @@ function Signup_first() {
   ]);
   console.log(genderValue);
 
+  const [emergencyOpen, setEmergencyOpen] = useState(false);
+  const [emergencyDonorValue, setEmergencyDonorValue] = useState(null);
+  const [emergencyItems, setEmergencyItems] = useState([
+    { label: 'Yes', value: 'Yes' },
+    { label: 'No', value: 'No' },
+  ]);
+  console.log(genderValue);
+
   const [bloodOpen, setBloodOpen] = useState(false);
   const [bloodValue, setBloodValue] = useState(null);
   const [bloodItems, setBloodItems] = useState([
@@ -183,6 +191,23 @@ function Signup_first() {
         />
       </View>
 
+      <View style={{padding:8}} />
+
+      <View style={styles.dropdown}>
+        <DropDownPicker
+          placeholder='Do you want to be registered as an Emergency Donor?'
+          open={emergencyOpen}
+          value={emergencyDonorValue}
+          items={emergencyItems}
+          setOpen={setEmergencyOpen}
+          setValue={setEmergencyDonorValue}
+          setItems={setEmergencyItems}
+          theme="LIGHT"
+        />
+      </View>
+
+      <View style={{padding:4}} />
+
       {/* <TextInput
           style={styles.input}
           onChangeText={onChangePassword}
@@ -192,16 +217,27 @@ function Signup_first() {
           placeholderTextColor= "#808080"
         /> */}
 
-      <TouchableOpacity style={styles.button} onPress={() =>
-        navigation.navigate('SignupSecond', {
-          name: name,
-          address: address,
-          mobileNumber: mobileNumber,
-          genderValue: genderValue,
-          bloodValue: bloodValue,
-          email: email,
-          //password
-        })
+      <TouchableOpacity style={styles.button} onPress={() => {
+
+        if(email.length == 0 || name.length == 0 || mobileNumber.length == 0 || address.length == 0 || genderValue == null || bloodValue == null || emergencyDonorValue == null){
+          Alert.alert("Please provide the required information");
+        }
+        else{
+
+          navigation.navigate('SignupSecond', {
+            name: name,
+            address: address,
+            mobileNumber: mobileNumber,
+            genderValue: genderValue,
+            bloodValue: bloodValue,
+            isEmergencyDonor: emergencyDonorValue,
+            email: email,
+            //password
+          })
+
+        }
+
+        }
       } >
         <Text style={styles.btnText}>Proceed</Text>
       </TouchableOpacity>
