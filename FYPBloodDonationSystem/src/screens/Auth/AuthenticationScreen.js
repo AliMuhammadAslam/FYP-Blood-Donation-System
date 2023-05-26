@@ -52,11 +52,12 @@ const AuthenticationScreen = () => {
                         style={{
                             color: 'white',
                             textAlign: 'center',
-                            paddingTop: 20,
-                            fontSize: 15
+                            paddingTop: 30,
+                            fontSize: 25,
+                            fontWeight: '900'
 
                         }}>
-                        {"The more details the better\nWrite a nice title and description\nSelect a category and add photos"}
+                        {"Blood Connect\n"}
                     </Text>
 
                     <View style={styles.fixToText}>
@@ -80,7 +81,7 @@ const AuthenticationScreen = () => {
 
                     <View style={styles.divider} />
 
-                    <View style={styles.fixToColumn}>
+                    {/* <View style={styles.fixToColumn}>
                         <View style={styles.buttonView2}>
                             <TouchableOpacity
                                 style={styles.buttonStyle3}
@@ -103,7 +104,7 @@ const AuthenticationScreen = () => {
                                 {"Continue With Facebook"}
                             </Text>
                         </TouchableOpacity>
-                    </View>
+                    </View> */}
                     <View style={styles.plainPaddingBottom} />
 
                 </View>
@@ -187,6 +188,7 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         width: win.width,
         height: 576 * ratio,
+        marginBottom: 20
     },
     imageIcon: {
         //flex: 1,
@@ -203,7 +205,7 @@ const styles = StyleSheet.create({
 
     },
     plainPaddingBottom: {
-        paddingBottom: 100
+        paddingBottom: 174
     }
 });
 

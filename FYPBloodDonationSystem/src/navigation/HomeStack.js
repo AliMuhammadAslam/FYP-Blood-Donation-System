@@ -7,6 +7,7 @@ import DonationRequestInfoPage from '../screens/DonationRequestInfoPage';
 import CreateAppointment from '../screens/createAppointment';
 import MyOrganizations from '../screens/MyOrganizations';
 import MyNotifications from '../screens/MyNotifications';
+import EmergencyDonors from '../screens/EmergencyDonors';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,6 +25,7 @@ const HomeStack = () => {
                 <Stack.Screen name='Request Info' component={DonationRequestInfoPage} />
                 <Stack.Screen name='Create Appointment' component={CreateAppointment} />
                 <Stack.Screen name='My Organizations' component={MyOrganizations} />
+                <Stack.Screen name='EmergencyDonors' component={EmergencyDonors} />
         </Stack.Navigator>
     );
 }

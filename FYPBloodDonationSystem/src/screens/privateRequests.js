@@ -53,7 +53,7 @@ const PrivateReceiversRequestList = () => {
 
   useEffect(() => {
     const requestsRef = firestore().collection('requests');
-    requestsRef.onSnapshot((querySnapshot) => {
+    const unsubscribe = requestsRef.onSnapshot((querySnapshot) => {
       const data = [];
       querySnapshot.forEach((doc) => {
         const userId = doc.data().uid;
@@ -73,6 +73,12 @@ const PrivateReceiversRequestList = () => {
       setFilteredData(data);
       setIsLoading(false);
     });
+
+    return () => {
+      // Unsubscribe from the listener when the component is unmounted or when the user logs out
+      unsubscribe();
+    };
+
   }, []);
 
   /*useEffect(() => {
