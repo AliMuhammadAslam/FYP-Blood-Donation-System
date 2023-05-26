@@ -126,7 +126,7 @@ const HomeScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            {userDetails?.name ? <HomeHeader title={"Hello! " + userDetails?.name} navigation={navigation} /> : 'Loading'}
+            {userDetails?.name ? <HomeHeader title={"Hello! " + userDetails?.name} navigation={navigation} /> : <Text>Loading</Text>}
 
             <View style={styles.header}>
                 <Text style={styles.headingText}>Are You Looking for Blood?</Text>
