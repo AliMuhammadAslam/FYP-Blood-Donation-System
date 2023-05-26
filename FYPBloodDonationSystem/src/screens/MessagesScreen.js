@@ -114,7 +114,7 @@ useEffect(()=>{
   const navigation = useNavigation();
 
   return (
-    <SafeAreaView >
+    <SafeAreaView style={{flex:1}}>
     
       <Header title="Messages" isRed={true} navigation={navigation}/>
       <ScrollView
@@ -133,10 +133,11 @@ useEffect(()=>{
           <Text style={{color:"black", top:"40%", fontSize:20, color:'#5A5A5A'}}>No messages to display</Text>
         </View>
       ) : users && (
-      <View>
-        <View style={{ marginBottom: 100 }}>
+      // <View style={{flex:1}}>
+      //   <View style={{ marginBottom: 0, flex:1 }}>
           <FlatList
           
+            style={{marginBottom:80}}
             data={users}
             keyExtractor={item => item.id}
             scrollEnabled={true}
@@ -165,8 +166,8 @@ useEffect(()=>{
             )}
           />
 
-        </View>
-      </View>
+      //   </View>
+      // </View>
       )}
     </SafeAreaView>
   );
@@ -182,12 +183,12 @@ const styles = StyleSheet.create({
     // marginTop: 30,
   },
   scrollView: {
-    flex: 1,
+    //flex: 1,
     backgroundColor: '#DE0A1E',
     alignItems: 'center',
     justifyContent: 'center',
     height: 10, 
-    marginBottom: 20
+    marginBottom: 20,
   },
   avatar: {
     width: 50,
