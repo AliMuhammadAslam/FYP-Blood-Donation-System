@@ -11,7 +11,7 @@ import firestore from '@react-native-firebase/firestore';
 // import emailjs from '@emailjs/browser';
 
 function Signup_second({route}) {
-    const {name, address, mobileNumber, genderValue, bloodValue, email} = route.params;
+    const {name, address, mobileNumber, genderValue, bloodValue, email, isEmergencyDonor} = route.params;
     console.log(name, address, mobileNumber, genderValue, bloodValue, email);
     // const isDarkMode = useColorScheme() === 'dark';
     // const backgroundStyle = {
@@ -82,7 +82,7 @@ function Signup_second({route}) {
 
     const userSignUp = async () => {
 
-      if(email.length == 0 || password.length == 0 || name.length == 0 || mobileNumber.length == 0 || address.length == 0 || genderValue == null || bloodValue == null){
+      if(email.length == 0 || password.length == 0 || name.length == 0 || mobileNumber.length == 0 || address.length == 0 || genderValue == null || bloodValue == null || isEmergencyDonor == null){
         Alert.alert("Please provide the required information");
       }
       else if(password!=confirmPassword){
@@ -109,6 +109,7 @@ function Signup_second({route}) {
               email,
               password,
               isOrg: false,
+              isEmergencyDonor,
               image: "https://static.vecteezy.com/system/resources/previews/002/002/427/original/man-avatar-character-isolated-icon-free-vector.jpg"
 
             });
