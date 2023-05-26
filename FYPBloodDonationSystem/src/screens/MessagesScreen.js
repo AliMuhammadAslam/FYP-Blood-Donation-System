@@ -33,20 +33,20 @@ const MessagesScreen = () => {
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
     // count=count+1;
-    setCount(count+1);
-    console.log("refreshCount: "+count);
+    setCount(count + 1);
+    console.log("refreshCount: " + count);
     setTimeout(() => {
       //getAllChats();
-     
+
       setRefreshing(false);
     }, 2000);
   }, []);
 
-  
 
-  React.useEffect(()=> {
-    const userCheck = auth().onAuthStateChanged(userExist=>{
-      if(userExist)
+
+  React.useEffect(() => {
+    const userCheck = auth().onAuthStateChanged(userExist => {
+      if (userExist)
         setUser(userExist)
       else setUser("")
     })
@@ -56,118 +56,119 @@ const MessagesScreen = () => {
     }
   });
 
-   const [users, setUsers] = useState(null)
+  const [users, setUsers] = useState(null)
 
-useEffect(()=>{
-  //getAllChats();
-  console.log("effectCount: "+count);
-  setTimeout(() => {
-    
-  }, 2000);
-  const usersRef = firestore().collection('users');
+  useEffect(() => {
+    //getAllChats();
+    console.log("effectCount: " + count);
+    setTimeout(() => {
 
-  const unsubscribe = usersRef.onSnapshot((querySnapshot) => {
-    const data = [];
+    }, 2000);
+    const usersRef = firestore().collection('users');
 
-    querySnapshot.forEach((doc) => {
-      const userId = doc.id;
-      console.log("userId: "+doc.id);
-      if (auth().currentUser.uid == userId) {
-        setChats(doc.data().chats);
-      };
-      //console.log("Chats: "+auth().currentUser.chats);
-      if (auth().currentUser.uid != userId && doc.data().isOrg == false) {
-        if ( chats === undefined || chats.length == 0){
-          console.log('no chats '+chats);
-          setIsChats(false);
-        }
-          else{
-        for (let i = 0; i < chats?.length; i++) {
-          //setIsChats(true);
-          //console.log(doc.data().image);
-          if (doc.id == chats[i]) {
-            console.log("Chats with: " + doc.data().name);
-            data.push({
-              id: doc.id,
-              name: doc.data().name,
-              //address: doc.data().hospitalName,
-              bloodGroup: doc.data().bloodValue,
-              image: String(doc.data().image),
-              //chats: doc.data().chats
-            });
+    const unsubscribe = usersRef.onSnapshot((querySnapshot) => {
+      const data = [];
+
+      querySnapshot.forEach((doc) => {
+        const userId = doc.id;
+        console.log("userId: " + doc.id);
+        if (auth().currentUser.uid == userId) {
+          setChats(doc.data().chats);
+        };
+        //console.log("Chats: "+auth().currentUser.chats);
+        if (auth().currentUser.uid != userId && doc.data().isOrg == false) {
+          if (chats === undefined || chats.length == 0) {
+            console.log('no chats ' + chats);
+            setIsChats(false);
           }
-        };}
-      }
+          else {
+            for (let i = 0; i < chats?.length; i++) {
+              //setIsChats(true);
+              //console.log(doc.data().image);
+              if (doc.id == chats[i]) {
+                console.log("Chats with: " + doc.data().name);
+                data.push({
+                  id: doc.id,
+                  name: doc.data().name,
+                  //address: doc.data().hospitalName,
+                  bloodGroup: doc.data().bloodValue,
+                  image: String(doc.data().image),
+                  //chats: doc.data().chats
+                });
+              }
+            };
+          }
+        }
+      });
+      //console.log("Users: "+data);
+      setUsers(data);
+      setLoading(false);
     });
-    //console.log("Users: "+data);
-    setUsers(data);
-    setLoading(false);
-  });
 
-  return () => {
-    // Unsubscribe from the listener when the component is unmounted or when the user logs out
-    unsubscribe();
-  };
+    return () => {
+      // Unsubscribe from the listener when the component is unmounted or when the user logs out
+      unsubscribe();
+    };
 
-},[isLoading, count]);
+  }, [isLoading, count]);
 
   const navigation = useNavigation();
 
   return (
-    <SafeAreaView style={{flex:1}}>
-    
-      <Header title="Messages" isRed={true} navigation={navigation}/>
+    <SafeAreaView style={{ flex: 1 }}>
+
+      <Header title="Messages" isRed={true} navigation={navigation} />
       <ScrollView
         contentContainerStyle={styles.scrollView}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
-        >
-          
+      >
+
         <Text></Text>
       </ScrollView>
       {isLoading && users ? (
         <ActivityIndicator size="large" color="black" />
-      ) : chats===undefined || chats?.length==0 ? (
-        <View style={{alignItems:'center', justifyContent:'center', display: 'flex'}}>
-          <Text style={{color:"black", top:"40%", fontSize:20, color:'#5A5A5A'}}>No messages to display</Text>
+      ) : chats === undefined || chats?.length == 0 ? (
+        <View style={{ alignItems: 'center', justifyContent: 'center', display: 'flex' }}>
+          <Text style={{ color: "black", top: "40%", fontSize: 20, color: '#5A5A5A' }}>No messages to display</Text>
         </View>
       ) : users && (
-      // <View style={{flex:1}}>
-      //   <View style={{ marginBottom: 0, flex:1 }}>
-          <FlatList
-          
-            style={{marginBottom:80}}
-            data={users}
-            keyExtractor={item => item.id}
-            scrollEnabled={true}
-            renderItem={({ item }) => (
-              <Card 
-              onPress={() => navigation.navigate("ChatScreen", {name: item.name, id:item.id})}
-              >
+        // <View style={{flex:1}}>
+        //   <View style={{ marginBottom: 0, flex:1 }}>
+        <FlatList
 
-                <UserInfo>
-                  <UserImgWrapper>
-                    {/* <UserImg style={styles.avatar} source={ item?.image}/> */}
-                    <Image
-                source={{ uri: item.image }}
-                style={styles.avatar}
-              />
-                  </UserImgWrapper>
-                  <TextSection>
-                    <UserInfoText>
-                      <UserName style={{color:"black"}}>{item?.name}</UserName>
-                      <PostTime style={{color:"black"}}>{item?.messageTime}</PostTime>
-                    </UserInfoText>
-                    <MessageText style={{color:"black", textTransform: 'uppercase'}}>{item?.bloodGroup}</MessageText>
-                  </TextSection>
-                </UserInfo>
-              </Card>
-            )}
-          />
+          style={{ marginBottom: 80 }}
+          data={users}
+          keyExtractor={item => item.id}
+          scrollEnabled={true}
+          renderItem={({ item }) => (
+            <Card
+              onPress={() => navigation.navigate("ChatScreen", { name: item.name, id: item.id })}
+            >
 
-      //   </View>
-      // </View>
+              <UserInfo>
+                <UserImgWrapper>
+                  {/* <UserImg style={styles.avatar} source={ item?.image}/> */}
+                  <Image
+                    source={{ uri: item.image }}
+                    style={styles.avatar}
+                  />
+                </UserImgWrapper>
+                <TextSection>
+                  <UserInfoText>
+                    <UserName style={{ color: "black" }}>{item?.name}</UserName>
+                    <PostTime style={{ color: "black" }}>{item?.messageTime}</PostTime>
+                  </UserInfoText>
+                  <MessageText style={{ color: "black", textTransform: 'uppercase' }}>{item?.bloodGroup}</MessageText>
+                </TextSection>
+              </UserInfo>
+            </Card>
+          )}
+        />
+
+        //   </View>
+        // </View>
       )}
     </SafeAreaView>
   );
@@ -177,7 +178,7 @@ export default MessagesScreen;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, 
+    flex: 1,
     // alignItems: 'center', 
     // justifyContent: 'center',
     // marginTop: 30,
@@ -187,7 +188,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#DE0A1E',
     alignItems: 'center',
     justifyContent: 'center',
-    height: 10, 
+    height: 10,
     marginBottom: 20,
   },
   avatar: {
@@ -195,6 +196,6 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 40,
     left: '50%',
-    //marginRight: 20
+    // marginRight: 20
   },
 });
